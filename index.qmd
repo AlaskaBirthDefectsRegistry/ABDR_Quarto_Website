@@ -1,19 +1,21 @@
 ---
-title: "About Me"
+title: "The Alaska Birth Defect Registry"
 about:
   id: me
   template: broadside
-  image: img/profile.png
+  image: img/DPH_logo_2_color_Slogan.jpg
 ---
 
 :::{#me}
 
-## Goals
+## Program Overview
+Established in January 1996 under the [Alaska Administrative Code (7AAC 27.012)](https://www.akleg.gov/basis/aac.asp#7.27.012), ABDR is a passive surveillance program that collects and provides information on the number of infants with birth defects born to Alaska residents.The ABDR gathers information on several defects, including all 47 conditions recommended by the [National Birth Defects Prevention Network (NBDPN)](https://www.nbdpn.org/). Birth defect reports are limited to conditions identified within the first three years of life. The ABDR relies on semiannual reporting from hospitals, health insurance companies, and diagnostic laboratories operating in Alaska.
 
-## Education
+## [Data and Reports](reports.qmd)
 
-## Experience
+## Reporting Guide
+
+## Related Links
 
 :::
 
-Thanks for checking out my web site!

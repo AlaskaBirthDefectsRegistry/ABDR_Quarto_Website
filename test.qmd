@@ -1,0 +1,10 @@
+---
+title: "New Quarto Report"
+author: "Author Name"
+date: "2025-05-08" # Standardized date format often preferred
+format:
+  html:
+    toc: true
+    toc-float: true
+    code-fold: true
+---
