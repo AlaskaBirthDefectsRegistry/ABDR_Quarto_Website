@@ -1,5 +1,26 @@
 [
   {
+    "objectID": "reports.html",
+    "href": "reports.html",
+    "title": "Reports",
+    "section": "",
+    "text": "Prevalence Rates\nPrevalence Trends"
+  },
+  {
+    "objectID": "reports.html#rates-and-trends",
+    "href": "reports.html#rates-and-trends",
+    "title": "Reports",
+    "section": "",
+    "text": "Prevalence Rates\nPrevalence Trends"
+  },
+  {
+    "objectID": "reports.html#condition-specific-reports",
+    "href": "reports.html#condition-specific-reports",
+    "title": "Reports",
+    "section": "Condition Specific Reports",
+    "text": "Condition Specific Reports\n\nCardiovascular\n\nCoarctation of the aorta\nCommon truncus\nDouble outlet right ventricle\nEbstein anomaly\nHypoplastic left heart syndrome\nInterrupted aortic arch\nPulmonary valve atresia and stenosis\nSingle ventricle\nTeratology of fallot\nTotal anomalous pulmonary venous Return\nTransposition of the great arteries\nTricuspid valve atresia and stenosis\n\n\n\nCentral Nervous System\n\nAnencephaly\nSpina bifida without anencephalus\nEncephalocele\n\n\n\nChromosomal\n\nTrisomy 13\nTrisomy 18\nTrisomy 21 (Down syndrome)\n\n\n\nEye\n\nAnophthalmia/Microphthalmia\n\n\n\nGenitourinary\n\nHypospadias\n\n\n\nMusculoskeletal\n\nClubfoot\nCraniosynostosis\nDiaphragmatic hernia\nGastroschisis\nLimb Deficiencies\nOmphalocele\n\n\n\nOrofacial\n\nCleft Lip\nCleft Palate"
+  },
+  {
     "objectID": "projects.html#project-2",
     "href": "projects.html#project-2",
     "title": "Projects",
@@ -14,24 +35,59 @@
     "text": "Project 3"
   },
   {
+    "objectID": "analysis_collection.html",
+    "href": "analysis_collection.html",
+    "title": "Analysis and Collection Information",
+    "section": "",
+    "text": "Data analysis methods\nData collection methods"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "The Alaska Birth Defect Registry",
     "section": "",
-    "text": "Established in January 1996 under the Alaska Administrative Code (7AAC 27.012), ABDR is a passive surveillance program that collects and provides information on the number of infants with birth defects born to Alaska residents.The ABDR gathers information on several defects, including all 47 conditions recommended by the National Birth Defects Prevention Network (NBDPN). Birth defect reports are limited to conditions identified within the first three years of life. The ABDR relies on semiannual reporting from hospitals, health insurance companies, and diagnostic laboratories operating in Alaska."
+    "text": "Established in January 1996 under the Alaska Administrative Code (7AAC 27.012), ABDR is a passive surveillance program that collects and provides information on the number of infants with birth defects born to Alaska residents. Birth defect reports are limited to conditions identified within the first three years of life. The ABDR relies on semiannual reporting from hospitals, health insurance companies, and diagnostic laboratories operating in Alaska.\n\n\n\nThe ABDR gathers information on several defects,including all 47 conditions recommended by the National Birth Defects Prevention (NBDPN).\n\n\n\nWho: Any organization that provides service to or collects, and maintains records of service to children under the age of three with any of the conditions listed below. When: Organizations are expected to report all indicated conditions semiannually (every six months). What: Please include data for:\n• All of the divisions and / or business segments of your organization. - In-patient, outpatient, admits, discharges, radiology, laboratory, specialty clinics, etc.\n• All individuals seen by your organization up until their 3rd birthday. (Date of Service – Date of Birth) &lt;3\n• All of the ICD-10 CM codes listed in the following tables.\n\n\n\nAlaska Birth Defect Registry data collection and analysis methods\n\n\n\nAdditional information from resources beyond the registry\n\n\n3601 C Street, Suite 358\nAnchorage, AK 99503\nPhone: 907-269-3400\nFax 907-754-3529\nhssbirthdefreg@alaska.gov"
   },
   {
     "objectID": "index.html#program-overview",
     "href": "index.html#program-overview",
     "title": "The Alaska Birth Defect Registry",
     "section": "",
-    "text": "Established in January 1996 under the Alaska Administrative Code (7AAC 27.012), ABDR is a passive surveillance program that collects and provides information on the number of infants with birth defects born to Alaska residents.The ABDR gathers information on several defects, including all 47 conditions recommended by the National Birth Defects Prevention Network (NBDPN). Birth defect reports are limited to conditions identified within the first three years of life. The ABDR relies on semiannual reporting from hospitals, health insurance companies, and diagnostic laboratories operating in Alaska."
+    "text": "Established in January 1996 under the Alaska Administrative Code (7AAC 27.012), ABDR is a passive surveillance program that collects and provides information on the number of infants with birth defects born to Alaska residents. Birth defect reports are limited to conditions identified within the first three years of life. The ABDR relies on semiannual reporting from hospitals, health insurance companies, and diagnostic laboratories operating in Alaska."
   },
   {
-    "objectID": "reports.html",
-    "href": "reports.html",
-    "title": "Reports",
+    "objectID": "index.html#data-and-reports",
+    "href": "index.html#data-and-reports",
+    "title": "The Alaska Birth Defect Registry",
     "section": "",
-    "text": "Craniosynostosis"
+    "text": "The ABDR gathers information on several defects,including all 47 conditions recommended by the National Birth Defects Prevention (NBDPN)."
+  },
+  {
+    "objectID": "index.html#reporting-guide",
+    "href": "index.html#reporting-guide",
+    "title": "The Alaska Birth Defect Registry",
+    "section": "",
+    "text": "Who: Any organization that provides service to or collects, and maintains records of service to children under the age of three with any of the conditions listed below. When: Organizations are expected to report all indicated conditions semiannually (every six months). What: Please include data for:\n• All of the divisions and / or business segments of your organization. - In-patient, outpatient, admits, discharges, radiology, laboratory, specialty clinics, etc.\n• All individuals seen by your organization up until their 3rd birthday. (Date of Service – Date of Birth) &lt;3\n• All of the ICD-10 CM codes listed in the following tables."
+  },
+  {
+    "objectID": "index.html#analysis-and-collection-information",
+    "href": "index.html#analysis-and-collection-information",
+    "title": "The Alaska Birth Defect Registry",
+    "section": "",
+    "text": "Alaska Birth Defect Registry data collection and analysis methods"
+  },
+  {
+    "objectID": "index.html#resouces",
+    "href": "index.html#resouces",
+    "title": "The Alaska Birth Defect Registry",
+    "section": "",
+    "text": "Additional information from resources beyond the registry\n\n\n3601 C Street, Suite 358\nAnchorage, AK 99503\nPhone: 907-269-3400\nFax 907-754-3529\nhssbirthdefreg@alaska.gov"
+  },
+  {
+    "objectID": "reporting_guide.html",
+    "href": "reporting_guide.html",
+    "title": "Reporting Guide",
+    "section": "",
+    "text": "ABDR Reporting Guide"
   }
 ]

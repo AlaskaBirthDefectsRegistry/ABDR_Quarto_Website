@@ -8,10 +8,19 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - reports.qmd
+      - href: reports.qmd
+        text: Reports
+      - href: reporting_guide.qmd
+        text: Reporting Guide
+      - href: resources.qmd
+        text: Resources
+      - href: analysis_collection.qmd
+        text: Methods
     tools:
-      - icon: twitter
-        href: https://twitter.com/
+      - icon: facebook
+        href: https://www.facebook.com/doh.alaska
+      - icon: youtube
+        href: https://www.youtube.com/alaskadhss
       - icon: github
         href: https://github.com/AlaskaBirthDefectsRegistry/
   page-footer:

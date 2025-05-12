@@ -1,21 +1,45 @@
 ---
-title: "The Alaska Birth Defect Registry"
+title: "**The Alaska Birth Defect Registry**"
 about:
   id: me
   template: broadside
-  image: img/DPH_logo_2_color_Slogan.jpg
+  image: img/abdr_homepage_img2.png
 ---
 
 :::{#me}
 
 ## Program Overview
-Established in January 1996 under the [Alaska Administrative Code (7AAC 27.012)](https://www.akleg.gov/basis/aac.asp#7.27.012), ABDR is a passive surveillance program that collects and provides information on the number of infants with birth defects born to Alaska residents.The ABDR gathers information on several defects, including all 47 conditions recommended by the [National Birth Defects Prevention Network (NBDPN)](https://www.nbdpn.org/). Birth defect reports are limited to conditions identified within the first three years of life. The ABDR relies on semiannual reporting from hospitals, health insurance companies, and diagnostic laboratories operating in Alaska.
+Established in January 1996 under the [Alaska Administrative Code (7AAC 27.012)](https://www.akleg.gov/basis/aac.asp#7.27.012), ABDR is a passive surveillance program that collects and provides information on the number of infants with birth defects born to Alaska residents. Birth defect reports are limited to conditions identified within the first three years of life. The ABDR relies on semiannual reporting from hospitals, health insurance companies, and diagnostic laboratories operating in Alaska.
 
 ## [Data and Reports](reports.qmd)
+The ABDR gathers information on several defects,including all 47 conditions recommended by the [National Birth Defects Prevention  (NBDPN)](https://www.nbdpn.org/).
 
-## Reporting Guide
+## [Reporting Guide](reporting_guide.qmd)
+**Who:**  Any organization that provides service to or collects, and maintains records of service to children under the age of three with any of the conditions listed below.
+When:	Organizations are expected to report all indicated conditions semiannually (every six months).
+What:	Please include data for:\
+•	All of the divisions and / or business segments of your organization.
+-	In-patient, outpatient, admits, discharges, radiology, laboratory, specialty clinics, etc.\
+•	All individuals seen by your organization up until their 3rd birthday. (Date of Service – Date of Birth) <3\
+•	All of the ICD-10 CM codes listed in the following tables.
 
-## Related Links
+## [Analysis and Collection Information](analysis_collection.qmd)
+Alaska Birth Defect Registry data collection and analysis methods
+
+## [Resouces](related_links.qmd)
+
+Additional information from resources beyond the registry
+
+
+
+
+
+### Contact ABDR:
+**3601 C Street, Suite 358**\
+**Anchorage, AK 99503**\
+**Phone: 907-269-3400**\
+**Fax 907-754-3529** \
+**hssbirthdefreg@alaska.gov**
 
 :::
 
