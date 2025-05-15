@@ -1,5 +1,5 @@
 ---
-title: "Alaska Birth Defect Registy Reported Prevalence and Defect Estimates"
+title: "Alaska Birth Defect Registy - Reported Prevalence and Defect Estimates"
 subtitle: "Birth Years 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
 title-block-banner: ~img/ABDR_csr2.png
 format:
