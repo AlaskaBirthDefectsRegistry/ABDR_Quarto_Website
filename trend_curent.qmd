@@ -1,0 +1,388 @@
+---
+title:  "Alaska Birth Defect Registy Trend Report 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
+author: "Current nationally reportable congenital anomalies (N=47) - Reported Prevalence (per 10,000 live births)" 
+title-block-banner: ~img/ABDR_csr2.png
+format:
+  html:
+    page-layout: full
+    toc: true
+    toc-float: true
+    code-fold: true
+---
+
+
+<style type="text/css">
+
+h4.author { /* Header 4 - and the author and date headers use this too  */
+  font-size: 36px;
+  font-style: normal;
+  font-family: "Times New Roman";
+  color: Black;
+  text-align: center;
+}
+h4.date { /* Header 4 - and the author and date headers use this too  */
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  color: Black;
+  text-align: center;
+}
+</style>
+
+
+<center>
+```{r} 
+#| label: chunk-label-1  
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+library(epitools)
+library(lubridate)  
+library(RODBC)
+library(dplR)
+library(plyr)
+library(knitr)
+library(pander)
+library(htmlTable)
+library(haven)
+library(dplyr)
+library(tidyverse)
+library(broom)
+library(DT)
+library(sparkline)
+
+# Removing scientific notation
+options(scipen=999)
+
+# Loading trend table from Access database just for defect decriptions
+channel.c<-odbcDriverConnect("Driver={Microsoft Access Driver (*.mdb, *.accdb)};
+                             DBQ=R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\CaseConfProb.accdb")
+tnd<-sqlQuery(channel.c,"SELECT * FROM Trend")
+
+# Loading research dataset
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_BTH_0721RSRCH_L3.Rda") # #
+
+gg <- ABDR_BTH_0721RSRCH_L3 %>%                                                 #
+  mutate(YOB = ifelse(is.na(dob), 
+                      substr(BC, start = 0, stop = 4), 
+                      year(ymd(dob))))
+ABDR_L3 <- gg %>%
+  select(HYP:YOB) %>%
+  group_by(YOB) %>%
+  summarise_all(.funs = sum) %>%
+  filter(YOB %in% 2007:2021)                                                    #
+                           
+# Loading Birth Certificate data
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\bth07_21.Rda")   # #
+                           
+# Loading ABDR data with NatCond variable
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_0721YOR_YOB.Rda") # #
+
+ABDR_YOB <- ABDR_0721YOR_YOB %>%                                                #
+  distinct(BC, NatCond, YOB) %>%
+  group_by(NatCond, YOB) %>%
+  dplyr::summarise(cases = n())
+
+# #### Loading  BVS data (MCH Unit specific) ####
+birth<-read_sas("R:\\ResData\\BVS MASTER FILES\\AUTHORIZED RESEARCHERS ONLY\\current\\birth_statistical.sas7bdat")
+
+birth2 <- birth %>%
+  select(birth_cert, dob, sex)
+#
+
+# fp_vs2 <- file.path("R:\\ResData\\BVS MASTER FILES\\AUTHORIZED RESEARCHERS ONLY\\current\\_89_birth.sas7bdat")
+# BVS89 <- read_sas(fp_vs2) # Births from 1990-2012
+# 
+# fp_vs <- file.path("R:\\ResData\\BVS MASTER FILES\\AUTHORIZED RESEARCHERS ONLY\\current\\_03_birth.sas7bdat")
+# BVS03 <- read_sas(fp_vs) # Births from 2013-2019
+# 
+# BVS89_2 <- BVS89 %>% 
+#   dplyr::select(birth_certificate_number, child_dob, SEX)
+# BVS03_2 <- BVS03 %>% 
+#   dplyr::select(birth_certificate_number, child_dob, sex)
+# 
+# colnames(BVS89_2) <- c("birth_certificate_number", "child_dob", "sex")
+# 
+# # Combing both BVS datasets (BVS89_2 and BVS03_2) into one dataset (BVS) 
+# BVS <- rbind(BVS89_2, BVS03_2)
+
+# Creating a year of birth varible (YOB)
+birth3 <- birth2 %>% mutate(YOB = ifelse(is.na(dob), 
+                                    substr(birth_certificate_number, 
+                                           start = 0, stop = 4), 
+                                    year(ymd(dob))))
+
+# Creating dataframe of birth per year (birth_totals)
+birth_totals <- birth %>% 
+  filter(dob_yr %in% 2007:2021) %>%                                             #
+  dplyr::group_by(dob_yr) %>% 
+  dplyr::summarise(total_population = n()) %>%
+  mutate_all(.funs = as.integer) %>%
+  dplyr::rename("YOB" = dob_yr)
+
+# Creating dataframe of female birth per year (f_birth_totals)
+f_birth_totals <- birth %>%
+  filter(sex == "F") %>% 
+  filter(dob_yr %in% 2007:2021) %>%                                             #
+  dplyr::group_by(dob_yr) %>% 
+  dplyr::summarise(female_population = n()) %>%
+  mutate_all(.funs = as.integer) %>%
+  dplyr::rename("YOB" = dob_yr)
+
+# Creating dataframe of male birth per year (m_birth_totals)
+m_birth_totals <- birth %>%
+  filter(sex == "M") %>% 
+  filter(dob_yr %in% 2007:2021) %>%                                             #
+  dplyr::group_by(dob_yr) %>% 
+  dplyr::summarise(male_population = n()) %>%
+  mutate_all(.funs = as.integer) %>%
+  dplyr::rename("YOB" = dob_yr)
+
+# Joining birth_totals with ABDR
+ABDR_2 <- dplyr::left_join(ABDR_YOB, birth_totals, by = "YOB") %>% 
+  merge(f_birth_totals, by = "YOB") %>%
+  merge(m_birth_totals, by = "YOB") %>%
+  arrange(NatCond, YOB)
+
+# Identify conditions with < 3 occurrences and exclude
+ABDR_3 <- ABDR_2 %>% 
+  filter(!is.na(NatCond))
+
+# Altering ABDR_3 denominators (total_population) to only female births for TURN
+#and only male births for HYP: ABDR_4
+ABDR_4 <- ABDR_3 %>%
+  mutate(total_population = if_else(NatCond == "HYP", 
+                                    male_population,
+                                    if_else(NatCond == "TURN", 
+                                            female_population,
+                                    total_population)))
+
+# Creating a funciton to run glm model
+yob_model <- function(df) {
+  glm(glm(cases ~ YOB,
+                 family=quasipoisson(link="log"),
+                 offset=log(total_population),
+                 data = df))
+}
+
+# Creating dataframe with p-values: pval
+# Running a glm model for each National Condition and "tidying" outputs
+models <- ABDR_4 %>% 
+  dplyr::group_by(NatCond) %>% 
+  nest() %>%
+  mutate(model_a = map(data, yob_model)) %>%
+  dplyr::summarise(tdy = purrr::map_df(.x = model_a, 
+                                .f = broom::tidy, 
+                                .id = "model"))
+
+# Binding columns from models dataframe to produce tibble and renaming columns
+models2 <- bind_cols(models$NatCond, models$tdy) %>%
+  rename("NatCond" = `...1`)
+
+# Filtering by year of birth and select NatCond and a rounded p-value.
+pval <- models2 %>%
+  filter(term == "YOB") %>%
+  select(NatCond, p.value) %>%
+  mutate(p.value = round(p.value, digits = 2))
+
+# Creating annual rates for each condition: rts
+rts<-ddply(ABDR_4,.(NatCond,YOB),summarise,Rate=(cases/total_population)*10000) 
+
+# Reshaping rts to a wide format
+rts1<-reshape(rts,timevar="YOB",idvar="NatCond",direction="wide")
+
+#Reordering variables
+rts1 <- rts1[c("NatCond", "Rate.2007", "Rate.2008", "Rate.2009", "Rate.2010", 
+       "Rate.2011", "Rate.2012", "Rate.2013", "Rate.2014", "Rate.2015",
+       "Rate.2016", "Rate.2017", "Rate.2018", "Rate.2019", "Rate.2020", 
+       "Rate.2021")]                                                            #
+
+# Merging rts1 and pval2 into one dataframe: trend
+trend<-merge(rts1,pval,by="NatCond",all.x=T)    
+
+# Creating a column of number of years used in the model
+cond <- ddply(ABDR_4,.(NatCond),summarise,Cases=length(cases)) 
+
+# Creating a dataframe of NatCond matched with Defect descripiton: cond_b
+cond_b <- cond %>% 
+  left_join(tnd, by = c("NatCond" = "D_Code")) %>%
+  distinct(NatCond, Defect)
+
+# Combining the number of years used in each model to trend(w/o the NatCond)
+trend1 <- merge(trend, cond_b, by = "NatCond") %>% 
+  mutate(NatCond = Defect) %>% 
+  select(-Defect)
+
+colnames(trend1) <-c("Defect", "2007", "2008", "2009", "2010", "2011", "2012", 
+                      "2013", "2014", "2015", "2016", "2017", "2018", "2019",
+                     "2020", "2021", "p-value")                                 #
+
+trend1[,2:16]<-round(trend1[,2:16],1)                                           # # add one to all last column numbers
+trend1[,17]<-round(trend1[,17],4)                                               # #
+trend1[,2:17]<-format(trend1[,2:17],drop0trailing = FALSE,trim = T)             # #
+trend1[,2:17][trend1[,2:17]=="NA"|trend1[,2:17]=="NaN"]<- 0 # used to be "-" not zero   # # #
+
+row.names(trend1)<-trend1[,1]
+
+# Creating a list of ordered Defects
+s <- c("Aortic valve stenosis", 
+       "Atrial septal defect", 
+       "Atrioventricular septal defect", 
+       "Coarctation of the aorta", "Common truncus", 
+       "Double outlet right ventricle", "Ebstein anomaly", 
+       "Hypoplastic left heart syndrome", "Inerrupted aortic arch", 
+       "Pulmonary valve atresia and stenosis", "Single ventricle", 
+       "Teratology of fallot", "Total anomalous pulmonary venous connection", 
+       "Transposition of the great arteries", 
+       "Tricuspid valve atresia and stenosis", 
+       "Ventricular septal defect", "Anencephalus", 
+       "Spina bifida without anencephalus", "Encephalocele", 
+       "Holoprosencephaly", "Deletion 22 q11", "Trisomy 13", "Trisomy 18", 
+       "Trisomy 21 (Down syndrome)", "Turner syndrome", "Anotia / microtia", 
+       "Anophthalmia / microphthalmia", "Congenital cataract", 
+       "Biliary atresia", "Esophageal atresia / tracheoesophageal fistula", 
+       "Rectal and large intestinal atresia / stenosis",
+       "Small intestinal atresia / stenosis", "Bladder exstrophy", 
+       "Congenital posterior urethral valves", "Hypospadias", 
+       "Renal agenesis / hypoplasia", "Clubfoot", "Craniosynostosis", 
+       "Diaphragmatic hernia", "Gastroschisis", "Limb deficiencies", 
+       "Omphalocele", "Choanal atresia", "Cleft lip with celft palate",
+       "Cleft lip alone", "Cleft palate alone")
+
+# Setting s as a factor to obtain levels
+s <- as.factor(s)
+
+# Reodering trend1 by the levels of s; trend2
+trend2 <- trend1 %>% 
+  mutate(Defect = factor(Defect, levels = s)) %>%
+  arrange(Defect) %>%
+  mutate(Defect = as.character(Defect))
+
+# Adding '*' to Turner Syndrome and Hypospadias
+trend2$Defect[trend2$Defect == 'Turner syndrome'] <- 'Turner syndrome*'
+trend2$Defect[trend2$Defect == "Hypospadias"] <-"Hypospadias**"
+
+# Setting variable "Defect" to row names and dropping Defect
+#row.names(trend2) <- trend2$Defect
+trend2 <- trend2 %>% select(-Defect)
+
+
+tidytrend <- trend2 %>%
+  rownames_to_column() %>%
+  select(-`p-value`) %>%
+  pivot_longer( names_to = "year", values_to = "reports", `2007`:`2021`) %>%    #
+  mutate(reports = ifelse(reports == "-", 0, reports)) %>%
+  mutate(reports = as.numeric(reports), 
+         year = as.numeric(year)) %>%
+  rename("Condition" = rowname)
+
+sparkline_data <- tidytrend %>%
+  dplyr::group_by(Condition) %>%
+  dplyr::summarize(
+    TrendSparkline = spk_chr(
+      reports, type ="line",
+      chartRangeMin = 0, chartRangeMax = max(reports)
+    )
+  )
+
+
+trend3 <- trend2 %>%
+  mutate(de_groups = c("Cardiovascular", "Cardiovascular", "Cardiovascular", 
+                       "Cardiovascular", "Cardiovascular", "Cardiovascular", 
+                       "Cardiovascular", "Cardiovascular", "Cardiovascular", 
+                       "Cardiovascular", "Cardiovascular", "Cardiovascular",
+                       "Cardiovascular", "Cardiovascular", "Cardiovascular",
+                       "Cardiovascular",
+                       "Central Nervous System", "Central Nervous System", 
+                       "Central Nervous System", "Central Nervous System", 
+                       "Chromosomal", "Chromosomal", "Chromosomal", 
+                       "Chromosomal", "Chromosomal", "Ear", "Eye", "Eye", 
+                       "Gastrointestinal", "Gastrointestinal", 
+                       "Gastrointestinal", "Gastrointestinal", "Genitourinary", 
+                       "Genitourinary", "Genitourinary", "Genitourinary",
+                       "Genitourinary",
+                       "Musculoskeletal", "Musculoskeletal", "Musculoskeletal", 
+                       "Musculoskeletal", "Musculoskeletal", "Musculoskeletal", 
+                       "Orofacial", "Orofacial", "Orofacial", "Orofacial")) %>%
+  rownames_to_column() %>%
+  rename("Condition" = rowname)
+
+trend4 <- left_join(trend3, sparkline_data, by = "Condition") %>%
+  dplyr::rename("Trend" = TrendSparkline) %>%
+  select(Condition:`p-value`, Trend, de_groups) %>%
+  column_to_rownames(var = "Condition")
+
+trend4_no_groups <- trend4 %>%
+  select(-de_groups)
+
+tmp1<-htmlTable(trend4_no_groups,
+                rgroup=c("Cardiovascular","Central Nervous System",
+                         "Chromosomal","Ear","Eye",
+                         "Gastrointestinal","Genitourinary",
+                         "Musculoskeletal","Orofacial"),
+                n.rgroup=c(16,4,5,1,2,4,4,6,4),
+              # col.rgroup=c("#F7F7F7","none"),
+                rowlabel="Defect",
+                css.cell="padding-left: 2em; padding-right: 2em;",
+                tfoot=txtMergeLines("Ref: 95% CI = 95% Confidence Interval; g = grams",
+                                    "*per 10,000 live female births",
+                                    "**per 10,000 live male births"))
+#gsub('<td','<td nowrap="nowrap";',tmp1) #removes wrapping
+
+demo_tbl <- datatable(trend4,
+                      escape = FALSE,
+                      extensions = c("RowGroup"), #, "Responsive"),
+          options = list(rowGroup = list(dataSrc = 18),                         # Add one to dataSrc to keep the right grouping number
+                         pageLength = 47, 
+                         dom = 't',
+                         paging = FALSE, fnDrawCallback = htmlwidgets::JS(
+  '
+function(){
+  HTMLWidgets.staticRender();
+}
+'
+)
+       ),
+          container = tmp1,
+          rownames = T,
+          class = 'cell-border stripe') %>%
+  spk_add_deps()
+
+demo_tbl
+
+
+#library(knitr)
+# kable(trend1,format="markdown",align='c',row.names = FALSE) 
+```
+</center>
+
+Table Notes: 
+
+1. Missing data is the result of suppression and/or non-data collection in early years. 
+
+2. Prevalence rate estimates are based on reports to the Alaska Birth Defect Registry. Although p-value estimates are provided to assess the trend (increasing or decreasing) over time, caution should be used in interpretation as data collection methods and data aggregation may vary, leading to systematic differences over time. Reports of defects are only included if diagnosed before the age of three years. For conditions that are commonly diagnosed after the first three years of life, reporting estimates may be systematically lower.
+
+3. The p-value estimates the probability that the observed slope is different from a slope of zero. By convention an alpha of 0.05 is used to determine significance; p-values are only calculated for defects with 3 or more data points. 
+The p-value estimate is calculated to model the observed rates over time using a generalized linear model with a Poisson distribution and offset of the natural log (ln) of the birth population size under the form:  
+
+$$ ln \frac a n = \beta_0 + \beta_1 X_1 + \ln(n) $$
+
+
+
+   
+
+**Resources**  
+[National Birth Defects Prevention Network](http://www.nbdpn.org/index.php)  
+[Centers for Diesase Control and Prevention](https://www.cdc.gov/ncbddd/birthdefects/index.html)  
+
+**Contact**    
+Alaska Birth Defects Registry (ABDR)  
+3601 C Street, Suite 358  
+Anchorage, AK 99503  
+(907) 269-3400 phone  
+(907) 754-3529 fax  
+hssbirthdefreg@alaska.gov
+
+
+*Updated: `r format(Sys.time(), '%B %d, %Y')`*                                                      
+*Code source:* ```R:\ABDR\Analysis_New\Published Data\trend07_20.Rmd```         

@@ -1,0 +1,461 @@
+---
+title: "Alaska Birth Defect Registy Reported Prevalence and Defect Estimates"
+subtitle: "Birth Years 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
+title-block-banner: ~img/ABDR_csr2.png
+format:
+  html:
+    page-layout: full
+    toc: false
+    toc-float: false
+    code-fold: true
+---
+
+<style type="text/css">
+
+h4.title { 
+  text-align: center;
+}
+
+h4.author { /* Header 4 - and the author and date headers use this too  */
+  font-size: 25px;
+  font-style: normal;
+  font-family: "Times New Roman";
+  color: Black;
+  text-align: center;
+}
+h4.date { /* Header 4 - and the author and date headers use this too  */
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  color: Black;
+  text-align: center;
+}
+</style>
+
+**Report and Estimated Defect Prevalence Estimates (per 10,000 live births)**  
+```{r} 
+#| label: chunk-label-1  
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+library(epitools)
+library(lubridate)  
+library(RODBC)
+library(dplR)
+library(plyr)
+library(knitr)
+library(htmlTable)
+library(dplyr)
+library(tidyverse)
+
+# library(datadr)                                                               # Not available for R 4.0.2
+
+# Removing scientific notation
+options(scipen=999)
+
+channel.c<-odbcDriverConnect("Driver={Microsoft Access Driver (*.mdb, *.accdb)};
+                             DBQ=R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\CaseConfProb.accdb")
+CPROB<-sqlQuery(channel.c,"SELECT * FROM CaseConfProb1")
+
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_BTH_0721RSRCH_L3.Rda") # #
+
+A_Y5<-subset(ABDR_BTH_0721RSRCH_L3,year(dob) %in% (2017:2021))                  # # #
+
+
+key<-sqlQuery(channel.c,"SELECT * FROM CODES")
+
+
+#### Organize data ####
+#Cleft lips
+ # A_Y5$CLP.1<-with(A_Y5,ifelse(CLP==1,1,ifelse(CL==1 & CP==1,1,0)))
+ # A_Y5$CL.1<-with(A_Y5,ifelse(CL==1 & CP==1 & CLP==1,0,
+ #                      ifelse(CL==1 & CP==1 & CLP==0,0,
+ #                      ifelse(CL==1 & CP==0 & CLP==1,0,
+ #                      ifelse(CL==1 & CP==0 & CLP==0,1,0)))))
+ # A_Y5$CP.1<-with(A_Y5,ifelse(CL==1 & CP==1 & CLP==1,0,
+ #                      ifelse(CL==1 & CP==1 & CLP==0,0,
+ #                      ifelse(CL==0 & CP==1 & CLP==1,0,
+ #                      ifelse(CL==0 & CP==1 & CLP==0,1,0)))))
+ #drop Cleft reports to add in new ones
+  ###These are mutually exclusive now!!!!
+A_Y5 <-A_Y5 %>%
+  mutate(CL.1 = ifelse(CL == 1, 1, 0)) %>%
+  mutate(CP.1 = ifelse(CP == 1, 1, 0)) %>%
+  mutate(CLP.1 = ifelse(CLP == 1, 1, 0))
+A_Y5 <- A_Y5 %>% select(-c(CL, CP, CLP)) %>%
+  rename("CL" = CL.1, "CP" = CP.1, "CLP" = CLP.1)
+
+
+A_Y5 <- A_Y5 %>%
+  select(-CLOE) %>%
+  rename("CLOE" = count.CLOE)
+  
+reports <- A_Y5 %>% 
+  summarise_at(.vars = vars(ASD:CCAT, RLIA:CLP),
+               .funs = sum) %>%
+  data.frame() %>% 
+  gather(value = "Reports")
+rownames(reports) <- reports[,1] 
+reports <- select(reports, -key)
+
+reports_M <- A_Y5 %>% filter(sex == "Male") %>% 
+  summarise(Reports = sum(HYP))
+rownames(reports_M) <- "HYP" 
+
+reports_F <- A_Y5 %>% 
+  filter(sex == "Female") %>% 
+  summarise(Reports = sum(TURN))
+rownames(reports_F) <- "TURN" 
+
+reports<-rbind(reports,reports_M,reports_F)
+
+#Counts of births total (bts) males (btsM) and females (btsF)
+  bts<- length(A_Y5$BC)
+  btsM<-sapply(subset(A_Y5, sex=="Male")[1],length)
+  btsF<-sapply(subset(A_Y5, sex=="Female")[1],length)
+
+#### Prevalence For most groups ####
+#Reported Prevalence
+rname<-rownames(reports) 
+ev1<-pois.exact(reports[c(1:45),],bts)
+  ev1$NatCond<-rname[c(1:45)]
+  #For Turner Syndrome#
+  ev1a<-pois.exact(reports[47,],btsF)
+  ev1a$NatCond<-rname[47]
+ev1<-rbind(ev1,ev1a) 
+
+# Weights
+  cp<-subset(CPROB,NatCond!="HYPOS" ,select=c("NatCond","ReportsSens","Confirmed","PPV","NPV"))
+    cp$NatCond<-as.character(cp$NatCond)
+    cp$NatCond[cp$NatCond=="ANENC"]<-"ANEN"
+    cp$NatCond[cp$NatCond=="GASTR"]<-"GAS"
+    cp$NatCond[cp$NatCond=="OMPHA"]<-"OMP"
+    cp <- cp[-13, ]                                                             # Removed CF
+  cp1<-merge(ev1, cp, by.x = "NatCond", by.y = "NatCond",all.y=T)
+# estimated Prevalence
+temp1<-((as.numeric(cp1$rate))*cp1$PPV)+((1-(as.numeric(cp1$rate)))*(1-cp1$NPV))
+#temp1 <- as.vector(na.omit(temp1))
+temp1_logical <- is.na(temp1)
+temp1[temp1_logical] <- 0
+ cp2<-pois.exact(temp1*bts, bts)                                                # pois.exact() doesn't seem to like NA's but
+  cp3<-cbind(cp1[,c(1,10:11)],cp2)                                              # row numbers don't line up with na.omit(temp1)
+# Table
+Prev<-merge(ev1,cp3[,-c(5,9)],by.x = "NatCond", by.y = "NatCond",all.x = T)
+Prev1<-Prev[,-c(7)]  
+  colnames(Prev1)<-c("NatCond","Reports","Births","RptPrev","RptLower","RptUpper","PPV","NPV","Defects","Prev","PrevLower","PrevUpper")
+
+#### Prevalence For Hypospadias  ####
+ev2<-pois.exact(reports[46,],btsM)
+  ev2$NatCond<-rname[46]
+
+# Weights
+  hp<-subset(CPROB,NatCond=="HYPOS",select=c("NatCond","ReportsSens","Confirmed","PPV","NPV"))
+      hp$NatCond<-as.character(hp$NatCond)
+      hp$NatCond[hp$NatCond=="HYPOS"]<-"HYP"
+  hp1<-merge(ev2, hp, by.x = "NatCond", by.y = "NatCond",all.y=T)
+# estimated Prevalence
+temp2<-((as.numeric(hp1$rate))*hp1$PPV)+((1-(as.numeric(hp1$rate)))*(1-hp1$NPV))
+ hp2<-pois.exact(temp2*btsM,btsM)
+  hp3<-cbind(hp1[,c(1,10:11)],hp2)
+# Table
+PrevH<-merge(ev2,hp3[,-c(5,9)],by.x = "NatCond", by.y = "NatCond",all.x = T)
+Prev1H<-PrevH[,-c(7)]  
+  colnames(Prev1H)<-c("NatCond","Reports","Births","RptPrev","RptLower","RptUpper","PPV","NPV","Defects","Prev","PrevLower","PrevUpper")
+
+
+### Create Table for annual estimates ####
+PrevTab<-rbind(Prev1,Prev1H)  
+    PrevTab[,c(4:6,10:12)]<-round(PrevTab[,c(4:6,10:12)]*10000,1)
+    PrevTab[,c(7,8)]<-round(PrevTab[,c(7,8)],4)
+    PrevTab[,9]<-round(PrevTab[,9],1)
+  PrevTab[,c(4:12)]<-format(PrevTab[,c(4:12)],drop0trailing = FALSE,trim = T)
+PrevTab<- merge(key[,c(1,2)], PrevTab, by.x = "D_Code", by.y = "NatCond",all.y=T)# combine with descriptors
+
+#Numbers supressed 
+PrevTab$RCIa<-paste(PrevTab[,5],paste("(",PrevTab[,6],",",PrevTab[,7],")",sep = ""))
+PrevTab$PCIa<-paste(PrevTab[,11],paste("(",PrevTab[,12],",",PrevTab[,13],")",sep = ""))
+
+PrevTab1<-subset(PrevTab,select=c(D_Code,Defect,Reports,Births,RCIa,PPV,NPV,Defects,PCIa))
+
+colnames(PrevTab1)<-c("Code","Defect","Reports","Births","Report Prevalence (95%CI)","PPV","NPV","Estimated Defects","Defect Prevalence (95%CI)")
+
+PrevTab1[PrevTab1$Reports<6,c(3:5)]<-'-'
+PrevTab1[,6:8][PrevTab1[,6:8]=="NA"]<-""
+PrevTab1[,9][PrevTab1[,9]=="NA (NA,NA)"]<-"NA"
+PrevTab1<-PrevTab1[order(PrevTab1$Defect),]
+PrevTab1<-PrevTab1[,-c(1,4)]
+
+row.names(PrevTab1)<-PrevTab1[,1]
+  rownames(PrevTab1)[rownames(PrevTab1)=='Turner syndrome']<-'Turner syndrome*'
+  rownames(PrevTab1)[rownames(PrevTab1)=="Hypospadias"]<-"Hypospadias**"
+  rownames(PrevTab1)[rownames(PrevTab1)== "Cleft lip with celft palate"] <-  "Cleft lip with celft palate***"                             
+  rownames(PrevTab1)[rownames(PrevTab1)== "Cleft lip alone"] <-  "Cleft lip alone***"
+  rownames(PrevTab1)[rownames(PrevTab1)== "Cleft palate alone"] <-  "Cleft palate alone***"
+  rownames(PrevTab1)[rownames(PrevTab1)== "Inerrupted aortic arch"] <-  "Interrupted aortic arch"
+  rownames(PrevTab1)[rownames(PrevTab1)== "Total anomalous pulmonary venous sonnection"] <-  "Total anomalous pulmonary venous connection"
+PrevTab1$order<-c(17,27,26,1,2,3,29,33,44,46,45,47,34,38,4,5,28,35,39,21,40,6,
+                  7,19,30,41,20,8,36,9,42,43,10,31,37,11,32,18,12,13,14,15,22,23,
+                  24,25,16)
+PrevTab2<-PrevTab1[order(PrevTab1$order),]
+PrevTab3<-PrevTab2[,-c(1,8)]
+
+# Having to impute cleft condition values
+load("R:\\ABDR\\chris_analysis\\cleft\\ev2_cl.Rda")                           
+load("R:\\ABDR\\chris_analysis\\cleft\\ev2_cp.Rda")                           
+load("R:\\ABDR\\chris_analysis\\cleft\\ev2_clp.Rda")                           
+
+#### CL ####
+cl15 <- ev2_cl %>% filter(yrs %in% 2017:2021) %>%                               # #
+  select(-c('Prevalence (95% CI)', yrs)) %>%
+  mutate_all(.funs = as.numeric) %>%
+  summarise_all(.funs = sum)
+cl15b <- cl15/5
+
+# Pasting brackets around the upper and lower confidence intervals
+cl15b$`Defect Prevalence` <- 
+  paste(cl15b$`Defect Prevalence`, " ")
+cl15b$`Defect Prevalence` <- gsub(" ", "", cl15b$`Defect Prevalence`) %>%
+    str_pad(side = "right",width = 5)
+
+cl15b$UpperCI <- 
+  paste(cl15b$UpperCI,")")
+cl15b$UpperCI <- gsub(" ", "", cl15b$UpperCI)
+
+cl15b$LowerCI <- 
+  paste("(",cl15b$LowerCI,",")
+cl15b$LowerCI <- gsub(" ", "", cl15b$LowerCI) %>%
+    str_pad(side = "right",width = 6)
+
+# Combining prevalence and confidence intervals into a single column
+cl15c <- cl15b %>% 
+  unite('Defect Prevalence (95%CI)', `Defect Prevalence`, LowerCI, UpperCI,
+        sep = " ")
+
+#### Report Prevalence CL ####
+cl15_rpt <- pois.exact(cl15c[1], cl15c[3])
+cl15_rptb <- round(cl15_rpt*10000,1)
+
+# Pasting brackets around the upper and lower confidence intervals
+cl15_rptb$rate <- 
+  paste(cl15_rptb$rate,".0", " ")
+cl15_rptb$rate <- gsub(" ", "", cl15_rptb$rate) %>%
+    str_pad(side = "right",width = 6)
+
+cl15_rptb$upper <- 
+  paste(cl15_rptb$upper,")")
+cl15_rptb$upper <- gsub(" ", "", cl15_rptb$upper)
+
+cl15_rptb$lower <- 
+  paste("(",cl15_rptb$lower," ")
+cl15_rptb$lower <- gsub(" ", "", cl15_rptb$lower) %>%
+    str_pad(side = "right",width = 5)
+
+# Combining prevalence and confidence intervals into a single column
+cl15_rptc <- cl15_rptb %>% 
+  unite('Reort Prevalence (95%CI)', rate, lower, upper,
+        sep = " ")
+
+
+#### CP
+cp15 <- ev2_cp %>% filter(yrs %in% 2017:2021) %>%                               # #
+  select(-c('Prevalence (95% CI)', yrs)) %>%
+  mutate_all(.funs = as.numeric) %>%
+  summarise_all(.funs = sum)
+cp15b <- cp15/5
+
+# Pasting brackets around the upper and lower confidence intervals
+cp15b$`Defect Prevalence` <- 
+  paste(cp15b$`Defect Prevalence`," ")
+cp15b$`Defect Prevalence` <- gsub(" ", "", cp15b$`Defect Prevalence`) %>%
+    str_pad(side = "right",width = 5)
+
+cp15b$UpperCI <- 
+  paste(cp15b$UpperCI,")")
+cp15b$UpperCI <- gsub(" ", "", cp15b$UpperCI)
+
+cp15b$LowerCI <- 
+  paste("(",cp15b$LowerCI,","," ")
+cp15b$LowerCI <- gsub(" ", "", cp15b$LowerCI) %>%
+    str_pad(side = "right",width = 6)
+
+# Combining rpt_prev and confidence intervals into a single column
+cp15c <- cp15b %>% 
+  unite('Defect Prevalence (95%CI)', `Defect Prevalence`, LowerCI, UpperCI,
+        sep = " ")
+
+# Report Prevalence CP
+cp15_rpt <- pois.exact(cp15c[1], cp15c[3])
+cp15_rptb <- round(cp15_rpt*10000,1)
+
+# Pasting brackets around the upper and lower confidence intervals
+cp15_rptb$rate <- 
+  paste(cp15_rptb$rate," ")
+cp15_rptb$rate <- gsub(" ", "", cp15_rptb$rate) %>%
+    str_pad(side = "right",width = 5)
+
+cp15_rptb$upper <- 
+  paste(cp15_rptb$upper,")")
+cp15_rptb$upper <- gsub(" ", "", cp15_rptb$upper)
+
+cp15_rptb$lower <-
+  paste("(",cp15_rptb$lower,","," ")
+cp15_rptb$lower <- gsub(" ", "", cp15_rptb$lower) %>%
+    str_pad(side = "right",width = 6)  
+
+# Combining prevalence and confidence intervals into a single column
+cp15_rptc <- cp15_rptb %>% 
+  unite('Reort Prevalence (95%CI)', rate, lower, upper,
+        sep = " ")
+
+
+#### CLP ####
+clp15 <- ev2_clp %>% filter(yrs %in% 2017:2021) %>%                             # #
+  select(-c('Prevalence (95% CI)', yrs)) %>%
+  mutate_all(.funs = as.numeric) %>%
+  summarise_all(.funs = sum)
+clp15b <- clp15/5
+
+# Pasting brackets around the upper and lower confidence intervals
+clp15b$`Defect Prevalence` <- 
+  paste(clp15b$`Defect Prevalence`," ") 
+clp15b$`Defect Prevalence` <- gsub(" ", "", clp15b$`Defect Prevalence`) %>%
+    str_pad(side = "right",width = 5) 
+
+clp15b$UpperCI <- 
+  paste(clp15b$UpperCI,")")
+clp15b$UpperCI <- gsub(" ", "", clp15b$UpperCI)
+
+clp15b$LowerCI <- 
+  paste("(",clp15b$LowerCI,","," ")
+clp15b$LowerCI <- gsub(" ", "", clp15b$LowerCI) %>%
+    str_pad(side = "right",width = 6)     
+
+# Combining rpt_prev and confidence intervals into a single column
+clp15c <- clp15b %>% 
+  unite('Defect Prevalence (95%CI)', `Defect Prevalence`, LowerCI, UpperCI,
+        sep = " ")
+
+# Report Prevalence CLP
+clp15_rpt <- pois.exact(clp15c[1], clp15c[3])
+clp15_rptb <- round(clp15_rpt*10000,1)
+
+# Pasting brackets around the upper and lower confidence intervals
+clp15_rptb$rate <- 
+  paste(clp15_rptb$rate," ")
+clp15_rptb$rate <- gsub(" ", "", clp15_rptb$rate) %>%
+    str_pad(side = "right",width = 5) 
+
+clp15_rptb$upper <- 
+  paste(clp15_rptb$upper,")")
+clp15_rptb$upper <- gsub(" ", "", clp15_rptb$upper)
+    # str_pad(side = "right",width = 6) 
+
+clp15_rptb$lower <- 
+  paste("(",clp15_rptb$lower,","," ")
+  clp15_rptb$lower <- gsub(" ", "", clp15_rptb$lower) %>%
+    str_pad(side = "right",width = 6)                                           
+
+# Combining prevalence and confidence intervals into a single column
+clp15_rptc <- clp15_rptb %>% 
+  unite('Reort Prevalence (95%CI)', rate, lower, upper,
+        sep = " ")
+
+Report_Prevalence <- c(cl15_rptc$`Reort Prevalence (95%CI)`, 
+                       cp15_rptc$`Reort Prevalence (95%CI)`, 
+                       clp15_rptc$`Reort Prevalence (95%CI)`)
+
+Defect_Prevalence <- c(cl15c$`Defect Prevalence (95%CI)`,
+                       cp15c$`Defect Prevalence (95%CI)`, 
+                       clp15c$`Defect Prevalence (95%CI)`)
+
+
+clft_prevs <- data.frame(Report_Prevalence, Defect_Prevalence, 
+                         row.names = c("CL", "CP", "CLP"))
+
+clft_prevs <- clft_prevs %>% mutate_all(.funs = as.character)
+
+save(clft_prevs, file = "R:/ABDR/Analysis_New/Published Data/clft_prevs.Rda")
+
+# Replacing auto-calculated cleft conditions with more complex adjustment
+PrevTab4 <- PrevTab3
+PrevTab4[45, 2] <- clft_prevs[3, 1] 
+PrevTab4[45, 6] <- clft_prevs[3, 2]
+
+PrevTab4[46, 2] <- clft_prevs[1, 1]
+PrevTab4[46, 6] <- clft_prevs[1, 2]
+
+PrevTab4[47, 2] <- clft_prevs[2, 1]
+PrevTab4[47, 6] <- clft_prevs[2, 2] 
+
+PrevTab4[22, 6] <- "-"
+
+
+
+#### Make HTML Table ####
+tmp1<-htmlTable(PrevTab4,
+                rgroup=c("Cardiovascular","Central Nervous System","Chromosomal","Ear","Eye","Gastrointestinal","Genitourinary","Musculoskeletal","Orofacial"),
+                n.rgroup=c(16,4,5,1,2,4,5,6,4),
+                col.rgroup=c("#F7F7F7","none"),
+                rowlabel="Defect",
+                css.cell="padding-left: 2em; padding-right: 2em;",
+                tfoot=txtMergeLines("Ref: NA = Information not available as of publication; '-' = supressed for cell counts <6; 95% CI = 95% Confidence Interval; g = grams, PPV = Positive Predictive Value; NPV = Negative Predictive value","*per 10,000 live female births","**per 10,000 live male births", "***All cleft condition defect estimates include additional adjustments (not displayed here) for intra-conditional misclassification (i.e. individuals reported for the wrong, or multiple cleft conditions)"))
+gsub('<td','<td nowrap="nowrap";',tmp1) #removes wrapping
+
+#library(knitr)
+# kable(PrevTab1,format="markdown",align='c',row.names = FALSE) 
+```  
+
+**Note:** The Alaska Birth Defects Registry (ABDR) was established and operates under Alaska statute [7 AAC 27.012](http://www.legis.state.ak.us/basis/aac.asp#7.27.012). Statue allows reports to by age three years of a child. This report includes defects reported before the third birthday.  
+
+**Column descriptions:**  
+**Defect** = The Nationally reportable birth defect grouping name.  
+**Reports** = Unless otherwise noted, the number of unique reports of defect received by ABDR during the specified birth year(s). Each report represents a unique child with specified defect.   
+**Report Prevalence (95% CI)** = The number of reported defects divided by the number of Alaska resident in-state births (Children can be reported multiple times. they are counted only once for each condition).  
+**PPV** = The probability of being defect positive given being reported for the defect.  
+**NPV** = The probability of being defect negative given not being reported for the defect.  
+**Estimated Defects** = The estimated number of defects based on the report prevalence, PPV, and 1-NPV.  
+**Defect Prevalence (95% CI)** = The estimated defect prevalence calculated using a Bayesian approach based on the reported prevalence, PPV and 1-NPV (see formula below).
+
+*Through medical records review and case confirmation of a random sample of reported cases, the defect prevalence is calculated as: 
+
+$$PPV (Positive Predictive Value) = p(defect)|report)$$
+$$NPV (Negative Predictive Value) = p(\overline{defect}|\overline{report})]$$
+
+$$p(defect) \approx [p(report)\cdot PPV]+[p(\overline{report})\cdot 1-NPV)]$$   
+
+Defect prevalence estimates are a more accurate estimation of the actual diagnosed prevelance of birth defects compared to the reported prevelance estimates in Alaska. ABDR obtains reports from medical providers using International Classification of Disease (ICD) codes that are extracted from individual systems which when aggregated may not reflect true diagnostics. Caution should be used when interpreting and comparing the reported prevalence estimates with national estimates.
+
+**Condition Notes:**  
+<!-- Cleft Lip (CL), Cleft Palate (CP), and Cleft Lip and Palate (CLP) are coded to be mutually exclusive groups.Because an individual can be reported multiple times and for any condition, this coding ensures that for these cleft conditions the classifications conform to the expectation of being mutually exclusive.   -->
+
+<!-- * Cleft lip alone includes reports without Cleft palate (CP) or cleft lip and palate (CLP)   -->
+<!-- * Cleft palate alone includes reports without Cleft lip (CL) or cleft lip and palate (CLP)   -->
+<!-- * Cleft lip and palate includes reports of both Cleft lip (CL) and Cleft palate (CP), Cleft lip and palate (CLP) or any other combination of Cleft lip (CL) or Cleft palate (CP) with cleft lip and palate (CLP)   -->
+
+Hypospadias is restricted to male births (N = `r btsM[1]`).  
+Turner Syndrome is restricted to female births (N = `r btsF[1]`).
+
+**Resources:**    
+[National Birth Defects Prevention Network](http://www.nbdpn.org/index.php)  
+[Centers for Diesase Control and Prevention](https://www.cdc.gov/ncbddd/birthdefects/index.html)  
+
+## Suggested Citation
+State of Alaska Department of Health and Social Services, Division of Public Health, Section of Women's, Children's, and Family Health. Alaska Birth Defects Registry Nationally reportable major congenital anomalies. Updated `r format(Sys.time(), '%B %d, %Y')`. Available at: https://rpubs.com/AK_ABDR/Prevalence.
+
+**Contact**    
+Alaska Birth Defects Registry (ABDR)  
+3601 C Street, Suite 358  
+Anchorage, AK 99503  
+(907) 269-3400 phone  
+(907) 754-3529 fax  
+hssbirthdefreg@alaska.gov 
+
+
+*Updated: `r format(Sys.time(), '%B %d, %Y')`*  
+*Code source:* ```R:\ABDR\Analysis_New\Published Data\Prevalence_current.qmd```    
+
+&nbsp;
+
+ <center>
+**State of Alaska, Department of Health, Section of Women's, Children's and Family Health**
+</center>  

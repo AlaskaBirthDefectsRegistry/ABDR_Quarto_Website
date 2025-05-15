@@ -15,13 +15,15 @@ Established in January 1996 under the [Alaska Administrative Code (7AAC 27.012)]
 The ABDR gathers information on several defects,including all 47 conditions recommended by the [National Birth Defects Prevention  (NBDPN)](https://www.nbdpn.org/).
 
 ## [Reporting Guide](reporting_guide.qmd)
-**Who:**  Any organization that provides service to or collects, and maintains records of service to children under the age of three with any of the conditions listed below.
-When:	Organizations are expected to report all indicated conditions semiannually (every six months).
-What:	Please include data for:\
-•	All of the divisions and / or business segments of your organization.
--	In-patient, outpatient, admits, discharges, radiology, laboratory, specialty clinics, etc.\
-•	All individuals seen by your organization up until their 3rd birthday. (Date of Service – Date of Birth) <3\
+**Who:** Any organization that provides service to or collects, and maintains records of service to children under the age of three with any of the conditions listed below.\
+**When:**	Organizations are expected to report all indicated conditions semiannually (every six months).\
+**What:**	Please include data for:\
+• All of the divisions and / or business segments of your \
+    organization. In-patient, outpatient, admits, discharges, \  
+  radiology, laboratory, specialty clinics, etc.\
+• All individuals seen by your organization up until their 3rd birthday. (Date of Service – Date of Birth) <3\
 •	All of the ICD-10 CM codes listed in the following tables.
+
 
 ## [Analysis and Collection Information](analysis_collection.qmd)
 Alaska Birth Defect Registry data collection and analysis methods

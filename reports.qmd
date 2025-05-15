@@ -4,8 +4,8 @@ title: "Reports"
 
 ## Rates and Trends
 
-* [Prevalence Rates](https://rpubs.com/AK_ABDR/five-year_prev)
-* [Prevalence Trends](https://rpubs.com/AK_ABDR/trends)
+* [Prevalence Rates](Prevalence_current.qmd)
+* [Prevalence Trends](trend_current.qmd)
 
 ## Condition Specific Reports
 
@@ -25,6 +25,7 @@ title: "Reports"
 
 ### Central Nervous System
 * [Anencephaly](https://rpubs.com/AK_ABDR/1043560)
+* [Anencephaly](Anencephaly_tar.qmd)
 * [Spina bifida without anencephalus](https://rpubs.com/AK_ABDR/1045024)
 * [Encephalocele](https://rpubs.com/AK_ABDR/1043684)
 
