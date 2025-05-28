@@ -10,10 +10,10 @@ title: "Reports"
 ## Condition Specific Reports
 
 ### Cardiovascular
-* [Coarctation of the aorta](https://rpubs.com/AK_ABDR/1043607)
-* [Common truncus](https://rpubs.com/AK_ABDR/1045079)
-* [Double outlet right ventricle](https://rpubs.com/AK_ABDR/1043675)
-* [Ebstein anomaly](https://rpubs.com/AK_ABDR/1043678)
+* [Coarctation of the aorta](Coarctation_Aorta_tar.qmd)
+* [Common truncus](Truncus_Arteriosus_tar.qmd)
+* [Double outlet right ventricle](DOVR_tar.qmd)
+* [Ebstein anomaly](Ebstein_Anomaly_tar.qmd)
 * [Hypoplastic left heart syndrome](https://rpubs.com/AK_ABDR/1045456)
 * [Interrupted aortic arch](https://rpubs.com/AK_ABDR/1043713)
 * [Pulmonary valve atresia and stenosis](https://rpubs.com/AK_ABDR/1045021)

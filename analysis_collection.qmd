@@ -3,5 +3,5 @@ title: "Analysis and Collection Information"
 ---
 
 * [Data analysis methods]()
-* [Data collection methods]()
+* [Data collection methods](Data_Methods.qmd)
 

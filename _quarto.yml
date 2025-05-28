@@ -16,6 +16,8 @@ website:
         text: Resources
       - href: analysis_collection.qmd
         text: Methods
+      - href: about.qmd
+        text: About
     tools:
       - icon: facebook
         href: https://www.facebook.com/doh.alaska

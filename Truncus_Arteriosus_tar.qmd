@@ -1,5 +1,5 @@
 ---
-title:  "Anencephaly 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
+title:  "Truncus Arteriosus (Common Truncus) 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
 author: "Alaska Birth Defect Registy"
 title-block-banner: ~img/ABDR_csr2.png
 format:
@@ -9,25 +9,47 @@ format:
     code-fold: true
 ---
 
+<style type="text/css">
+
+h4.author { /* Header 4 - and the author and date headers use this too  */
+  font-size: 36px;
+  font-style: normal;
+  font-family: "Times New Roman";
+  color: Black;
+  text-align: center;
+}
+h4.date { /* Header 4 - and the author and date headers use this too  */
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  color: Black;
+  text-align: center;
+}
+</style>
+
+---
 ## Background 
 
-Anencephaly is a neural tube defect (NTD) or brain disorder that results when the upper part of the neural tube does not close all the way. The neural tube is essential in forming the infant's brain, skull, and spinal cord. The incomplete closure of the upper part of the neural tube results in a infant being born without the forebrain (the front part of the brain) and the cerebrum (the thinking and coordinating part of the brain). The remaining brain tissue is often left exposed, uncovered by bone or skin. Affected babies are usually born unconscious, blind, deaf, and unable to feel pain. Due to the severity of this condition, almost all babies with anencephaly die before birth or only survive a few hours or days after birth. [[1,2]](#references)   
+Truncus arteriosus is a birth defect of the heart that occurs when the aorta and pulmonary artery fail to separate into two distinct blood vessels. [[1]](#references) This leads to oxygenated and unoxygenated blod mixing before it is pumped to the rest of the body. [[2]](#references) This defect can be diagnosed during pregnancy using prenatal tests like ultrasound but may be missed or mis-diagnosed, or after birth by echocardiography, physical exam, and pulse oximetry.  [[3]](#references) Symptoms of truncus arteriosus after birth can be variable and include heart failure (respiratory distress, tachycardia, poor feeding, and excessive sweating) and blue skin (cyanosis). [[1]](#references) In addition, this defect is frequently associated with extracardiac defects and genetic syndromes, especially 22q11 deletion. [[1]](#references) Treatment for truncus arteriosus includes medications to improve cardiac function and remove excess fluid from the body along with surgery to repair the heart and blood vessels. [[1]](#references) Surgery is typically performed in the first few weeks of life and includes separating the pulmonary artery from the aorta, closing the ventricular septal defect, and creating  a connection between the right ventricle and the pulmonary artery with an artificial tube. [[4]](#references) Because an infant with truncus arteriosus needs these procedures soon after birth, this defect is considered a critical congenital heart defect.
 
-Most occurrences of anencephaly are sporadic and happen in people with no family history of the condition or other NDTs. However, similar to spina bifida, another NTD, low intake of folic acid before and in early pregnancy has been shown to increase the risk of having a child affected by anencephaly. [[3]](#references) Further supporting evidence for the link between folic acid and NTDs is the significant decline in pregnancies affected by NTDs since the United States began fortifying grains with folic acid. [[4]](#references)  
+<br>
+
+<iframe width="812" height="456.75" src="https://www.youtube.com/embed/193JQ6LQRwI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-external = "1"></iframe>
 
 
 ## Epidemiology 
 Alaska Birth Defects Registry (ABDR) registers birth defects as reported from health care providers using International Classification of Disease (ICD) billing codes. The use of these ICD codes can lead to misclassification of diagnosed conditions. Prior to this report, all prevalence estimates were based on the number of unique children reported to ABDR with an ICD code representing a specified condition regardless of case confirmation status.  
 
-The estimates in this report were derived by conducting medical record review and case confirmation of a random sample of cases of the condition reported to ABDR. The confirmation probability from the sample was used to develop informed estimates of the actual diagnosed defect prevalence. [See Defect prevalence calculation](#defect-prevalence-calculation).      
+The estimates in this report were derived by conducting medical record review and case confirmation of all reported cases between 2007 and 2018. The confirmation probability calculated from this time period is used to develop informed estimates of the defect prevalence beyond 2018. [See Defect prevalence calculation](#defect-prevalence-calculation).      
 
 For explanations of table columns [see Column descriptions](#column-descriptions).  
 
 ### Prevalence   
-Anencephaly occurs in **2.15 (95% CI 2.03–2.28) out of every 10,000 live births in the United States.** This results in about 860 babies diagnosed with anencephaly nationally each year.[[1]](#references), [[5]](#references)
+Truncus arteriosus occurs in about **0.82 (95% CI 0.71–0.93) in every 10,000 live births in the United States.** [[5]](#references)
+
+
+
 
 ```{r} 
-#| label: chunk-label-1  
 #| warning: false 
 #| message: FALSE 
 #| echo: false
@@ -48,14 +70,13 @@ library(plotly)
 library(lubridate)
 library(epitools)
 
-
 # Removing scientific notation
 options(scipen=999)
 
 # Specify the National Condition Code to be used
-  code <- "ANEN"                                                                #
+  code <- "TA"
 # Create a label for the condition to be used
-  condition <- ("anencephaly")                                                  #
+  condition <- ("Truncus arteriosus")
   
 # Setting last updated date
   up_date <-  today() 
@@ -68,46 +89,43 @@ datYRS <- datYRS %>%
 #Specify the row-names for moving averages
 load("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\rnames.Rda")
 
-# Loading the ANEN
-ev2 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/ev2_num_ANEN.rds") #
+# Loading the TA
+ev2 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/ev2_num_TA.rds") #
+
 
 ```
-
   
    
-In Alaska, during `r datYRS[1]`, the prevalence of `r condition[1]` was **`r ev2[max(row.names(ev2)),4]` per 10,000 live births**. 
+In Alaska, during **`r datYRS[1]`**, the prevalence of `r condition[1]` was **`r ev2[max(row.names(ev2)),4]` per 10,000 live births**. 
 <center>
-```{r}  
-#| warning: false  
-#| message: FALSE
+```{r} 
+#| warning: false 
+#| message: FALSE 
 #| echo: false
-
-tmp <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\tmp_ANEN.rds")
+tmp <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\tmp_TA.rds")
 tmp[[1]]
 ```  
-</center>
 
 
 ### Trend 
 Prevalence per 10,000 births of `r condition[1]` during `r datYRS[1]` by five-year moving averages, with 95% confidence interval band and Poisson estimated fitted line.
 <center>
-```{r}  
+```{r} 
 #| warning: false 
-#| echo: false  
-#| message: FALSE
-
+#| message: FALSE 
+#| echo: false
 library(ggplot2)
 library(plotly)
 
- trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_ANEN.rds")
+ trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_TA.rds")
   
- trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_ANEN.rds")
+ trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_TA.rds")
   
  ggplotly(trend, tooltip = c("text")) %>%
   layout(legend = list(orientation = "h", x = 0.4, y = -0.2))
  
 trend_1 <- htmlTable(trend_table,
-                    # txt.NA = "-",
+                     #txt.NA = "-",
                   css.cell="padding-left: 2em; padding-right: 2em;",
                   # header=c("Reports","Defects","Births","Prevalence (95% CI)","Predicted Prevalence&dagger;"),
                   rnames = F,
@@ -124,38 +142,38 @@ datatable(trend_table,
  
  
 ``` 
-</center>
 
+
+</center>
 Trend tests with a p-value of 0.05 or lower detect a statistically significant increase or decrease in the number of live births with `r condition[1]` during `r datYRS[1]`. See [p-value estimate](#p-value-estimate)
 <center>
-```{r}  
-#| warning: false  
+```{r} 
+#| warning: false 
+#| message: FALSE 
 #| echo: false
-#| message: false 
- p_val <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_p_table_ANEN.rds")
+ p_val <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_p_table_TA.rds")
 
 p_val
-```  
-
-</center>
-
+```   
+ 
+   
+</center>   
 ### Regional Distribution
 Distribution of `r condition[1]` in Alaska by Public Health Region of maternal residence at the time of birth. [A description of regional breakdowns can be found here](http://dhss.alaska.gov/dph/InfoCenter/Pages/ia/brfss/geography.aspx). Data suppressed for # of reports  < 6.   
-
 <center>
-```{r}  
-#| warning: false  
-#| message: false 
+```{r} 
+#| warning: false 
+#| message: FALSE 
 #| echo: false
-
-geo_plot <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\sf_plot_map_ANEN.rds")
+geo_plot <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\sf_plot_map_TA.rds")
  ggplotly(geo_plot) %>%
   layout(xaxis = list(autorange = TRUE),
          yaxis = list(autorange = TRUE))
 
-geo_tbl <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\geo_tbl_ANEN.rds")
+geo_tbl <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\geo_tbl_TA.rds")
 
-geo_html <- htmlTable(htmlTable::txtRound(x = geo_tbl), 
+geo_html <- htmlTable(txtRound(geo_tbl), 
+                               #txt.NA = "-"), 
                       rnames = F,
                       css.cell = "padding-left: 2em; padding-right: 2em;", tfoot = "Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports  <  6; 95% CI = 95% Confidence
                       Interval") 
@@ -171,19 +189,19 @@ datatable(geo_tbl,
 
 
 ```
-</center>
-
+  
+  
+</center>  
 ### Demographics
 Some subgroups may be more at risk for having a baby with `r condition[1]`. This section provides the descriptive epidemiology of specified maternal, birth, and child characteristics identified from the birth certificate.  
   
-
-```{r}  
+<center>  
+```{r} 
 #| warning: false 
-#| echo: false  
-#| message: false
-
-t6 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/t6_ANEN.Rds")
-t7 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/t7_ANEN.Rds")
+#| message: FALSE 
+#| echo: false
+t6 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/t6_TA.Rds")
+t7 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/t7_TA.Rds")
 
 tmp1<-htmlTable(t6,
                 rowlabel = "Groups",
@@ -211,22 +229,23 @@ demo_tbl
 
 ``` 
 
+</center>
 
 ### Accompanying Diagnoses
 The ten diagnoses most commonalty associated with `r condition[1]`. 
 
 <center>
-```{r}  
-#| warning: false  
-#| message: false 
-#| echo: false 
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
 
-plot <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/accomp_diag_ANEN.Rds")
+plot <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/accomp_diag_TA.Rds")
 
 ggplotly(plot, tooltip = c("text"))
 
 ```
-
+___
 ## Technical notes  
 ### Column descriptions  
 **# Reports:** Unless otherwise noted, the number of unique reports of the defect received by ABDR during the specified birth year(s). Each report represents a unique child with the specified defect.  
@@ -258,29 +277,29 @@ To evaluate the trend over time and account for under/over-dispersion we constru
 For region and demographic data tables, values are suppressed based on the number of reports received during the observation period. Counts less than 6 are suppressed (as indicated by '-' in the table). For regions or demographics with only one cell count suppressed a second is suppressed to eliminate the ability to back-calculate the estimate.   
 
 ## References
-[[1]]( https://www.cdc.gov/ncbddd/birthdefects/anencephaly.html) Centers for Disease Control and Prevention. Facts about Anencephaly, https<span></span>:// www.cdc.gov/ncbddd/birthdefects/anencephaly.html; 2015 [accessed 03.06.2017]  
+[[1]](https://www.cdc.gov/ncbddd/heartdefects/truncusarteriosus.html) Congenital Heart Defects - Facts about Truncus Arteriosus | CDC. (2019). Retrieved 9 April 2021, from https://www.cdc.gov/ncbddd/heartdefects/truncusarteriosus.html
 
-[[2]]( https://rarediseases.info.nih.gov/diseases/5808/anencephaly#ref_9565) NIH National Center for Advancing Translational Sciences. Genetic and Rare Diseases Information Center: Anencephaly, https<span></span>:// rarediseases.info.nih.gov/diseases/5808/anencephaly#ref_9565; 2015 [accessed 03.06.2017]  
+[[2]](https://www.chop.edu/conditions-diseases/truncus-arteriosus) Truncus Arteriosus | Children's Hospital of Philadelphia. (2021). Retrieved 9 April 2021, from https://www.chop.edu/conditions-diseases/truncus-arteriosus
 
-[[3]]( https://www.ncbi.nlm.nih.gov/pubmed/8437310) Oakley GP Jr. Folic acid-preventable spina bifida and anencephaly. JAMA 1993; 269(10): 1292-3.  
+[[3]]( https://www.mayoclinic.org/diseases-conditions/truncus-arteriosus/diagnosis-treatment/drc-20364277) Truncus arteriosus - Diagnosis and treatment - Mayo Clinic. (2021). Retrieved 9 April 2021, from https://www.mayoclinic.org/diseases-conditions/truncus-arteriosus/diagnosis-treatment/drc-20364277
+      
+[[4]](https://www.cincinnatichildrens.org/health/t/truncus) Truncus Arteriosus | Symptoms, Repair & Prognosis . (2021). Retrieved 9 April 2021, from https://www.cincinnatichildrens.org/health/t/truncus
 
-[[4]](https://www.cdc.gov/mmwr/preview/mmwrhtml/mm6401a2.htm) Centers for Disease Control and Prevention. Updated Estimates of Neural Tube Defects Prevented by Mandatory Folic Acid Fortification - United States, 1995-2011. MMWR Morb Mort Wkly Rep. 2015: 64(01); 1-5  
+[[5]](https://pubmed.ncbi.nlm.nih.gov/31580536/) Mai CT, Isenburg JL, Canfield MA, Meyer RE, Correa A, Alverson CJ, Lupo PJ, Riehle-Colarusso T, Cho SJ, Aggarwal D, Kirby RS; National Birth Defects Prevention Network. National population-based estimates for major birth defects, 2010-2014. Birth Defects Res. 2019 Nov 1;111(18):1420-1435. doi: 10.1002/bdr2.1589. Epub 2019 Oct 3. PMID: 31580536; PMCID: PMC7203968.
 
-[[5]](https://onlinelibrary.wiley.com/doi/abs/10.1002/bdr2.1589) Mai CT, Isenburg JL, Canfield MA, Meyer RE, Correa A, Alverson CJ, Lupo PJ, Riehle‐Colarusso T, Cho SJ, Aggarwal D, Kirby RS. National population‐based estimates for major birth defects, 2010–2014. Birth Defects Research. 2019; 111(18): 1420-1435     
-    
 
 ## Resources 
-[Centers for Disease Control and Prevention](https://www.cdc.gov/ncbddd/birthdefects/anencephaly.html)
+[Centers for Disease Control and Prevention](https://www.cdc.gov/ncbddd/heartdefects/truncusarteriosus.html)
 
-[Genetic and Rare Diseases Information Center: Anencephaly](https://rarediseases.info.nih.gov/diseases/5808/anencephaly#ref_9565)  
+[Seattle Children's:Transposition of the Great Arteries](https://www.seattlechildrens.org/conditions/truncus-arteriosus/)  
 
 [National Birth Defects Prevention Network](http://www.nbdpn.org/index.php) 
 
 ## Authorship
-Maternal and Child Health (MCH) senior epidemiologist Dr. Jared Parrish, PhD conceived of the presented analysis. Alaska Birth Defects Registry program manager and epidemiologist Chris Barnett, MS MPH and Dr. Jared Parrish, PhD developed the theory and performed the computations. Research analysts Monica Mills and Jordyn Lord managed data collection and storage. All authors discussed the results and contributed to the final report.
+Maternal and Child Health (MCH) senior epidemiologist Dr. Jared Parrish, PhD conceived of the presented analysis. Alaska Birth Defects Registry program manager and epidemiologist Chris Barnett, MS MPH and Dr. Jared Parrish, PhD developed the theory and performed the computations. Research analysts Monica Mills and Jordyn Lord managed the project and data storage. Pediatric cardiologist Dr. James Christiansen, MD performed defect confirmations and provided medical consultation. All authors discussed the results and contributed to the final report.
 
 ## Suggested Citation
-State of Alaska Department of Health, Division of Public Health, Section of Women's, Children's, and Family Health. Alaska Birth Defects Registry Condition Report: Anencephaly, Alaska, 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`. Updated `r format(Sys.time(), '%B %d, %Y')`. Available at: http://rpubs.com/AK_ABDR/Anencephaly.
+State of Alaska Department of Health, Division of Public Health, Section of Women's, Children's, and Family Health. Alaska Birth Defects Registry Condition Report: Truncus Arteriosus, Alaska, 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`. Updated `r format(Sys.time(), '%B %d, %Y')`. Available at: http://rpubs.com/AK_ABDR/truncus_arteriosus.
 
 ## Contact    
 Alaska Birth Defects Registry (ABDR)  
@@ -291,13 +310,16 @@ Anchorage, AK 99503
 hssbirthdefreg@alaska.gov
 
 
-*Updated: `r format(Sys.time(), '%B %d, %Y')`*  
-*Code source:* ```R:\ABDR\Analysis_New\ABDR_CASECONF\cond_reports\Published_reports\Targets_publications\Anencephaly_tar.Rmd```   
+*Updated: `r format(Sys.time(), '%B %d, %Y')`*    
+*Code source:* ```R:\ABDR\Analysis_New\ABDR_CASECONF\cond_reports\Published_reports\Targets_publications\truncus_arteriosus_tar.qmd```   
 
 &nbsp;
 
-<center>
+ <center>
 ![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](R:/ABDR/Website/ABDR_Quarto_Website/img/DOH%20Beveled.png) 
-
 **State of Alaska, Department of Health, Section of Women's, Children's and Family Health**
 </center>  
+
+  
+
+

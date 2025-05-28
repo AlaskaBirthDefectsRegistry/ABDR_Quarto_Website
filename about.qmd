@@ -1,0 +1,49 @@
+---
+title: "Alaska Birth Defect Registy - About the Program"
+---
+
+The Alaska Birth Defects Registry (ABDR) established in 1996 under the Alaska Administrative Code (7 AAC 27.012).
+
+Health care providers, hospitals, other healthcare facilities, all public/private health insurance organizations, and diagnostic laboratories operating in the state are required to report to ABDR when they encountered for a child with a congenital birth defect listed below.
+
+Public health surveillance systems such as the ABDR provide information on the occurrence and distribution of reportable health conditions within populations.
+
+## Registry Data Uses
+* Estimate the prevalence of congenital anomalies within populations and investigate unusual patterns of occurrence.
+* Monitor the prevalence of birth defects in populations with identifiable or preventable exposures, and determine whether known exposures have increased the risk of birth defects.
+* Conduct analytic studies of high prevalence conditions to elucidate possible etiologies and prevention strategies.
+* Provide scientific foundation for evidence-based decision making.
+* Observe and evaluate the effects of interventions and policy changes.​
+
+## Registry Operations
+ABDR conducts a modified passive surveillance system. Data collection relies on reporting by major hospitals, specialty clinics, health insurance organizations, and medical record aggregators.
+
+## Surveillance:
+* The reporting facility screens patient records for reportable ICD-10 codes and submits reports to the Registry.
+* Data includes: date of service, child’s name, sex, birth date, diagnosis coding and description, reporting agency, NPI, mother's name, and mother's date-of-birth.
+* Unique individuals are linked to Vital Statistics data to establish in-state birth.
+* Data is maintained for all unique individual and defect combinations reported.
+* Individuals with specific conditions are sampled and medical record reviews are completed to determine reporting error rates for conditions.
+* Individual data and personal identifiers are not released by the registry.
+
+## Data Collection
+Data is collected from agencies across the state. Each individual and specific condition (ICD10 code) constitutes a valid record for all individuals under three years of age. See [Data Collection Methods](Data_Methods.qmd) for a more thorough description.
+
+Data is collected for the following Congenital Defect Codes and Ranges (ICD-10 CM)*
+### Codes
+* C96.5, C96.6 Langerhans-cell histiocytosis
+* D55.0 - D61.09 Anemias
+* D80.0 - D89.9 Immunodeficiencies
+* E00.0-E00.9 Congenital iodine-deficiency syndrome
+* E03.0-E03.9 Congenital hypothyroidism
+* E25.0 - E25.9 Adrenogenital disorders
+* E70.0 - E88.9 Metabolic disorders
+* G11.0 - G94.9 Nervous system disorders
+* H35.52, H49.819 Pigmentary retinal dystrophy, Kearns-Sayre
+* H90.0 - H91.93 Hearing loss
+* M21.021 - M21.129 Acquired deformities of limbs
+* P00.0 - P04.9 Certain conditions originating in the perinatal period
+* P96.0 - P96.9 Other conditions originating in the perinatal period
+* Q00.0 - Q99.99 Congenital malformations
+
+'*' Note: The above list is presented for simplicity. ABDR collects specific codes from within the ranges identified above. The Registry parses any submitted data for these specific collection codes. All other data is ignored.
