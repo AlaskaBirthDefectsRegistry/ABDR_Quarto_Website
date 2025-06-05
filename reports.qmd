@@ -12,7 +12,7 @@ title: "Reports"
 ### Cardiovascular
 * [Coarctation of the aorta](Coarctation_Aorta_tar.qmd)
 * [Common truncus](Truncus_Arteriosus_tar.qmd)
-* [Double outlet right ventricle](DOVR_tar.qmd)
+* [Double outlet right ventricle](DORV_tar.qmd)
 * [Ebstein anomaly](Ebstein_Anomaly_tar.qmd)
 * [Hypoplastic left heart syndrome](https://rpubs.com/AK_ABDR/1045456)
 * [Interrupted aortic arch](https://rpubs.com/AK_ABDR/1043713)

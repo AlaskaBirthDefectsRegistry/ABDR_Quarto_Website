@@ -30,6 +30,7 @@ ABDR conducts a modified passive surveillance system. Data collection relies on 
 Data is collected from agencies across the state. Each individual and specific condition (ICD10 code) constitutes a valid record for all individuals under three years of age. See [Data Collection Methods](Data_Methods.qmd) for a more thorough description.
 
 Data is collected for the following Congenital Defect Codes and Ranges (ICD-10 CM)*
+
 ### Codes
 * C96.5, C96.6 Langerhans-cell histiocytosis
 * D55.0 - D61.09 Anemias

@@ -3,7 +3,8 @@ project:
   output-dir: docs
   
 website:
-  title: "ABDR Data Site"
+  image: "~img/alaska-logo.png"
+  title: "**ABDR Data Site**"
   navbar:
     left:
       - href: index.qmd
