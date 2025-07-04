@@ -37,15 +37,12 @@ Birth Defect Prevention Network code translation guide with additions for Alaska
 * 2018 – The registry updated its reporting provisions outlined in Alaska Administrative Code (7 AAC 27.012). Updated regulations changed data collection methodology to reduce the reporting frequency from within 3 months of the date of service to semiannual reporting; restrict reporting to children aged less than 3 years old at the time of diagnosis; include maternal identifiers (name and date of birth) as well as agency national provider identifiers; and expanded the list of organizations required to report to include all private/public health insurance organizations and diagnostic laboratories operating in the state.
 
 ## Registry Description
-The registry is operated as a modified passive surveillance system. Data collection relies on reporting by major
-hospitals, specialty clinics, private/public health insurance organizations, diagnostic labs and medical record
-aggregators. Surveillance is described below.
+The registry is operated as a modified passive surveillance system. Data collection relies on reporting by major hospitals, specialty clinics, private/public health insurance organizations, diagnostic labs and medical record aggregators. Surveillance is described below.
 
 ## Data Collection
 ### Incoming Reports
 Reports come to the agency in a wide variety of formats, and may require significant adjustment prior to input.
-The current focus concentrates on systems and agencies that either produce or acquire large amounts of
-diagnostic data from wide sources throughout the state.
+The current focus concentrates on systems and agencies that either produce or acquire large amounts of diagnostic data from wide sources throughout the state.
 
 ### Incoming Data Criteria
 All reports are filtered to accept - Children less than three (3) years of age at the time of diagnosis. Diagnosis codes contained in the ICD Master list maintained by the Registry (see Registry Reporting Guide for a list of ICD codes and groups).
@@ -60,7 +57,7 @@ years of age are added to the master encounter data set.
 ** Subsequent reports received for an existing name and diagnostic code combination in the master
 encounter data set are added to the agency reports data set.
 
-![Figure 1 Incoming Data](R:/ABDR/Website/ABDR_Quarto_Website/img/data_collections_fig1.png)
+![Figure 1 Incoming Data](img/data_collections_fig1.png)
 
 
 All encounters are compared to birth certificate data to determine if reported children were born in the State of

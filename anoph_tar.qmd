@@ -1,0 +1,322 @@
+---
+title: "Anophthalmia and Microphthalmia 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
+author: "Alaska Birth Defect Registy"
+title-block-banner: ~img/ABDR_csr2.png
+format:
+  html:
+    toc: true
+    toc-float: true
+    code-fold: true
+---
+
+
+<style type="text/css">
+
+h4.author { /* Header 4 - and the author and date headers use this too  */
+  font-size: 36px;
+  font-style: normal;
+  font-family: "Times New Roman";
+  color: Black;
+  text-align: center;
+}
+h4.date { /* Header 4 - and the author and date headers use this too  */
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  color: Black;
+  text-align: center;
+}
+</style>
+
+---
+## Background 
+
+Anophthalmia and microphthalmia are rare birth defects of one or both of a newborn’s eye(s). Anophthalmia is the complete lack of a developed eye. Microphthalmia occurs when the eye(s) do not develop fully and are undersized or underdeveloped.[1](#references) Researchers estimate that about 1 in every 5,200 babies is born with anophthalmia/microphthalmia in the United States.[2](#references) Anophthalmia and microphthalmia can create issues with vision or blindness. Both conditions can include changes in the bones around the eye, resulting in changes in the shape of a skull.[3](#references) The causes of anophthalmia and microphthalmia are not always known. Anophthalmia and microphthalmia can arise independently or with other eye defects, such as coloboma and orbital cyst, or as part of more generalized syndromes, such as CHARGE syndrome.[4](#references) An ophthalmologist typically guides the treatment of newborns with either anophthalmia or microphthalmia. No medical therapy can provide typical eye function to people born with anophthalmia or microphthalmia. However, early treatment can help babies and children with these conditions grow and develop optimally. A newborn’s care team can include a pediatrician and other medical disciplines such as oculoplastic specialists, family support services, and genetic counseling.[3](#references) 
+
+
+## Epidemiology 
+Alaska Birth Defects Registry (ABDR) registers birth defects as reported from health care providers using International Classification of Disease (ICD) billing codes. The use of these ICD codes can lead to misclassification of diagnosed conditions. Prior to this report, all prevalence estimates were based on the number of unique children reported to ABDR with an ICD code representing a specified condition regardless of case confirmation status.  
+
+The estimates in this report were derived by conducting medical record review and case confirmation of a random sample of cases of the condition reported to ABDR. The confirmation probability from the sample was used to develop informed estimates of the actual diagnosed defect prevalence. [See Defect prevalence calculation](#defect-prevalence-calculation).      
+
+For explanations of table columns [see Column descriptions](#column-descriptions).  
+
+### Prevalence   
+Anophthalmia or microphthalmia occurs in about **1 in every 5,200 babies** in the United States.[[2]](#references)
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+options(width=150)
+
+library(shiny)
+library(knitr)
+library(pander)
+library(htmlTable)
+library(htmltools)
+library(tidyverse)
+library(haven)
+library(dplyr)
+library(janitor)
+library(DT)
+library(plotly)
+library(lubridate)
+library(epitools)
+
+
+# Removing scientific notation
+options(scipen=999)
+
+# Specify the National Condition Code to be used
+  code <- "ANOPH"                                                                #
+# Create a label for the condition to be used
+  condition <- ("Anophthalmia and microphthalmia")                                           #
+  
+# Setting last updated date
+  up_date <-  today() 
+  
+  #Specify the years of these data
+load("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\datYRS.Rda")
+datYRS <- datYRS %>%
+  filter(row == max(row)) %>%
+  dplyr::select(years)
+#Specify the row-names for moving averages
+load("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\rnames.Rda")
+
+# Loading the ANOPH
+ev2 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/ev2_num_ANOPH.rds") #
+
+```
+
+  
+   
+In Alaska, during `r datYRS[1]`, the prevalence of `r condition[1]` was **`r ev2[max(row.names(ev2)),4]` per 10,000 live births**. 
+<center>
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+tmp <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\tmp_ANOPH.rds")
+tmp[[1]]
+```  
+</center>
+
+### Trend 
+Prevalence per 10,000 births of `r condition[1]` during `r datYRS[1]` by five-year moving averages, with 95% confidence interval band and Poisson estimated fitted line.
+<center>
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+library(ggplot2)
+library(plotly)
+
+ trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_ANOPH.rds")
+  
+ trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_ANOPH.rds")
+  
+ ggplotly(trend, tooltip = c("text")) %>%
+  layout(legend = list(orientation = "h", x = 0.4, y = -0.2))
+ 
+trend_1 <- htmlTable(trend_table,
+                    # txt.NA = "-",
+                  css.cell="padding-left: 2em; padding-right: 2em;",
+                  # header=c("Reports","Defects","Births","Prevalence (95% CI)","Predicted Prevalence&dagger;"),
+                  rnames = F,
+                  tfoot=txtMergeLines("Notes: Each row is based on three-year moving averages; Prevalence reported per 10,000 live births; 95% CI=95%
+                                      Confidence Interval", "&dagger; Estimated rate based on Poisson model"))
+ 
+datatable(trend_table, 
+          container = trend_1, 
+          options = list(pageLength = nrow(trend_table),
+                         dom = 't'),
+                         rownames = F, 
+                         colnames = names(trend_1))      
+ 
+ 
+ 
+``` 
+
+
+</center>
+Trend tests with a p-value of 0.05 or lower detect a statistically significant increase or decrease in the number of live births with `r condition[1]` during `r datYRS[1]`. See [p-value estimate](#p-value-estimate)
+<center>
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+ p_val <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_p_table_ANOPH.rds")
+
+p_val
+```  
+
+</center>
+
+### Regional Distribution
+Distribution of `r condition[1]` in Alaska by Public Health Region of maternal residence at the time of birth. [A description of regional breakdowns can be found here](http://dhss.alaska.gov/dph/InfoCenter/Pages/ia/brfss/geography.aspx). Data suppressed for # of reports  < 6.   
+
+<center>
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+ 
+geo_plot <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\sf_plot_map_ANOPH.rds")
+ ggplotly(geo_plot) %>%
+  layout(xaxis = list(autorange = TRUE),
+         yaxis = list(autorange = TRUE))
+
+geo_tbl <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\geo_tbl_ANOPH.rds")
+
+geo_html <- htmlTable(htmlTable::txtRound(x = geo_tbl), 
+                      rnames = F,
+                      css.cell = "padding-left: 2em; padding-right: 2em;", tfoot = "Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports  <  6; 95% CI = 95% Confidence
+                      Interval") 
+# gsub('<td','<td nowrap = "nowrap";', geo_html) #removes wrapping
+
+datatable(geo_tbl, 
+          container = geo_html, 
+          options = list(pageLength = nrow(geo_tbl),
+                         dom = 't'),
+                         rownames = F, 
+                         colnames = names(geo_tbl)) 
+
+
+
+```
+</center>
+
+### Demographics
+Some subgroups may be more at risk for having a baby with `r condition[1]`. This section provides the descriptive epidemiology of specified maternal, birth, and child characteristics identified from the birth certificate.  
+  
+<center> 
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+t6 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/t6_ANOPH.Rds")
+t7 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/t7_ANOPH.Rds")
+
+tmp1<-htmlTable(t6,
+                rowlabel = "Groups",
+                rgroup=c("Sex","Birth weight (grams)","Maternal age",
+                         "Maternal race",
+                         "Maternal education (years)","Marital status",
+                         "Maternal smoking use",
+                         "Medicaid (mother or child)",
+                         "Father on birth certificate"),
+                n.rgroup=c(2,2,6,4,3,2,2,2,2),
+                css.cell="padding-left: 2em; padding-right: 2em;",
+                tfoot=txtMergeLines("Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports  < 6; 95% CI = 95% Confidence Interval"))
+
+demo_tbl <- datatable(t7,
+          extensions = c("RowGroup", "Responsive"),
+          options = list(rowGroup = list(dataSrc = 5), 
+                         pageLength = 30, 
+                         dom = 't'),
+          container = tmp1,
+          rownames = T, 
+          class = 'cell-border stripe')
+
+#Make table   
+demo_tbl
+
+``` 
+</center>
+
+### Accompanying Diagnoses
+The ten diagnoses most commonalty associated with `r condition[1]`. 
+
+<center>
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+ 
+
+plot <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/accomp_diag_ANOPH.Rds")
+
+ggplotly(plot, tooltip = c("text"))
+
+```
+
+## Technical notes  
+### Column descriptions  
+**# Reports:** Unless otherwise noted, the number of unique reports of the defect received by ABDR during the specified birth year(s). Each report represents a unique child with the specified defect.  
+
+**# Defects:** The estimated true number of reports that are diagnosed defects based on medical record review and case confirmation.  
+
+**# Births:** The number of live births among Alaskan residents that occurred in Alaska during the specified birth year(s).  
+
+**Prevalence (95% CI):** The estimated diagnosed prevalence of the condition and corresponding 95% Confidence Interval. (For information on how the defect prevalence was estimated see below).   
+
+### Defect prevalence calculation
+The estimated defect prevalence was calculated using a Bayesian approach based on the reported prevalence, PPV and 1-NPV (see formula below).
+
+Through medical records review and case confirmation of a random sample of reported cases, the defect prevalence is calculated as: 
+
+$$PPV (Positive Predictive Value) = p(defect|report)$$
+$$NPV (Negative Predictive Value) = p(\overline{defect}|\overline{report})$$
+
+$$p(defect) \approx [p(report)\cdot PPV]+[p(\overline{report})\cdot (1-NPV)]$$   
+
+Defect prevalence estimates are a more accurate estimation of the actual diagnosed prevalance of birth defects compared to the reported prevalance estimates in Alaska. ABDR obtains reports from medical providers using International Classification of Disease (ICD) codes that are extracted from individual systems which when aggregated may not reflect true diagnostics. Caution should be used when interpreting and comparing the reported prevalence estimates with national estimates.  
+
+See [Data analysis methods](https://alaskabirthdefectsregistry.github.io/ABDR_Quarto_Website/Data_Methods.html) for more information.
+
+### P-value estimate  
+To evaluate the trend over time and account for under/over-dispersion we constructed a quasi-Poisson regression model. This model assumes the variance is a linear function of the mean and models the estimated number of annual defects by year with a natural log (ln) offset of the annual births. P-values < 0.05 are considered significant, which indicates that the predicted slope is significantly different from a slope of zero.   
+
+### Data suppression
+For region and demographic data tables, values are suppressed based on the number of reports received during the observation period. Counts less than 6 are suppressed (as indicated by '-' in the table). For regions or demographics with only one cell count suppressed a second is suppressed to eliminate the ability to back-calculate the estimate.   
+
+## References
+[[1]](https://www.cdc.gov/ncbddd/birthdefects/anophthalmia-microphthalmia.html) Facts about Anophthalmia / Microphthalmia (CDC), from https://www.cdc.gov/ncbddd/birthdefects/anophthalmia-microphthalmia.html (2024) [accessed April, 04 20234]  
+
+[[2]](https://onlinelibrary.wiley.com/doi/abs/10.1002/bdr2.1589) Mai CT, Isenburg JL, Canfield MA, Meyer RE, Correa A, Alverson CJ, Lupo PJ, Riehle‐Colarusso T, Cho SJ, Aggarwal D, Kirby RS. National population‐based estimates for major birth defects, 2010–2014. Birth Defects Research. 2019; 111(18): 1420-1435     
+
+[[3]]https://www.nei.nih.gov/learn-about-eye-health/eye-conditions-and-diseases/anophthalmia-and-microphthalmia#:~:text=Anophthalmia%20is%20when%20a%20baby,born%20with%20anophthalmia%20or%20microphthalmia.) National Eye Institute - At a glance: Anophthalmia and Microphthalmia (NIH), from https://www.nei.nih.gov/learn-about-eye-health/eye-conditions-and-diseases/anophthalmia-and-microphthalmia#:~:text=Anophthalmia%20is%20when%20a%20baby,born%20with%20anophthalmia%20or%20microphthalmia. (2024). [accessed April, 04 2024]
+
+[[4]](https://www.nature.com/articles/6702858) Ragge, N. K., I. D. Subak-Sharpe, and J. R. O. Collin. "A practical guide to the management of anophthalmia and microphthalmia." Eye 21.10 (2007): 1290-1300.    
+    
+
+## Resources 
+[National Institutes of Health - National Eye Institute](https://www.nei.nih.gov/learn-about-eye-health/eye-conditions-and-diseases/anophthalmia-and-microphthalmia#:~:text=Anophthalmia%20is%20when%20a%20baby,born%20with%20anophthalmia%20or%20microphthalmia.)
+
+[March of Dimes](https://www.marchofdimes.org/find-support/topics/planning-baby/anophthalmia-and-microphthalmia)  
+
+[National Birth Defects Prevention Network](http://www.nbdpn.org/index.php) 
+
+## Authorship
+Maternal and Child Health (MCH) senior epidemiologist Dr. Jared Parrish, PhD conceived of the presented analysis. Alaska Birth Defects Registry program manager and epidemiologist Chris Barnett, MS MPH and Dr. Jared Parrish, PhD developed the theory and performed the computations. Research analysts Brittany Corbin managed data collection and storage. All authors discussed the results and contributed to the final report.
+
+## Suggested Citation
+State of Alaska Department of Health, Division of Public Health, Section of Women's, Children's, and Family Health. Alaska Birth Defects Registry Condition Report: `r condition[1]`, Alaska, 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`. Updated `r format(Sys.time(), '%B %d, %Y')`. Available at: http://rpubs.com/AK_ABDR/`r condition[1]`.
+
+## Contact    
+Alaska Birth Defects Registry (ABDR)  
+3601 C Street, Suite 358  
+Anchorage, AK 99503  
+(907) 269-3400 phone  
+(907) 754-3529 fax  
+hssbirthdefreg@alaska.gov
+
+
+*Updated: `r format(Sys.time(), '%B %d, %Y')`*  
+*Code source:* ```R:\ABDR\Website\ABDR_Quarto_Website\anoph_tar.qmd```   
+
+&nbsp;
+
+<center>
+![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png){width=200px height=200px}
+</center>  
+
+  
+
+

@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Author Name">
-<meta name="dcterms.date" content="2025-05-08">
 
-<title>ABDR Data Site - New Quarto Report</title>
+<title>Alaska Department of Health Header</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,15 +70,15 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">ABDR Data Site</span>
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./img/alaska-logo.png" alt="" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -127,34 +125,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">New Quarto Report</h1>
+<h1 class="title">Alaska Department of Health Header</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Author Name </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">May 8, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -164,10 +148,112 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<style>
+/* Define CSS variables for colors */
+:root {
+  --header-bg-color: #1a345a; /* A dark blue similar to the website */
+  --text-color: #ffffff;
+  --light-gray-text: #c0c0c0; /* For the top "The Great State of Alaska" */
+}
+
+/* Overall header container */
+.website-header {
+  background-color: var(--header-bg-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif; /* Common sans-serif font */
+}
+
+/* Top banner: "The Great State of Alaska" */
+.top-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator */
+}
+
+.top-banner .logo-text {
+  font-size: 0.8em;
+  color: var(--light-gray-text);
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between logo and text */
+}
+
+.top-banner .logo-text img {
+  height: 1.5em; /* Adjust size of eagle logo */
+  vertical-align: middle;
+}
+
+.top-banner .dropdown-arrow {
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+/* Main header: "State of Alaska Department of Health" */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.main-header .department-info {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between department logo and text */
+}
+
+.main-header .department-info .department-logo img {
+  height: 50px; /* Adjust size of department logo */
+  width: auto;
+}
+
+.main-header .department-info .department-text h1 {
+  font-size: 1.8em;
+  margin: 0;
+  font-weight: normal;
+  color: var(--text-color);
+}
+
+.main-header .menu-icon {
+  font-size: 2em; /* Size for hamburger icon */
+  cursor: pointer;
+}
+
+/* Basic responsiveness for smaller screens (optional, but good practice) */
+@media (max-width: 768px) {
+  .main-header .department-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .main-header .department-info .department-text h1 {
+    font-size: 1.5em;
+  }
+}
+</style>
+<div class="website-header">
+<div class="top-banner">
+<pre><code>&lt;div class="logo-text"&gt;
+  &lt;img src="https://health.alaska.gov/PublishingImages/Alaska_State_Seal.png" alt="Alaska Eagle Logo"&gt; The Great State of Alaska
+&lt;/div&gt;
+&lt;div class="dropdown-arrow"&gt;&amp;#9660;&lt;/div&gt; &lt;/div&gt;</code></pre>
+<div class="main-header">
+<pre><code>&lt;div class="department-info"&gt;
+  &lt;div class="department-logo"&gt;
+    &lt;img src="https://health.alaska.gov/PublishingImages/Alaska_State_Seal.png" alt="State of Alaska Seal Logo"&gt;
+  &lt;/div&gt;
+  &lt;div class="department-text"&gt;
+    &lt;h1&gt;State of Alaska&lt;/h1&gt;
+    &lt;h1&gt;Department of Health&lt;/h1&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="menu-icon"&gt;&amp;#9776;&lt;/div&gt; &lt;/div&gt;</code></pre>
+</div>
 
 
 
-</main> <!-- /main -->
+</div></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

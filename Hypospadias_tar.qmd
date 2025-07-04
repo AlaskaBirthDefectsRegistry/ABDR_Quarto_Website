@@ -1,0 +1,459 @@
+---
+title: "Hypospadias 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
+
+title-block-banner: ~img/ABDR_csr2.png
+format:
+  html:
+    toc: true
+    toc-float: true
+    code-fold: true
+---
+
+<style type="text/css">
+
+h4.author { /* Header 4 - and the author and date headers use this too  */
+  font-size: 36px;
+  font-style: normal;
+  font-family: "Times New Roman";
+  color: Black;
+  text-align: center;
+}
+h4.date { /* Header 4 - and the author and date headers use this too  */
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  color: Black;
+  text-align: center;
+}
+</style>
+
+---
+<left>
+![](img/ABDR_csr2_lato.png)
+</left>
+
+## Background 
+
+Hypospadias is a male birth defect in which the opening of the urethra, the tube that allows urine to drain from the bladder and exit the body, is not located on the tip of the penis. Instead the urethra opening is located somewhere along the underside of the penis. The type of hypospadias depends on the location of the opening of the urethra, which can fall into one of three locations: subcoronal (near the head of the penis); midshaft (on the shaft of penis); or penoscrotal (where the penis and scrotum meet). In some cases, boys with hypospadias will have a curved penis, difficulties urinating while standing up, and problems with sexual intercourse. Most cases can be treated with surgery to correct the defect. [[1,2]](#references)  
+
+Recently, CDC reported on risk factors that may contribute to having a baby with hypospadias. The risk factors included, advanced maternal age coupled with obesity, fertility treatments, and certain hormones. [[3,4,5]](#references) 
+
+
+
+## Epidemiology 
+Alaska Birth Defects Registry (ABDR) registers birth defects as reported from health care providers using International Classification of Disease (ICD) billing codes. The use of these ICD codes can lead to misclassification of diagnosed conditions. Prior to this report, all prevalence estimates were based on the number of unique children reported to ABDR with an ICD code representing a specified condition regardless of case confirmation status.  
+
+The estimates in this report were derived by conducting medical record review and case confirmation of a random sample of cases of the condition reported to ABDR. The confirmation probability from the sample was used to develop informed estimates of the actual diagnosed defect prevalence. [See Defect prevalence calculation](#defect-prevalence-calculation).      
+
+For explanations of table columns [see Column descriptions](#column-descriptions).    
+ 
+
+### Prevalence   
+Hypospadias occurs in about **50 out of every 10,000 live male births in the United States.**[[6]](#references) 
+
+
+
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+options(width=150)
+
+library(plyr)
+library(shiny)
+library(knitr)
+library(pander)
+library(htmlTable)
+library(htmltools)
+library(tidyverse)
+library(haven)
+library(dplyr)
+library(janitor)
+library(DT)
+library(plotly)
+library(lubridate)
+library(epitools)
+library(magrittr)
+
+# Removing scientific notation
+options(scipen=999)
+
+# Specify the National Condition Code to be used
+  code <- "HYP"                                                                #
+# Create a label for the condition to be used
+  condition <- ("hypospadias")                                                  #
+  
+# Setting last updated date
+  up_date <-  today() 
+  
+  #Specify the years of these data
+load("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\datYRS.Rda")
+datYRS <- datYRS %>%
+  filter(row == max(row)) %>%
+  dplyr::select(years)
+#Specify the row-names for moving averages
+load("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\rnames.Rda")
+
+# Loading the ANEN
+ev2 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/ev2_num_HYP.rds") #
+
+```
+ 
+    
+In Alaska, during `r datYRS[1]`, the prevalence of `r condition[1]` was **`r ev2[max(row.names(ev2)),4]` per 10,000 live male births**. 
+<center>
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+tmp <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\tmp_HYP.rds")
+tmp[[1]]
+```  
+
+</center>
+### Trend 
+Prevalence per 10,000 births of `r condition[1]` during `r datYRS[1]` by three-year moving averages, with 95% confidence interval band and Poisson estimated fitted line.
+<center>
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+library(ggplot2)
+library(plotly)
+
+ trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_HYP.rds")
+  
+ trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_HYP.rds")
+  
+ ggplotly(trend, tooltip = c("text")) %>%
+  layout(legend = list(orientation = "h", x = 0.4, y = -0.2))
+ 
+trend_1 <- htmlTable(trend_table,
+                     #txt.NA = "-",
+                  css.cell="padding-left: 2em; padding-right: 2em;",
+                  # header=c("Reports","Defects","Births","Prevalence (95% CI)","Predicted Prevalence&dagger;"),
+                  rnames = F,
+                  tfoot=txtMergeLines("Notes: Each row is based on three-year moving averages; Prevalence reported per 10,000 live births; 95% CI=95%
+                                      Confidence Interval", "&dagger; Estimated rate based on Poisson model"))
+ 
+datatable(trend_table, 
+          container = trend_1, 
+          options = list(pageLength = nrow(trend_table),
+                         dom = 't'),
+                         rownames = F, 
+                         colnames = names(trend_1))      
+ 
+ 
+ 
+``` 
+
+</center>
+The p-value test for trend detected no significant increase or decrease in the number of live births with `r condition[1]` during `r datYRS[1]`. See [p-value estimate](#p-value-estimate)
+<center>
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+ p_val <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_p_table_HYP.rds")
+
+p_val
+```  
+ 
+</center>   
+### Regional Distribution
+Distribution of `r condition[1]` in Alaska by Public Health Region of maternal residence at the time of birth. [A description of regional breakdowns can be found here](http://dhss.alaska.gov/dph/InfoCenter/Pages/ia/brfss/geography.aspx). Data suppressed for # of reports  < 6. 
+<center>
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+geo_plot <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\sf_plot_map_HYP.rds")
+ ggplotly(geo_plot) %>%
+  layout(xaxis = list(autorange = TRUE),
+         yaxis = list(autorange = TRUE))
+
+geo_tbl <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\geo_tbl_HYP.rds")
+
+geo_html <- htmlTable(txtRound(geo_tbl), 
+                               #txt.NA = "-"), 
+                      rnames = F,
+                      css.cell = "padding-left: 2em; padding-right: 2em;", tfoot = "Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports  <  6; 95% CI = 95% Confidence
+                      Interval") 
+# gsub('<td','<td nowrap = "nowrap";', geo_html) #removes wrapping
+
+datatable(geo_tbl, 
+          container = geo_html, 
+          options = list(pageLength = nrow(geo_tbl),
+                         dom = 't'),
+                         rownames = F, 
+                         colnames = names(geo_tbl)) 
+
+
+
+```
+  
+</center>  
+### Demographics
+Some subgroups may be more at risk for having a baby boy with hypospadias. This section provides the descriptive epidemiology of specified maternal, birth, and child characteristics identified from the birth certificate.   
+  
+<center>  
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+CDATA <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\cdata_demo_hyp.rds")
+code_conf <- "HYP"
+# Conf files
+load("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\CPROB.Rda")
+CPROB <- CPROB %>%
+  mutate(NatCond = ifelse(is.na(NatCond), rownames, NatCond)) %>%
+  filter(NatCond != "EA") %>%
+  mutate(NatCond = ifelse(NatCond == "ANENC", "ANEN",
+                          ifelse(NatCond == "GASTR", "GAS",
+                                 ifelse(NatCond == "OMPHA", "OMP",
+                                        ifelse(NatCond == "HYPOS", "HYP",
+                                               NatCond)))))
+
+# levels(CDATA$BWT_G)<-c("<2500","2500+")
+# CDATA$M_EDU<-(as.factor(CDATA$M_EDU))
+# levels(CDATA$M_EDU)<-c("<12","12","12+")
+# levels(CDATA$eligible)<-c("Enrolled","Not enrolled")
+# CDATA$smoking_status<-relevel(as.factor(CDATA$smoking_status),ref="Reported smoking")
+# #CDATA$substance<-relevel(as.factor(CDATA$substance),ref="Yes")
+
+COND_FCTR<-function(code_conf,Factor,data){
+  ga<-addmargins(table(data[,"CD"]==1,data[,Factor],useNA = "always"))
+  ga<-ga[-3,][,-c(max(length(colnames(ga)))-1,max(length(colnames(ga))))]
+    row.names(ga)<-c("NoDefect","Defect","Total")
+  cp<-subset(CPROB,NatCond==code_conf,select=c("NatCond","ReportsSens","Confirmed","PPV","NPV"))
+  Rrate<-ga[2,]/ga[3,] #Reported prevalence rate by year
+  temp1<-((Rrate)*cp$PPV)+((1-(Rrate))*(1-cp$NPV))
+    ga1<-pois.exact(temp1*ga[3,],ga[3,]) #Obtain CI's
+    ga1[,3:5]<-round(ga1[,3:5]*10000,2)
+    #ga1<-ga1[,-6]
+    row.names(ga1)<-colnames(ga) 
+  ga2<-cbind(ga[2,],ga1[,-6])
+    colnames(ga2)<-c("Reports","Defects","Births","Defect Prevalence","LowerCI","UpperCI")
+  #ga2[ga2$Reports<5,]<-NA
+  ga2
+}
+
+# d1<-COND_FCTR(code,"sex",CDATA)
+d2<-COND_FCTR(code_conf,"BWT_G",CDATA)
+d3<-COND_FCTR(code_conf,"M_grp",CDATA)
+d4<-COND_FCTR(code_conf,"M_rce",CDATA)
+d5<-COND_FCTR(code_conf,"M_EDU",CDATA)
+d6<-COND_FCTR(code_conf,"marital_status",CDATA)
+d8<-COND_FCTR(code_conf,"smoking_status",CDATA)
+d11<-COND_FCTR(code_conf,"eligible",CDATA)
+d12<-COND_FCTR(code_conf,"DName",CDATA)
+
+###Make the combined Demographic table
+
+t1a<-rbind(d2,d3,d4,d5,d6,d8,d11,d12)
+  t2<-as.data.frame(data.matrix(t1a))
+    t2[,c(2,4:6)]<-round(t2[,c(2,4:6)],1)
+    t2[,c(2,4:6)]<-format(t2[,c(2,4:6)],drop0trailing = FALSE,trim = T)
+    t2$`Prevalence (95% CI)`<-paste(t2[,4],paste("(",t2[,5],","," ",t2[,6],")",sep = ""))
+  t3<-t2[,-(4:6)]  
+  t3$grp<-rep(1:8,c(2,6,4,3,2,2,2,2))
+  t3$vlu<-c(1:23)
+  t3$num <- ave(t3$Reports, t3$grp, FUN = seq_along)
+#Suppression rules
+  t4<-merge(t3,t3[t3$Reports<6,c("grp","Reports")],by=c("grp"),all.x=T)
+  t5<-t4[!duplicated(t4[,1:7]),]
+   t5<-ddply(t5,.(grp),transform,count = length(grp))
+    t5<-t5[order(t5$vlu),]
+   rownames(t5)<-rownames(t3)
+    t5[is.na(t5$Reports.y),"Reports.y"]<-10
+      t5[t5$Reports.x <6 & t5$Reports.y<6,c(5:8)]<-0
+      t5$sup1<-with(t5,ifelse(`Prevalence (95% CI)` == '0',1,0))
+      t5<-ddply(t5,.(grp),transform,sup2 = sum(sup1))
+      rownames(t5)<-rownames(t3)
+      t5$dif<-t5$count-t5$sup2
+      t5 <- t5 %>% dplyr::group_by(grp) %>%
+        dplyr::mutate(rank = rank(Reports.x, ties.method = "random"))
+      t5$sup<-ifelse(t5$sup1==0 & t5$count==2 & t5$dif < 2,0,
+              ifelse(t5$sup1==0 & t5$count==2 & t5$dif == 2,1,
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 5 &
+                       t5$rank <= 2.5, 0, 
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 4,1,
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 3,1,
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 2,1,      
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 1,1,   
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 6,1,
+                  ifelse(t5$sup1==0 & t5$count==4 & t5$dif == 3 & 
+                           (t5$rank == 1 | t5$rank == 2), 0,
+                  ifelse(t5$sup1==0 & t5$count==4 & t5$dif == 2,1,
+                  ifelse(t5$sup1==0 & t5$count==4 & t5$dif == 1,1,
+                  ifelse(t5$sup1==0 & t5$count==4 & t5$dif == 4,1,
+                    ifelse(t5$sup1==0 & t5$count==3 & t5$dif ==2,0,
+                    ifelse(t5$sup1==0 & t5$count==3 & t5$dif ==1,1,
+                    ifelse(t5$sup1==0 & t5$count==3 & t5$dif ==3,1,9)
+                    ))))))))))))))                                              #
+       t5 <- t5 %>% mutate_at(.vars = c(2:4, 6:14), .funs = as.numeric)         #
+      t5[t5$Reports.x <6 & t5$Reports.y<6,c(1:3,6:8)]<- 0 
+      t5[(t5$sup==0),c(1:3)]<-0
+            t5 <- t5 %>% mutate_all(.funs = as.character)
+            t5 <- t5 %>% mutate_at( 
+                             .vars = c(2,3,5:14),
+                             funs(ifelse(. == "0", "-", .)))
+   # t5[t5 == "0"] <- '-'                                                       #
+    t6<-t5[-c(1,6:14)]                                                          #
+    rownames(t6)<-rownames(t3)                                                  #
+      colnames(t6)[1]<-"Reports"
+      colnames(t6)[4]<-"Prevalence (95% CI)" 
+
+      t6_b <- t6 %>%
+        data.frame() %>%
+        set_rownames(c("<2500", "2500+", "12-19", "20-24",
+                         "25-29", "30-34", "35-39", "40+", 
+                         "Alaska Native/American Indian", 
+                         "Asian/Pacific Islander",
+                         "Black", "White", "<12", "12", "12+", "Married", 
+                         "Unmarried", "Reported not smoking", 
+                         "Reported smoking", 
+                         "Enrolled", "Not enrolled", "None", "Present"))
+      t7 <- t6_b %>%
+        dplyr::mutate(de_groups = c( 
+                               "Birth weight (grams)", "Birth weight (grams)",
+                               "Maternal age", "Maternal age", "Maternal age", 
+                               "Maternal age", "Maternal age", "Maternal age",
+                               "Maternal race", "Maternal race", 
+                               "Maternal race", "Maternal race", 
+                               "Maternal education (years)",
+                               "Maternal education (years)", 
+                               "Maternal education (years)",
+                               "Marital status",
+                               "Marital status", 
+                               "Maternal smoking use",
+                               "Maternal smoking use",
+                               "Medicaid (mother or child)",
+                               "Medicaid (mother or child)",
+                               "Father on birth certificate", 
+                               "Father on birth certificate"))
+      
+      tmp1<-htmlTable(t6_b,
+                rowlabel = "Groups",
+                rgroup=c("Birth weight (grams)","Maternal age","Maternal race",
+                         "Maternal education (years)","Marital status",
+                         "Maternal smoking use",
+                         "Medicaid (mother or child)",
+                         "Father on birth certificate"),
+                n.rgroup=c(2,6,4,3,2,2,2,2),
+                css.cell="padding-left: 2em; padding-right: 2em;",
+                tfoot=txtMergeLines("Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports  < 6; 95% CI = 95% Confidence Interval"))
+# gsub('<td','<td nowrap="nowrap";',tmp1) #removes wrapping
+
+demo_tbl <- datatable(t7,
+          extensions = c("RowGroup", "Responsive"),
+          options = list(rowGroup = list(dataSrc = 5), 
+                         pageLength = 30, 
+                         dom = 't'),
+          container = tmp1,
+          rownames = T, 
+          class = 'cell-border stripe')
+
+#Make table   
+demo_tbl
+
+```  
+
+
+</center>
+
+### Accompanying Diagnoses
+The ten diagnoses most commonalty associated with `r condition[1]`. 
+
+<center>
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+
+plot <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/accomp_diag_HYP.Rds")
+
+ggplotly(plot, tooltip = c("text"))
+
+```
+
+___
+## Technical notes  
+### Column descriptions  
+**# Reports:** Unless otherwise noted, the number of unique reports of the defect received by ABDR during the specified birth year(s). Each report represents a unique child with the specified defect.  
+
+**# Defects:** The estimated true number of reports that are diagnosed defects based on medical record review and case confirmation.  
+
+**# Births:** The number of live male births among Alaskan residents that occurred in Alaska during the specified birth year(s).  
+
+**Prevalence (95% CI):** The estimated diagnosed prevalence of the condition and corresponding 95% Confidence Interval. (For information on how the defect prevalence was estimated see below).   
+
+### Defect prevalence calculation
+The estimated defect prevalence was calculated using a Bayesian approach based on the reported prevalence, PPV and 1-NPV (see formula below).
+
+Through medical records review and case confirmation of a random sample of reported cases, the defect prevalence is calculated as: 
+
+$$PPV (Positive Predictive Value) = p(defect|report)$$
+$$NPV (Negative Predictive Value) = p(\overline{defect}|\overline{report})$$
+
+$$p(defect) \approx [p(report)\cdot PPV]+[p(\overline{report})\cdot (1-NPV)]$$   
+
+Defect prevalence estimates are a more accurate estimation of the actual diagnosed prevalance of birth defects compared to the reported prevalance estimates in Alaska. ABDR obtains reports from medical providers using International Classification of Disease (ICD) codes that are extracted from individual systems which when aggregated may not reflect true diagnostics. Caution should be used when interpreting and comparing the reported prevalence estimates with national estimates.  
+
+See [Data analysis methods](https://alaskabirthdefectsregistry.github.io/ABDR_Quarto_Website/Data_Methods.html) for more information.
+
+### P-value estimate  
+To evaluate the trend over time and account for under/over-dispersion we constructed a quasi-Poisson regression model. This model assumes the variance is a linear function of the mean and models the estimated number of annual defects by year with a natural log (ln) offset of the annual births. P-values < 0.05 are considered significant, which indicates that the predicted slope is significantly different from a slope of zero.      
+
+### Data suppression
+For region and demographic data tables, values are suppressed based on the number of reports received during the observation period. Counts less than 6 are suppressed (as indicated by '-' in the table). For regions or demographics with only one cell count suppressed a second is suppressed to eliminate the ability to back-calculate the estimate.   
+
+## References
+[[1]]( https://www.ncbi.nlm.nih.gov/pubmed/20569796) Kraft KH, Shukla AR, Canning DA. Hypospadias. Urol Clin North Am 2010; 37(2):167-81.  
+
+[[2]]( https://www.cdc.gov/ncbddd/birthdefects/hypospadias.html#ref) Centers for Disease Control and Prevention. Facts about Hypospadias, https<span></span>://www.cdc.gov/ncbddd/birthdefects/hypospadias.html#ref; 2016 [accessed 023.07.2017]  
+
+[[3]](http://onlinelibrary.wiley.com/doi/10.1111/j.1365-3016.2007.00809.x/full) Carmichael SL, Shaw GM, Laurent C, Olney RS, Lammer EJ, and the National Birth Defects Prevention Study. Maternal reproductive and demographic characteristics as risk factors for hypospadias. Paediatr Perinat Epidemiol. 2007; 21: 210-218.  
+
+[[4]]( https://academic.oup.com/humrep/article/24/2/360/811363/Assisted-reproductive-technology-and-major) Reefhuis J, Honein MA, Schieve LA, Correa A, Hobbs CA, Rasmussen SA, and the National Birth Defects Prevention Study. Assisted reproductive technology and major structural birth defects in the United States. Human Rep. 2009; 24:360-366  
+
+[[5]](http://jamanetwork.com/journals/jamapediatrics/fullarticle/486138) Carmichael SL, Shaw GM, Laurent C, Croughan MS, Olney RS, Lammer EJ. Maternal progestin intake and risk of hypospadias. Arch Pediatr Adolesc Med. 2005;159: 957-962  
+
+[[6]]( https://www.cdc.gov/ncbddd/birthdefects/data.html) Centers for Disease Control and Prevention, Birth Defects Data and Statistics, https<span></span>://www.cdc.gov/ncbddd/birthdefects/data.html; 2016 [accessed 02.23.2017]    
+    
+## Resources 
+[Centers for Disease Control and Prevention](https://www.cdc.gov/ncbddd/birthdefects/hypospadias.html#ref)     
+[Hypospadias and Epispadias Association](http://heainfo.org/)  
+[Urology Care Foundation](http://www.urologyhealth.org/urologic-conditions/hypospadias)  
+[National Birth Defects Prevention Network](http://www.nbdpn.org/index.php)  
+
+## Authorship
+Maternal and Child Health (MCH) senior epidemiologist Dr. Jared Parrish, PhD conceived of the presented analysis. Alaska Birth Defects Registry program manager and epidemiologist Chris Barnett, MS MPH and Dr. Jared Parrish, PhD developed the theory and performed the computations. Research analysts Monica Mills and Jordyn Lord managed data collection and storage. All authors discussed the results and contributed to the final report.
+
+## Suggested Citation
+State of Alaska Department of Health, Division of Public Health, Section of Women's, Children's, and Family Health. Alaska Birth Defects Registry Condition Report: Hypospadias, Alaska, 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`. Updated `r format(Sys.time(), '%B %d, %Y')`. Available at: http://rpubs.com/AK_ABDR/Hypospadias07_17.
+
+## Contact    
+Alaska Birth Defects Registry (ABDR)  
+3601 C Street, Suite 358  
+Anchorage, AK 99503  
+(907) 269-3400 phone  
+(907) 754-3529 fax  
+hssbirthdefreg@alaska.gov
+
+
+*Updated: `r format(Sys.time(), '%B %d, %Y')`*  
+*Code source:* ```R:\ABDR\Website\ABDR_Quarto_Website\Hypospadias_tar.qmd```  
+
+&nbsp;
+
+<center>
+![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png){width=200px height=200px}
+</center>  
+
+  

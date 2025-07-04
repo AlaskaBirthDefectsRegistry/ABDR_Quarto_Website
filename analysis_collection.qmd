@@ -2,6 +2,6 @@
 title: "Analysis and Collection Information"
 ---
 
-* [Data analysis methods]()
-* [Data collection methods](Data_Methods.qmd)
+* [Data Analysis Methods](Data Analysis Methods.qmd)
+* [Data Collection Methods](Data_Methods.qmd)
 

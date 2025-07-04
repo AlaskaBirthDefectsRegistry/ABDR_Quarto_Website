@@ -1,0 +1,2024 @@
+---
+title: "Prenatal Alcohol Exposure 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
+author: "Alaska Birth Defect Registy"
+title-block-banner: ~img/ABDR_csr2.png
+format:
+  html:
+    toc: true
+    toc-float: true
+    code-fold: true
+---
+
+<style type="text/css">
+
+h4.author { /* Header 4 - and the author and date headers use this too  */
+  font-size: 20px;
+  font-style: normal;
+  font-family: Tahoma, Verdana, sans-serif;
+  color: Black;
+  text-align: center;
+
+}
+h4.date { /* Header 4 - and the author and date headers use this too  */
+  font-size: 20px;
+  font-family: Tahoma, Verdana, sans-serif;
+  color: Black;
+  text-align: center;
+}
+
+h2 {/* Header 2 */
+  font-size: 24px;
+  font-family: Tahoma, Verdana, sans-serif;
+  color: Black;
+  background-color: WhiteSmoke;
+  text-indent: 5px;
+}
+</style>
+
+---
+## Background
+Fetal alcohol syndrome (FAS) is the most severe form of fetal alcohol spectrum disorder (FASD), a group of conditions that occur in children whose mothers consumed alcohol during pregnancy. Fetal alcohol syndrome leads to a range of lifelong physical, behavioral, and cognitive impairments. The syndrome is characterized by distinctive facial features (such as small eyes, a thin upper lip, and a smooth philtrum), growth deficiencies, and central nervous system abnormalities. These issues can manifest as intellectual disabilities, learning and memory problems, poor coordination, and behavioral difficulties.[1,2,3](#references)
+
+The sole cause of FAS is the consumption of alcohol by a pregnant person. Alcohol passes through the placenta and can interfere with the normal development of the fetus, particularly affecting the brain and other organs. There is no known safe amount or type of alcohol to consume during pregnancy; even small amounts can be harmful. The risk is present throughout pregnancy, including the earliest stages when a person may not yet realize they are pregnant.[2,3,4](#references) Diagnosis of FAS is based on the presence of characteristic physical features, growth deficits, neurodevelopmental problems, and a history of prenatal alcohol exposure. No laboratory test exists for FAS, so healthcare providers rely on clinical assessment and developmental history to make the diagnosis.[1,5,6](#references)
+
+Fetal alcohol syndrome is a lifelong condition with no cure, but early intervention and supportive treatments can improve outcomes. Treatment options include behavioral and educational therapies, medical care for associated health problems, medications for specific symptoms, and parent training to help families manage behavioral and learning challenges. Supportive environments, early diagnosis (ideally before age six), and access to special education and social services can help mitigate the impact of FAS.[1,2,6](#references) Prevention is straightforward: avoiding alcohol entirely during pregnancy or when planning to become pregnant is the only way to prevent fetal alcohol syndrome.[2,3,6](#references)
+
+## Public Health Surveillance of FAS
+Surveillance of fetal alcohol syndrome (FAS) has many inherent challenges due to the delayed manifestation of its clinical features and reliance on subjective diagnostic criteria. Many physical and neurodevelopmental characteristics of FAS, such as cognitive impairments or behavioral issues, may not become apparent until a child reaches school age, complicating early identification.[7,8](#references) Diagnosis requires clinical observation of specific facial anomalies, growth deficiencies, and central nervous system abnormalities. However, these signs can be subtle, vary across ethnic groups, or change as a child develops.[7,9](#references) Additionally, maternal alcohol consumption during pregnancy is often under-reported or undocumented in medical records, further hindering confirmation of prenatal exposure.[9](#references)
+
+Another major obstacle is integrating data from multiple sources, including medical, educational, and social service records, to capture FAS cases fully. Surveillance systems often lack access to non-medical records (e.g., school evaluations), limiting their ability to identify neurodevelopmental issues that emerge outside clinical settings.[9](#references) Variability in diagnostic practices among healthcare providers and the absence of standardized biomarkers for FAS also contribute to underreporting or misclassification.[7,8](#references) Furthermore, tracking cases across different healthcare systems or geographic regions poses logistical challenges, particularly when children move or change providers before establishing a definitive diagnosis.[9](#references) These complexities result in underestimated prevalence rates and hinder efforts to monitor FAS's true public health impact.
+
+The many challenges of FAS surveillance have led the Alaska Birth Defect Registry to take a multi-prong approach that leverages multiple data sources to obtain an estimate of other (upstream) outcomes of prenatal alcohol exposure. To achieve this, the registry performs parallel surveillance on three medical diagnosis codes that capture different adverse health outcomes caused by maternal alcohol use during pregnancy. The ABDR utilizes data from the state's Health Facilities Data Reporting (HFDR) Program, the state's Health Analytics and Vital Records - Birth Certificate, and ABDR's own data collection to create this report.
+
+Prenatal Alcohol Exposure Diagnosis Codes
+ICD-10-CM Diagnosis Code O99.31 - The ICD-10 code "O99.31" refers to a medical event where alcohol use results in a complication during pregnancy, childbirth, or puerperium (about six weeks after childbirth, during which the mother's reproductive organs return to their original nonpregnant condition)
+ICD-10-CM Diagnosis Code P04.3 - The ICD-10 code "P04.3" refers to a newborn affected by maternal use of alcohol, meaning a baby showing signs of complications due to the mother's alcohol consumption during pregnancy, essentially indicating "Fetal Alcohol Syndrome" related issues in the newborn.
+ICD-10-CM Diagnosis Code Q86.0 - The ICD-10 code "Q86.0" refers to "Fetal alcohol syndrome (dysmorphic)
+Surveillance of ICD-10 codes "O99.31" and "P04.3" are likely more sensitive than the threshold for FAS. Additionally, for ICD-10 codes "O99.31" and "P04.3," the diagnostic complexity is much lower, requiring less clinical expertise and assessment for an accurate diagnosis. Lastly, "O99.31" and "P04.3" do not require follow-up to assess symptoms that develop later.
+
+Surveying primary prevention targets of FAS is like checking for lead paint in homes versus diagnosing lead poisoning in children: it is more straightforward to test homes built before a certain year for the presence of lead-based paint than diagnosing lead poisoning in children, which requires blood tests, developmental assessments, and can manifest with a wide range of non-specific symptoms.
+
+## Limitations
+Tracking more immediate targets of alcohol consumption during pregnancy, like "O99.31" and "P04.3," can be done more accurately than FAS for the reasons outlined previously. The surveillance of these targets offers valuable insights into the public health needs for primary prevention efforts. However, there are inherent limitations compared to tracking actual Fetal Alcohol Syndrome (FAS) diagnoses. Tracking "O99.31" and "P04.3" does not help quantify the true burden of FAS and the broader Fetal Alcohol Spectrum Disorders (FASD) in Alaska and does not necessarily assist in planning and delivery of intervention services for patients with FAS. Consequently, relying solely on primary prevention surveillance paints an incomplete picture of the overall public health challenge posed by FAS, limiting the ability to understand the full scope of needs and effectively allocate resources for those living with the condition.
+
+## Summary 
+By performing the surveillance of upstream outcomes of prenatal alcohol exposure along with FAS, the registry hopes to bolster stakeholder confidence in the data. The registry aims to obtain a clear and accurate understanding of prenatal alcohol exposure in Alaska that stakeholders can utilize to inform mitigation efforts and track the progress and effectiveness of programs and interventions focused on primary Prevention.
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+knitr::opts_chunk$set(echo = TRUE)
+library(htmlTable)
+library(dplyr)
+library(lubridate)
+library(haven)
+library(tidyverse)
+#library(skimr)
+#library(DataExplorer)
+#library(RecordLinkage)
+library(arrow)
+library(duckdb)
+library(DBI)
+#library(duckplyr)
+library(DT)
+library(viridis)
+library(plotly)
+library(sf)
+```
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# Pointing to the inpatient parquet data with arrow
+  arrow_files_hfdr_2016_2023 <- open_dataset(                                   #
+    "R:/ResData/HFDR/arrow/hfdr_2016_2023.parquet",                             # 
+    format = "parquet")
+
+#dim(arrow_files_hfdr_2016_2023)
+#* 74,963,310 observations in HFDR data (2016-2023) 
+```
+     
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# Creating duckdb database connection 
+con <- DBI::dbConnect(duckdb())
+
+ to_duckdb(.data = arrow_files_hfdr_2016_2023,                                  #
+            con = con, 
+            table_name = "hfdr_duck_db")
+```
+
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# Filtering to just ICD-10-CM codes for **Alcohol use complicating pregnancy, childbirth, and postpartum**: O99.31# 
+# * O99.31 diagnoses are applied to the mother, not the newborn.
+alcohol_query <- r'(SELECT *
+                    FROM hfdr_duck_db
+                    WHERE diag LIKE 'O9931%')'
+
+alcohol_get_query <- dbGetQuery(con, alcohol_query)
+
+# dim(alcohol_get_query)
+# 
+# nrow(alcohol_get_query %>% distinct(dkey))
+# * 2089 (2087 unique?) instances of O99.31 diagnoses in the inpatient and Emergency Department setting
+```
+
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# O99.31 diagnoses Counts by Year 2016-2023
+# table(alcohol_get_query$year)
+```
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# alcohol_get_query %>%
+#   dplyr::group_by(pat_type, year) %>%
+#   dplyr::summarise(count = n()) %>%
+# ggplot(aes(x = year, 
+#            y = count, 
+#            group = pat_type, 
+#            colour = pat_type)) +
+#   geom_line(stat = 'identity') +
+#   theme_minimal()  +
+#   ggtitle("ICD-10 Code O99.31 - Alcohol use complicating pregnancy, childbirth, and postpartum")
+
+#table(alcohol_get_query$year, alcohol_get_query$pat_type)
+
+#* Alcohol use complicating pregnancy diagnosis codes appear different with inpatient and out patient HFDR data. 
+
+#* Alcohol use complicating pregnancy diagnoses peaked in the inpatient setting in 2019 and have been half the annual counts since 2019.
+
+#* Outpatient Alcohol use complicating pregnancy diagnoses dipped between 2020 through 2022 (COVID Effect?).
+```
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+
+## ABDR Data 
+# Obtaining ABDR data 2016-2024
+#load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_BTH_0721RSRCH_L3.Rda")
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_0721YOR_YOB.Rda")
+
+### Microsoft Access connection ####
+# library(RODBC)
+# # Connecting to Access Database. Calling it "channel.a"
+# channel.a<-odbcDriverConnect("Driver={Microsoft Access Driver (*.mdb, *.accdb)};
+#                              DBQ=R:/ABDR/__Current_Registry_App/BR_App.accdb")
+# 
+# # Specify type of database element.
+# sqlTables(channel.a,tableType="Encounter_data")
+# 
+# # Fetching whole Access table called "ICD_TABLE"
+# icd_table <- sqlFetch(channel.a, "Encounter_data") %>%
+#   filter(Yr > 2021) %>%
+#   mutate(year = year(DOS)) %>%
+#   select(BC, ICDCode, year) %>%
+#  # mutate(YOB = year(DOB)) %>%
+#   rename("ICD10" = ICDCode) %>%
+#   filter(ICD10 %in% c("P043", "Q860")) %>%
+#   mutate(BC = as.character(BC)) #%>%
+#   #select(-DOB)
+# 
+# # Closing connection with Access database
+# RODBC::odbcClose(channel.a)
+```
+
+## Prenatal Alcohol Exposure Diagnosis Codes
+* **ICD-10-CM Diagnosis Code O99.31** - The ICD-10 code "*O99.31*" refers to a medical event where alcohol use results in a complication during pregnancy, childbirth, or puerperium (the period of about six weeks after childbirth during which the mother's reproductive organs return to their original nonpregnant condition)
+* **ICD-10-CM Diagnosis Code P04.3** - The ICD-10 code "*P04.3*" refers to a newborn affected by maternal use of alcohol, meaning a baby showing signs of complications due to the mother's alcohol consumption during pregnancy; essentially indicating "Fetal Alcohol Syndrome" related issues in the newborn. 
+* **ICD-10-CM Diagnosis Code Q86.0** - The ICD-10 code "*Q86.0*" refers to "Fetal alcohol syndrome (dysmorphic).
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# 
+p_code <- ABDR_0721YOR_YOB %>%
+  mutate(year = year(DOS)) %>%
+  select(BC, ICD10, year) %>%
+  #bind_rows(icd_table) %>%
+  filter(ICD10 == "P043" &
+           year > 2015) %>%
+  distinct()
+
+# p_code %>% 
+#   group_by(year) %>%
+#   summarise(count = n()) %>%
+#   ggplot(aes(x = year, y = count)) +
+#   geom_line(stat = 'identity') +
+#   theme_minimal() +
+#   ggtitle("ICD-10 Code P04.3 - Newborn affected by maternal use of alcohol")
+
+#table(p_code$year)
+```
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+q_code <- ABDR_0721YOR_YOB %>%
+  mutate(year = year(DOS)) %>%
+  select(BC, ICD10, year) %>%
+  # bind_rows(icd_table) %>%
+  filter(ICD10 == "Q860"&
+           year > 2015) %>%
+  distinct()
+
+# q_code %>% 
+#   group_by(year) %>%
+#   summarise(count = n()) %>%
+#   ggplot(aes(x = year, y = count)) +
+#   geom_line(stat = 'identity') +
+#   theme_minimal() +
+#   ggtitle("Count of ICD-10 code Q86.0 Fetal alcohol syndrome (dysmorphic)")
+
+
+#table(q_code$year)
+```
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# par(mfrow = c(2,2))
+# 
+# alcohol_get_query %>%
+#   group_by(pat_type, year) %>%
+#   summarise(count = n()) %>%
+# ggplot(aes(x = year, 
+#            y = count, 
+#            group = pat_type, 
+#            colour = pat_type)) +
+#   geom_line(stat = 'identity') +
+#   theme_minimal() +
+#   ggtitle("Count of ICD-10 Code O99.31 - Alcohol use complicating pregnancy, childbirth, and postpartum 2016-2023")
+
+
+# p_code %>% 
+#   filter(YOB > 2015) %>%
+#   group_by(YOB) %>%
+#   summarise(count = n()) %>%
+#   ggplot(aes(x = YOB, y = count)) +
+#   geom_line(stat = 'identity') +
+#   theme_minimal() +
+#   ggtitle("Count of ICD-10 Code P04.3 - Newborn affected by maternal use of alcohol 2016-2023")
+# 
+# 
+# 
+# q_code %>% 
+#   filter(YOB > 2015) %>%
+#   group_by(YOB) %>%
+#   summarise(count = n()) %>%
+#   ggplot(aes(x = YOB, y = count)) +
+#   geom_line(stat = 'identity') +
+#   theme_minimal() +
+#   ggtitle("Count of ICD-10 code Q86.0 Fetal alcohol syndrome (dysmorphic) 2016-2023")
+```
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+#### Loading  BVS data (MCH Unit specific) ####
+birth <- read_sas("R:\\ResData\\BVS MASTER FILES\\AUTHORIZED RESEARCHERS ONLY\\current\\birth_statistical.sas7bdat")
+```
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# Calculating Annual Birth Rate
+bvs <- birth %>%
+  dplyr::group_by(dob_yr) %>%
+  dplyr::summarise(annual = n()) %>%
+  dplyr::filter(dob_yr > 2015 &
+           dob_yr < 2022) %>% #year(Sys.Date())) %>%                            # 
+  dplyr::rename("year" = dob_yr)
+```
+
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+alcohol_rate_1000 <- alcohol_get_query %>%
+  dplyr::group_by(pat_type, year) %>%
+  dplyr::summarise(count = dplyr::n())  %>%
+  dplyr::mutate(year = as.character(year)) %>%
+  dplyr::left_join(bvs, by = "year") %>%
+  dplyr::mutate(rate = (count/annual)*1000)
+
+alcohol_rate_1000_inpat <- alcohol_rate_1000 %>%
+  filter(pat_type == "inpatient") %>%
+  dplyr::rename("O99_inp_Rate" = rate)
+
+alcohol_rate_1000_outpat <- alcohol_rate_1000 %>%
+  filter(pat_type == "outpatient") %>%
+  dplyr::rename("O99_out_Rate" = rate)
+```
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# alcohol_rate_1000 %>%
+# ggplot(aes(x = year, 
+#            y = rate, 
+#            group = pat_type, 
+#            colour = pat_type)) +
+#   geom_line(stat = 'identity') +
+#   theme_minimal() +
+#   ggtitle("Rate of ICD-10 Code O99.31 - Alcohol use complicating pregnancy, childbirth, and postpartum 2016-2023")
+
+```
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# Calculating P04.3 Rate of diagnosis
+p_code_rate_1000 <- p_code %>%
+  dplyr::filter(year < 2022) %>%                                                #
+  dplyr::group_by(year) %>%
+  dplyr::summarise(count = n()) %>%
+ # dplyr::rename("year" = YOB) %>%
+  dplyr::mutate(year = as.character(year)) %>%
+  dplyr::left_join(bvs, by = "year") %>%
+  dplyr::mutate(rate = (count/annual)*1000) %>%
+  dplyr::rename("P04.3_Rate" = rate)
+# 
+# p_code_rate_1000 %>%
+# mutate(year = as.numeric(year)) %>%
+# ggplot(aes(x = year, 
+#            y = rate)) +
+#   geom_line(stat = 'identity') +
+#   theme_minimal() +
+#   ggtitle("Rate of ICD-10 Code P04.3 - Newborn affected by maternal use of alcohol 2016-2023")
+```
+
+ 
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# Calculating and trending the rate of ICD-10 code Q86.0 Fetal alcohol syndrome (dysmorphic)
+q_code_rate_1000 <- q_code %>%
+  dplyr::filter(year < 2022) %>%                                                #
+  dplyr::group_by(year) %>%
+  dplyr::summarise(count = dplyr::n()) %>%
+#  dplyr::rename("year" = YOB) %>%
+  dplyr::mutate(year = as.character(year)) %>%
+  dplyr::left_join(bvs, by = "year") %>%
+  dplyr::mutate(rate = (count/annual)*1000) %>%
+  dplyr::rename("Q86_Rate" = rate)
+# 
+# q_code_rate_1000 %>%
+# mutate(year = as.numeric(year)) %>%
+# ggplot(aes(x = year, 
+#            y = rate)) +
+#   geom_line(stat = 'identity') +
+#   theme_minimal() +
+#   ggtitle("Rate of ICD-10 code Q86.0 Fetal alcohol syndrome (dysmorphic)")
+```
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+rate_trend <- q_code_rate_1000 %>%
+  left_join(p_code_rate_1000, by = "year") %>%
+  left_join(alcohol_rate_1000_inpat, by = "year") %>%
+  left_join(alcohol_rate_1000_outpat, by = "year") %>%
+  select(year, P04.3_Rate, Q86_Rate, O99_inp_Rate, O99_out_Rate) %>%
+  pivot_longer(-year)
+
+# rate_trend %>%
+# mutate(year = as.numeric(year)) %>%
+# ggplot(aes(x = year, 
+#            y = value, 
+#            group = name, 
+#            colour = name)) +
+# geom_line(stat = 'identity') +
+# theme_minimal() +
+# ggtitle("Rate of Alcohol Exposure")
+```
+
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+rate_trend %>%
+  mutate(year = as.numeric(year)) %>%
+  ggplot(aes(x = year,
+             y = value,
+             group = name,
+             colour = name)) +
+  geom_line(stat = 'identity', linewidth = 1) +
+  geom_point(size = 2) + # Adding data points
+  # geom_smooth(se = FALSE, method = "loess") + # Adding a loess smoothing line (optional)
+  theme_minimal() +
+    scale_colour_viridis(discrete = TRUE, name = "Reported Diagnosis",
+                          labels = c(
+      "O99.31 Inpatient",
+      "O99.31 Emergency Dept.",
+      "P04.3",
+      "Q86.0")
+      ) + # Using viridis palette
+  labs(title = paste0("Prenatal Alcohol Exposure Reported Rates 2016-", year(Sys.Date()) - 3), 
+       x = "Year",
+       y = "Reported Prevalence per 1,000 Births",
+       colour = "Category", 
+       caption = "Alcohol complicating pregnancy (O99.31) \n Affected by maternal use of alcohol (P04.3)\nFetal Alcohol Syndrome (Q86.0)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"), # Centering and styling the title
+        axis.title.x = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        legend.title = element_text(size = 12),
+        plot.caption = element_text(hjust = 0, face = "italic"))
+```
+
+
+## Regional Distribution
+Distribution of prenatal alcohol exposure in Alaska by Public Health Region of maternal residence at the time of birth. [A description of regional breakdowns can be found here](https://health.alaska.gov/en/resources/brfss-map-regions/). Data suppressed for # of reports  < 6. 
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+library(plyr)
+library(epitools)
+ #channel.c<-odbcDriverConnect("Driver={Microsoft Access Driver (*.mdb, *.accdb)};
+ #                            DBQ=R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\CaseConfProb.accdb")
+#CPROB<-subset(sqlQuery(channel.c,"SELECT * FROM CaseConfProb1")) 
+
+#load current ABDR,BVS, & Conf files: update these files each year
+load("R:/ABDR/Research_Data_tables/ResearchTables2007_2021/ABDR_BTH_0721RSRCH_L3.Rda") #
+
+# Loading Birth Certificate data
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\bth07_21.Rda")   #
+
+# Loading ABDR data with NatCond variable
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_0721YOR_YOB.Rda") #
+
+# Conf files
+load("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\CPROB.Rda") 
+
+#Function to Create condition specific dataset from the ABDR and bth files
+  DAT<-function(DCODE,ABDRdata,VSdata){
+  cdton<-ddply(subset(ABDRdata,ICD10==DCODE & age_y<3),.(BC),summarise,FYOB=min(YOB))
+    dta<-join(VSdata,cdton,by='BC',type='left',match='first') 
+    dta$CD<-with(dta,ifelse(is.na(FYOB),0,1)) 
+    dta<-dta[which(!is.na(dta$PH_REGION)),] #Resident mothers only
+}
+#Specify the National Condition Code to be used
+  code<-"Q860"
+#Create a label for the condition to be used
+  condition<-("FAS")
+#Specify the condition specific dataset for the condition report
+  fas_CDATA<-as.data.frame(DAT(code,ABDR_0721YOR_YOB,bth07_21)) %>%
+    filter(dob > "2015-12-31")                                                  #
+#Specify the years of these data
+  datYRS<-(paste0("2016-", year(Sys.Date()) - 3))                               #
+#Specify the row-names for moving averages
+ rnames=c(#"2007-2011","2008-2012","2009-2013","2010-2014","2011-2015",
+          #"2012-2016", "2013-2017", "2014-2018", "2015-2019", 
+          "2016-2020", "2017-2021", "2018-2022")                                #
+  
+   
+### Condition Specific Report coding ####
+### Create Prevalence estimates by year
+  ev<-addmargins(table(fas_CDATA[,"CD"]==1,year(fas_CDATA[,"dob"]),useNA = "always"))
+  ev<-ev[-3,][,-c(length(colnames(ev))-1)] #remove the NA values from the summary table
+  row.names(ev)<-c("NoDefect","Defect","Total")
+  cp<-subset(CPROB,rownames=="FAS" ,select=c("NatCond","ReportsSens","Confirmed","PPV","NPV"))
+  Rrate<-ev[2,]/ev[3,] #Reported prevalence rate by year
+ # estimated Prevalence
+  temp1<- Rrate #((Rrate)*cp$PPV)+((1-(Rrate))*(1-cp$NPV)) #Bayes adjusted prevalence rate
+    ev1<-pois.exact(temp1*ev[3,],ev[3,]) #Obtain CI's
+    ev1[,3:5]<-round(ev1[,3:5]*1000,1)
+    ev1[,1]<-round(ev1[,1],1)
+    ev2<-cbind(ev[2,],ev1[,-6])
+    ev2<-format(round(ev2,1),trim=T,justify="centre",drop0trailing=F)
+    ev2$`Prevalence (95% CI)`<-paste(ev2[,4],paste("(",ev2[,5],","," ",ev2[,6],")",sep = ""))
+    #ev2$`Prevalence (95% CI)`<-sprintf("%1.1f (%1.1f, %1.1f)",ev2[,4],ev2[,5],ev[,6])
+    colnames(ev2)<-c("Reports","Defects","Births","Defect Prevalence","LowerCI","UpperCI", "Prevalence (95% CI)")
+    rownames(ev2)<-c(min(year(fas_CDATA[,"dob"])):max(year(fas_CDATA[,"dob"])),"Total")
+    ev2$yrs<-c(min(year(fas_CDATA[,"dob"])):max(year(fas_CDATA[,"dob"])),NA)
+
+    #ev2 Prevalence estimate table 
+```
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+ 
+library(GISTools)
+library(grid)
+library(sp)
+
+
+   ##Create map
+  em <- fas_CDATA %>%
+    filter(dob > "2015-12-31") %>%
+    dplyr::group_by(PH_REGION) %>%
+    dplyr::summarise(NoDefect = sum(CD == 0), 
+                  Defect = sum(CD == 1), 
+                  Total = dplyr::n()) %>%
+        mutate(RRrate = Defect/Total) %>%
+        filter(!is.na(PH_REGION))
+  RRrate <- em$RRrate #Reported prevalence region
+ # estimated Prevalence
+  temp2<- RRrate
+em2 <- pois.exact(temp2*em$Total, em$Total) %>%
+        dplyr::mutate(across(rate:upper, ~ round(.x*10000,1))) %>% 
+        mutate(x = round(x = x, 2)) %>% 
+        dplyr::select(-conf.level) %>%
+        bind_cols(em) %>%
+        select(-NoDefect, ) %>%
+        mutate(`Prevalence (95% CI)` = paste(rate, 
+                                             paste("(",
+                                                   lower,",",
+                                                   " ",upper,
+                                                   ")",sep = ""))) %>%
+        dplyr::rename("Reports" = Defect, 
+               "Defects" = x, 
+               "Births" = pt, 
+               "Defect Prevalence" = rate,
+               "LowerCI" = lower,
+               "UpperCI" = upper) %>%
+        select(PH_REGION, Reports, Defects, Births, 
+               `Defect Prevalence`, LowerCI, UpperCI,
+               `Prevalence (95% CI)`) %>% 
+        column_to_rownames(var = "PH_REGION") %>%
+        mutate(PH_REGION = c("Anchorage Municipality",
+                             "Gulf Coast","Interior",
+                             "Matanuska-Susitna Borough",
+                             "Northern","Southeast","Southwest"))
+
+# Building two-by-two table for fisher exact
+  # Selecting just defects and births from em2 
+defect_births <- em2 %>%
+        dplyr::select(Defects, Births) 
+
+defect_births_total <- defect_births %>%
+        summarise_all(.funs = sum)
+
+# Creating output vector 1
+ output1 <- as.vector(defect_births[ , 1])
+
+  # Creating output vector 2
+ output2 <- as.vector(defect_births[ , 2])
+
+ # Creating output vector 3
+output3 <- as.vector(defect_births_total$Defects - defect_births[ , 1])
+
+ # Creating output vector 4
+output4 <- as.vector(defect_births_total$Births - defect_births[ , 2])
+
+ # Creating tibble of defects and births with references
+ inter_tbl <- tibble(output1, output2, output3, output4) %>%
+        dplyr::rename("defects" = output1,
+               "Births" = output2,
+               "ref_defects" =output3,
+               "ref_births" = output4)
+ 
+ # Creating a list of 2x2 tables (matrix) for every local 
+output_matrix1 <- apply(inter_tbl, 1, function(x){
+        list(matrix(x, nrow = 2, ncol = 2, 
+                    dimnames = list(c("defects", "births"),
+                                    c("local", "reference"))))})
+
+# Unlisting output_matrix1 
+output_matrix2 <- lapply(output_matrix1, unlist)
+
+  # Turning unlisted output_matrix2 list in to a list of matrixes
+output_matrix3 <- map(.x = output_matrix2, 
+          .f = function(x) matrix(x, nrow = 2, 
+                                  ncol = 2, 
+                                  dimnames = list(
+                                    c("defects", "births"), 
+                                    c("local", "reference"))) %>%
+            as.matrix.data.frame())
+
+ # Looping fisher exact test over list of matrices
+fish2 <- lapply(output_matrix3, FUN = fisher.test)
+
+# Changing list names to match public health regions 
+fish3 <- fish2 %>%
+        magrittr::set_names(value = c("Anchorage Municipality",
+                            "Gulf Coast","Interior",
+                            "Matanuska-Susitna Borough",
+                            "Northern","Southeast","Southwest"))
+
+ # Creating matrices of specific fisher exact test results: p_value
+p_value <- matrix(lapply(fish2, 
+                    function(x){x$p.value}), 
+             nrow = nrow(em2))
+
+ # Creating matrices of specific fisher exact test results: odds_ratio
+ odds_ratio <- matrix(lapply(fish2, 
+                    function(x){x[[3]]}), 
+             nrow = nrow(em2))
+ 
+  # Creating matrices of specific fisher exact test results: conf_int
+conf_int <- matrix(lapply(fish2, 
+                    function(x){x[[2]]}), 
+             nrow = nrow(em2))
+
+  # Creating a tibble of the fisher exact test results
+fish_results <- tibble(em2$PH_REGION, unlist(p_value[, 1]), 
+             unlist(odds_ratio[, 1])) %>%
+        magrittr::set_colnames(value = c("region", "p_value", "odd_ratio"))
+
+
+# Joining em2 and fish_results: em2b
+em2b <- left_join(em2, fish_results, 
+                by = c("PH_REGION" = "region")) %>%
+        # dplyr::rename("Adjusted Defect Estimate" = Defects) %>%
+        select(Reports, `Defects`, Births,
+               `Defect Prevalence`, LowerCI, UpperCI,
+               `Prevalence (95% CI)`, p_value,
+               odd_ratio, PH_REGION) %>%
+        magrittr::set_rownames(value = c("Anchorage", "Gulf Coast",
+                               "Interior",  "Mat-Su",
+                               "Northern", "Southeast",
+                               "Southwest"))
+fas_em2b <- em2b
+
+# Importing ak_sf
+ak_sf <- st_read(dsn="R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\shapefiles",
+                 layer="PHR",
+                 quiet = TRUE)
+
+ # Joining ak_sf to fas_em2b
+ak_sf_em <- fas_em2b %>% left_join(ak_sf, by = c("PH_REGION" = "XAPHR_LBL")) %>%
+        mutate(hover = paste("Region:", PH_REGION,
+                             "<br>Prevalence Estimate:", `Defect Prevalence`,
+                             "<br>LowerCI:", LowerCI,"<br>UpperCI:", UpperCI))
+
+# Creating a ggplot for ak_sf_em data
+Q86_map <- ggplot(data = ak_sf_em, 
+             aes(geometry = geometry, 
+                 fill = `Defect Prevalence`,
+                 text = paste("Region:", PH_REGION,
+                              "<br>LowerCI:", LowerCI,
+                              "<br>UpperCI:", UpperCI))) +
+        geom_sf() +
+        viridis::scale_fill_viridis(option = "cividis", direction = -1) +
+        theme(axis.text.x = element_blank(),
+              axis.text.y = element_blank(),
+              axis.ticks = element_blank(),
+              panel.background = element_rect(fill = "white", 
+                                              color = "white"), 
+              legend.position = "none") +
+        ggtitle("Q86.0")
+
+Q86_map_ly <- ggplotly(Q86_map, 
+         tooltip = c("text", "size")) %>%  
+  layout(xaxis = list(autorange = TRUE),
+         yaxis = list(autorange = TRUE))
+
+# ggsave(plot = Q86_map, filename = "R:/ABDR/chris_analysis/Ad_hoc_queries/img/Q86_map.png")
+
+```
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+#Specify the National Condition Code to be used
+  code<-"P043"
+#Specify the condition specific dataset for the condition report
+  P_CDATA<-as.data.frame(DAT(code,ABDR_0721YOR_YOB,bth07_21)) %>%
+    filter(dob > "2015-12-31")                                                  #
+#Specify the years of these data
+  datYRS<-(paste0("2016-", year(Sys.Date()) - 3))                               #
+#Specify the row-names for moving averages
+ rnames=c(#"2007-2011","2008-2012","2009-2013","2010-2014","2011-2015",
+          #"2012-2016", "2013-2017", "2014-2018", "2015-2019", 
+          "2016-2020", "2017-2021", "2018-2022")                                #
+  
+   
+### Condition Specific Report coding ####
+### Create Prevalence estimates by year
+  ev<-addmargins(table(P_CDATA[,"CD"]==1,year(P_CDATA[,"dob"]),useNA = "always"))
+  ev<-ev[-3,][,-c(length(colnames(ev))-1)] #remove the NA values from the summary table
+  row.names(ev)<-c("NoDefect","Defect","Total")
+  cp<-subset(CPROB,rownames=="FAS" ,select=c("NatCond","ReportsSens","Confirmed","PPV","NPV"))
+  Rrate<-ev[2,]/ev[3,] #Reported prevalence rate by year
+ # estimated Prevalence
+  temp1<- Rrate #((Rrate)*cp$PPV)+((1-(Rrate))*(1-cp$NPV)) #Bayes adjusted prevalence rate
+    ev1<-pois.exact(temp1*ev[3,],ev[3,]) #Obtain CI's
+    ev1[,3:5]<-round(ev1[,3:5]*1000,1)
+    ev1[,1]<-round(ev1[,1],1)
+    ev2<-cbind(ev[2,],ev1[,-6])
+    ev2<-format(round(ev2,1),trim=T,justify="centre",drop0trailing=F)
+    ev2$`Prevalence (95% CI)`<-paste(ev2[,4],paste("(",ev2[,5],","," ",ev2[,6],")",sep = ""))
+    #ev2$`Prevalence (95% CI)`<-sprintf("%1.1f (%1.1f, %1.1f)",ev2[,4],ev2[,5],ev[,6])
+    colnames(ev2)<-c("Reports","Defects","Births","Defect Prevalence","LowerCI","UpperCI", "Prevalence (95% CI)")
+    rownames(ev2)<-c(min(year(P_CDATA[,"dob"])):max(year(P_CDATA[,"dob"])),"Total")
+    ev2$yrs<-c(min(year(P_CDATA[,"dob"])):max(year(P_CDATA[,"dob"])),NA)
+    
+     ##Create map
+  em <- P_CDATA %>%
+    filter(dob > "2015-12-31") %>%
+    dplyr::group_by(PH_REGION) %>%
+    dplyr::summarise(NoDefect = sum(CD == 0), 
+                  Defect = sum(CD == 1), 
+                  Total = dplyr::n()) %>%
+        mutate(RRrate = Defect/Total) %>%
+        filter(!is.na(PH_REGION))
+  RRrate <- em$RRrate #Reported prevalence region
+ # estimated Prevalence
+  temp2<- RRrate
+em2 <- pois.exact(temp2*em$Total, em$Total) %>%
+        dplyr::mutate(across(rate:upper, ~ round(.x*10000,1))) %>% 
+        mutate(x = round(x = x, 2)) %>% 
+        dplyr::select(-conf.level) %>%
+        bind_cols(em) %>%
+        select(-NoDefect, ) %>%
+        mutate(`Prevalence (95% CI)` = paste(rate, 
+                                             paste("(",
+                                                   lower,",",
+                                                   " ",upper,
+                                                   ")",sep = ""))) %>%
+        dplyr::rename("Reports" = Defect, 
+               "Defects" = x, 
+               "Births" = pt, 
+               "Defect Prevalence" = rate,
+               "LowerCI" = lower,
+               "UpperCI" = upper) %>%
+        select(PH_REGION, Reports, Defects, Births, 
+               `Defect Prevalence`, LowerCI, UpperCI,
+               `Prevalence (95% CI)`) %>% 
+        column_to_rownames(var = "PH_REGION") %>%
+        mutate(PH_REGION = c("Anchorage Municipality",
+                             "Gulf Coast","Interior",
+                             "Matanuska-Susitna Borough",
+                             "Northern","Southeast","Southwest"))
+
+# Building two-by-two table for fisher exact
+  # Selecting just defects and births from em2 
+defect_births <- em2 %>%
+        dplyr::select(Defects, Births) 
+
+defect_births_total <- defect_births %>%
+        summarise_all(.funs = sum)
+
+# Creating output vector 1
+ output1 <- as.vector(defect_births[ , 1])
+
+  # Creating output vector 2
+ output2 <- as.vector(defect_births[ , 2])
+
+ # Creating output vector 3
+output3 <- as.vector(defect_births_total$Defects - defect_births[ , 1])
+
+ # Creating output vector 4
+output4 <- as.vector(defect_births_total$Births - defect_births[ , 2])
+
+ # Creating tibble of defects and births with references
+ inter_tbl <- tibble(output1, output2, output3, output4) %>%
+        dplyr::rename("defects" = output1,
+               "Births" = output2,
+               "ref_defects" =output3,
+               "ref_births" = output4)
+ 
+ # Creating a list of 2x2 tables (matrix) for every local 
+output_matrix1 <- apply(inter_tbl, 1, function(x){
+        list(matrix(x, nrow = 2, ncol = 2, 
+                    dimnames = list(c("defects", "births"),
+                                    c("local", "reference"))))})
+
+# Unlisting output_matrix1 
+output_matrix2 <- lapply(output_matrix1, unlist)
+
+  # Turning unlisted output_matrix2 list in to a list of matrixes
+output_matrix3 <- map(.x = output_matrix2, 
+          .f = function(x) matrix(x, nrow = 2, 
+                                  ncol = 2, 
+                                  dimnames = list(
+                                    c("defects", "births"), 
+                                    c("local", "reference"))) %>%
+            as.matrix.data.frame())
+
+ # Looping fisher exact test over list of matrices
+fish2 <- lapply(output_matrix3, FUN = fisher.test)
+
+# Changing list names to match public health regions 
+fish3 <- fish2 %>%
+        magrittr::set_names(value = c("Anchorage Municipality",
+                            "Gulf Coast","Interior",
+                            "Matanuska-Susitna Borough",
+                            "Northern","Southeast","Southwest"))
+
+ # Creating matrices of specific fisher exact test results: p_value
+p_value <- matrix(lapply(fish2, 
+                    function(x){x$p.value}), 
+             nrow = nrow(em2))
+
+ # Creating matrices of specific fisher exact test results: odds_ratio
+ odds_ratio <- matrix(lapply(fish2, 
+                    function(x){x[[3]]}), 
+             nrow = nrow(em2))
+ 
+  # Creating matrices of specific fisher exact test results: conf_int
+conf_int <- matrix(lapply(fish2, 
+                    function(x){x[[2]]}), 
+             nrow = nrow(em2))
+
+  # Creating a tibble of the fisher exact test results
+fish_results <- tibble(em2$PH_REGION, unlist(p_value[, 1]), 
+             unlist(odds_ratio[, 1])) %>%
+        magrittr::set_colnames(value = c("region", "p_value", "odd_ratio"))
+
+
+# Joining em2 and fish_results: em2b
+em2b <- left_join(em2, fish_results, 
+                by = c("PH_REGION" = "region")) %>%
+        # dplyr::rename("Adjusted Defect Estimate" = Defects) %>%
+        select(Reports, `Defects`, Births,
+               `Defect Prevalence`, LowerCI, UpperCI,
+               `Prevalence (95% CI)`, p_value,
+               odd_ratio, PH_REGION) %>%
+        magrittr::set_rownames(value = c("Anchorage", "Gulf Coast",
+                               "Interior",  "Mat-Su",
+                               "Northern", "Southeast",
+                               "Southwest"))
+p043_em2b <- em2b
+
+# Importing ak_sf
+ak_sf <- st_read(dsn="R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\shapefiles",
+                 layer="PHR",
+                 quiet = TRUE)
+
+ # Joining ak_sf to p043_em2b
+ak_sf_em <- p043_em2b %>% 
+  left_join(ak_sf, by = c("PH_REGION" = "XAPHR_LBL")) %>%
+        mutate(hover = paste("Region:", PH_REGION,
+                             "<br>Prevalence Estimate:", `Defect Prevalence`,
+                             "<br>LowerCI:", LowerCI,"<br>UpperCI:", UpperCI))
+
+# Creating a ggplot for ak_sf_em data
+P043_map <- ggplot(data = ak_sf_em, 
+             aes(geometry = geometry, 
+                 fill = `Defect Prevalence`,
+                 text = paste("Region:", PH_REGION,
+                              "<br>LowerCI:", LowerCI,
+                              "<br>UpperCI:", UpperCI))) +
+        geom_sf() +
+        viridis::scale_fill_viridis(option = "cividis", direction = -1) +
+        theme(axis.text.x = element_blank(),
+              axis.text.y = element_blank(),
+              axis.ticks = element_blank(),
+              panel.background = element_rect(fill = "white", 
+                                              color = "white"),
+              legend.position = "none") +
+        ggtitle("P04.3")
+
+P043_map_ly <- ggplotly(P043_map, 
+         tooltip = c("text", "size")) %>%  
+  layout(xaxis = list(autorange = TRUE),
+         yaxis = list(autorange = TRUE))
+
+#ggsave(plot = P043_map, filename = "R:/ABDR/chris_analysis/Ad_hoc_queries/img/P043_map.png")
+```
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# Creating a vector of birth totals 2016-2021                                   #
+bvs_n <- birth %>%
+  filter(dob > '2015-12-31' & 
+            dob < '2022-01-01') %>% 
+  group_by(res_phregn) %>%
+  dplyr::summarise(Total = n()) %>%
+  filter(!(res_phregn %in% c("OUT OF STATE", "UNKNOWN"))) %>%
+  mutate(patientregion = str_to_title(str_remove(string = res_phregn, 
+                                                 pattern = " REGION"))) %>%
+  select(patientregion, Total, -res_phregn) #%>%
+  #dplyr::rename("NoDefect" = Total)
+
+# Creating temp O99 defects datatable
+ii <- alcohol_get_query %>%
+  group_by(patientregion) %>%
+  dplyr::summarise(Total = n()) %>%
+  filter(!(patientregion %in% c("Out of State", "Unknown"))) %>%
+  dplyr::rename("Defect" = Total)
+
+# Combining ii and bvs_n and creating 099 em table
+em <- bvs_n %>%
+  left_join(ii, by = "patientregion") %>%
+  mutate(NoDefect = Total - Defect) %>%
+  mutate(RRrate = Defect/Total) %>%
+  mutate(patientregion = ifelse(patientregion == "Matanuska-Susitna",
+                                "Mat-Su", patientregion)) %>%
+  dplyr::rename("PH_REGION" = patientregion)
+
+RRrate <- em$RRrate #Reported prevalence region
+ # estimated Prevalence
+  temp2<- RRrate
+em2 <- pois.exact(temp2*em$Total, em$Total) %>%
+        dplyr::mutate(across(rate:upper, ~ round(.x*10000,1))) %>% 
+        mutate(x = round(x = x, 2)) %>% 
+        dplyr::select(-conf.level) %>%
+        bind_cols(em) %>%
+        select(-NoDefect, ) %>%
+        mutate(`Prevalence (95% CI)` = paste(rate, 
+                                             paste("(",
+                                                   lower,",",
+                                                   " ",upper,
+                                                   ")",sep = ""))) %>%
+        dplyr::rename("Reports" = Defect, 
+               "Defects" = x, 
+               "Births" = pt, 
+               "Defect Prevalence" = rate,
+               "LowerCI" = lower,
+               "UpperCI" = upper) %>%
+        select(PH_REGION, Reports, Defects, Births, 
+               `Defect Prevalence`, LowerCI, UpperCI,
+               `Prevalence (95% CI)`) %>% 
+        column_to_rownames(var = "PH_REGION") %>%
+        mutate(PH_REGION = c("Anchorage Municipality",
+                             "Gulf Coast","Interior",
+                             "Matanuska-Susitna Borough",
+                             "Northern","Southeast","Southwest"))
+
+# Building two-by-two table for fisher exact
+  # Selecting just defects and births from em2 
+defect_births <- em2 %>%
+        dplyr::select(Defects, Births) 
+
+defect_births_total <- defect_births %>%
+        summarise_all(.funs = sum)
+
+# Creating output vector 1
+ output1 <- as.vector(defect_births[ , 1])
+
+  # Creating output vector 2
+ output2 <- as.vector(defect_births[ , 2])
+
+ # Creating output vector 3
+output3 <- as.vector(defect_births_total$Defects - defect_births[ , 1])
+
+ # Creating output vector 4
+output4 <- as.vector(defect_births_total$Births - defect_births[ , 2])
+
+ # Creating tibble of defects and births with references
+ inter_tbl <- tibble(output1, output2, output3, output4) %>%
+        dplyr::rename("defects" = output1,
+               "Births" = output2,
+               "ref_defects" =output3,
+               "ref_births" = output4)
+ 
+ # Creating a list of 2x2 tables (matrix) for every local 
+output_matrix1 <- apply(inter_tbl, 1, function(x){
+        list(matrix(x, nrow = 2, ncol = 2, 
+                    dimnames = list(c("defects", "births"),
+                                    c("local", "reference"))))})
+
+# Unlisting output_matrix1 
+output_matrix2 <- lapply(output_matrix1, unlist)
+
+  # Turning unlisted output_matrix2 list in to a list of matrixes
+output_matrix3 <- map(.x = output_matrix2, 
+          .f = function(x) matrix(x, nrow = 2, 
+                                  ncol = 2, 
+                                  dimnames = list(
+                                    c("defects", "births"), 
+                                    c("local", "reference"))) %>%
+            as.matrix.data.frame())
+
+ # Looping fisher exact test over list of matrices
+fish2 <- lapply(output_matrix3, FUN = fisher.test)
+
+# Changing list names to match public health regions 
+fish3 <- fish2 %>%
+        magrittr::set_names(value = c("Anchorage Municipality",
+                            "Gulf Coast","Interior",
+                            "Matanuska-Susitna Borough",
+                            "Northern","Southeast","Southwest"))
+
+ # Creating matrices of specific fisher exact test results: p_value
+p_value <- matrix(lapply(fish2, 
+                    function(x){x$p.value}), 
+             nrow = nrow(em2))
+
+ # Creating matrices of specific fisher exact test results: odds_ratio
+ odds_ratio <- matrix(lapply(fish2, 
+                    function(x){x[[3]]}), 
+             nrow = nrow(em2))
+ 
+  # Creating matrices of specific fisher exact test results: conf_int
+conf_int <- matrix(lapply(fish2, 
+                    function(x){x[[2]]}), 
+             nrow = nrow(em2))
+
+  # Creating a tibble of the fisher exact test results
+fish_results <- tibble(em2$PH_REGION, unlist(p_value[, 1]), 
+             unlist(odds_ratio[, 1])) %>%
+        magrittr::set_colnames(value = c("region", "p_value", "odd_ratio"))
+
+
+# Joining em2 and fish_results: em2b
+em2b <- left_join(em2, fish_results, 
+                by = c("PH_REGION" = "region")) %>%
+        # dplyr::rename("Adjusted Defect Estimate" = Defects) %>%
+        select(Reports, `Defects`, Births,
+               `Defect Prevalence`, LowerCI, UpperCI,
+               `Prevalence (95% CI)`, p_value,
+               odd_ratio, PH_REGION) %>%
+        magrittr::set_rownames(value = c("Anchorage", "Gulf Coast",
+                               "Interior", "Mat-Su",
+                               "Northern", "Southeast",
+                               "Southwest"))
+o99_em2b <- em2b %>%
+  mutate(PH_REGION = ifelse(PH_REGION == "Anchorage Municipality", "Anchorage", 
+                            ifelse(PH_REGION == "Matanuska-Susitna Borough", "Mat-Su", 
+                                   PH_REGION)))
+
+# Importing ak_sf
+ak_sf <- st_read(dsn="R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\shapefiles",
+                 layer="PHR",
+                 quiet = TRUE) %>%
+  mutate(XAPHR_LBL = ifelse(XAPHR_LBL == "Anchorage Municipality", "Anchorage", 
+                            ifelse(XAPHR_LBL == "Matanuska-Susitna Borough", "Mat-Su", 
+                                   XAPHR_LBL)))
+
+ # Joining ak_sf to o99_em2b
+ak_sf_em <- o99_em2b %>% left_join(ak_sf, by = c("PH_REGION" = "XAPHR_LBL")) %>%
+        mutate(hover = paste("Region:", PH_REGION,
+                             "<br>Prevalence Estimate:", `Defect Prevalence`,
+                             "<br>LowerCI:", LowerCI,"<br>UpperCI:", UpperCI))
+
+# choose a point on the surface of each geometry
+points <- sf::st_point_on_surface(ak_sf)
+
+# retrieve the coordinates
+coords <- as.data.frame(sf::st_coordinates(points))
+
+ak_sf_em_p <- bind_cols(ak_sf_em, coords)
+
+map_centroid <- st_centroid(st_union(ak_sf_em_p$geometry))
+
+my_data <- data.frame(
+PH_REGION <- data.frame(PH_REGION = ""), 
+wkt_geometry = st_as_text(map_centroid))
+repulsion_point_sf <- st_as_sf(my_data, wkt = "wkt_geometry")
+
+combined_data <- dplyr::bind_rows(ak_sf_em_p, repulsion_point_sf)
+
+# Create a data frame for the centroid point
+# repulsion_point_sf <- st_as_sf(data.frame(PH_REGION = ""), wkt = st_as_text(map_centroid))
+# 
+# combined_data <- dplyr::bind_rows(ak_sf_em_p, repulsion_point_sf)
+
+set.seed(123456)
+# Creating a ggplot for ak_sf_em data
+O9931_map <- ggplot(data = ak_sf_em_p, #combined_data, 
+             aes(geometry = geometry, 
+                 fill = `Defect Prevalence`, 
+                 text = paste("Region:", PH_REGION,
+                              "<br>LowerCI:", LowerCI,
+                              "<br>UpperCI:", UpperCI))) +
+        geom_sf() +
+        viridis::scale_fill_viridis(option = "cividis", direction = -1) +
+        theme(axis.text.x = element_blank(),
+              axis.text.y = element_blank(),
+              axis.ticks = element_blank(),
+              panel.background = element_rect(fill = "white", 
+                                              color = "white"),
+              legend.position = "right") +
+        ggtitle(paste0("Prevalence Rate per 1,000 Births by Public Health Region 2016-", year(Sys.Date()) - 3, "\n \n O99.31")) +
+  ggrepel::geom_label_repel(
+    data = ak_sf_em_p,
+    aes(label = PH_REGION, geometry = geometry),
+    stat = "sf_coordinates",
+    min.segment.length = 0,
+    colour = "black",
+    fill = "white", 
+    size = 2,
+    segment.colour = "black", 
+    segment.fill = "black", 
+    #nudge_x = 0.2,  # Increase for more horizontal distance
+  #nudge_y = 0.2,  # Increase for more vertical distance
+  box.padding = unit(0.0, "lines"), # Increase the padding around the label
+  point.padding = unit(0, "lines") # Increase the padding around the point
+  ) + 
+  xlab("") +
+  ylab("") + 
+  labs(fill = "Report Prevalence per 1,000 Births")
+
+#ggsave(plot = O9931_map, filename = "R:/ABDR/chris_analysis/Ad_hoc_queries/img/O9931_map.png")
+
+O9931_map
+```
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# Creating a ggplot for ak_sf_em data
+# ggO99 <- ggplot(data = ak_sf_em, 
+#              aes(geometry = geometry, 
+#                  fill = `Defect Prevalence`,
+#                  text = paste("Region:", PH_REGION,
+#                               "<br>Prevalence (95% CI):", `Prevalence (95% CI)`
+#                              # "<br>LowerCI:", LowerCI,
+#                             #  "<br>UpperCI:", UpperCI
+#                             )
+#                  )
+#              ) +
+#         geom_sf() +
+#         viridis::scale_fill_viridis(option = "cividis", direction = -1) +
+#         theme(axis.text.x = element_blank(),
+#               axis.text.y = element_blank(),
+#               axis.ticks = element_blank(),
+#               panel.background = element_rect(fill = "white", 
+#                                               color = "white")) +
+#         ggtitle("Distribution of Diagnoses by Public Health Region: Birth Years 2016-2023 \n
+#                 O99.31")
+# 
+# ggplotly(ggO99, 
+#          tooltip = c("text", "size")) %>%  
+#   layout(xaxis = list(autorange = TRUE),
+#          yaxis = list(autorange = TRUE))
+```
+
+
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+library(cowplot)
+header_plot <- ggdraw() 
+  # draw_text("Distribution of Diagnoses by Public Health Region: Birth Years 2016-2023",
+  #   size = 12, family = "abril", fontface = "bold")
+
+caption_plot <- ggdraw() + 
+  draw_text("Alcohol complicating pregnancy (O99.31)\nAffected by maternal use of alcohol (P04.3)\nFetal Alcohol Syndrome (Q86.0)",
+    size = 8, family = "tawa", color = "grey", hjust = 0.99)
+
+grid_plots <- plot_grid(
+  #O9931_map,
+  P043_map,
+  Q86_map,
+  nrow = 1,
+  ncol = 2
+)
+
+# Final plot
+plot_grid(
+
+  header_plot,
+  grid_plots,
+  caption_plot,
+
+  ## plot settings
+  nrow = 3,
+  ncol = 1,
+  rel_heights = c(1, 5, 1)
+)
+
+
+```
+
+### Alcohol complicating pregnancy (O99.31) by Public Health Region 2016-`r year(Sys.Date()) - 3`
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# Create regional summary table to display Suppression
+em3 <- o99_em2b %>%
+        dplyr::mutate(across(-Births, ~ifelse(Reports < 6, NA, .x)))
+
+
+# Adding suppression rules to table cell values less than 6
+em3_5 <- {if(sum(is.na(em3$Reports)) == 1)
+        em3 %>% mutate(rank = rank(Reports, 
+                                        ties.method = "random", 
+                                        na.last = TRUE)) %>%
+          dplyr::mutate(across(-Births, 
+                               ~ ifelse(rank == 1, NA, .x))) %>%
+          dplyr::select(-rank) else em3}
+
+# Deleting and rearranging variables
+ tmp2 <- em3_5 %>% dplyr::select(Reports, Defects, Births,
+                      `Prevalence (95% CI)`, odd_ratio, p_value) %>%
+   dplyr::rename("Odds Ratio" = odd_ratio, 
+                      "P-Value" = p_value) %>%
+   dplyr::mutate(across(.cols = c(Defects, 
+                                       `Odds Ratio`), 
+                             ~ round(.x, 1))) %>%
+   dplyr::mutate(`P-Value` = round(`P-Value`, 2)) %>%
+   dplyr::mutate(across(.cols = c("Reports":"P-Value"), 
+                             ~ ifelse(is.na(.x), '-', .x))) %>%
+        rownames_to_column(var = "Regions") %>%
+   select(-Defects) # Removing Defects column
+ 
+ library(htmlTable) 
+ library(DT)
+ 
+# geo_html <-  htmlTable(txtRound(tmp2), 
+#                                #txt.NA = "-"), 
+#                       rnames = F,
+#                       css.cell = "padding-left: 2em; padding-right: 2em;", tfoot = "Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports  <  6; CI = Confidence
+#                       Interval \n Odds Ratio - An odds ratio (OR) is a measure of association between an exposure and an outcome. The OR represents the odds that an outcome will occur given a particular exposure, compared to the odds of the outcome occurring in the absence of that exposure.") 
+# # gsub('<td','<td nowrap = "nowrap";', geo_html) #removes wrapping
+# 
+# datatable(tmp2, 
+#           container = geo_html, 
+#           options = list(pageLength = nrow(tmp2),
+#                          dom = 't'),
+#                          rownames = F, 
+#                          colnames = names(tmp2))
+
+##########################################################################################
+geo_html <- htmlTable(txtRound(tmp2), 
+                     rnames = F,
+                     css.cell = "padding-left: 2em; padding-right: 2em;",
+                     css.tfoot = "text-align: left; padding-left: 0; margin-left: 0;", 
+                     tfoot = "Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports < 6; CI = Confidence Interval\n\nOdds Ratio - An odds ratio (OR) is a measure of association between an exposure and an outcome. The OR represents the odds that an outcome will occur given a particular exposure, compared to the odds of the outcome occurring in the absence of that exposure.")
+
+# Enhanced CSS targeting for complete left alignment
+datatable(tmp2, 
+          container = geo_html, 
+          options = list(pageLength = nrow(tmp2),
+                        dom = 't',
+                        initComplete = JS(
+                          "function(settings, json) {",
+                          "$('.dataTables_wrapper tfoot').css({'text-align': 'left', 'padding-left': '0', 'margin-left': '0'});",
+                          "$('.dataTables_wrapper tfoot td').css({'padding-left': '0', 'margin-left': '0', 'text-align': 'left'});",
+                          "$('.dataTables_wrapper tfoot tr').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('tfoot').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('.dataTables_wrapper thead th').css('text-align', 'left');",
+                          "}"
+                        )),
+          rownames = F, 
+          colnames = names(tmp2))
+ 
+```
+
+###  Newborn Affected by Maternal Use of Alcohol (P04.3) by Public Health Region 2016-`r year(Sys.Date()) - 3`
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# Create regional summary table to display Suppression
+em3 <- p043_em2b %>%
+        dplyr::mutate(across(-Births, ~ifelse(Reports < 6, NA, .x)))
+
+
+# Adding suppression rules to table cell values less than 6
+em3_5 <- {if(sum(is.na(em3$Reports)) == 1)
+        em3 %>% mutate(rank = rank(Reports, 
+                                        ties.method = "random", 
+                                        na.last = TRUE)) %>%
+          dplyr::mutate(across(-Births, 
+                               ~ ifelse(rank == 1, NA, .x))) %>%
+          dplyr::select(-rank) else em3}
+
+# Deleting and rearranging variables
+ tmp2 <- em3_5 %>% dplyr::select(Reports, Defects, Births,
+                      `Prevalence (95% CI)`, odd_ratio, p_value) %>%
+   dplyr::rename("Odds Ratio" = odd_ratio, 
+                      "P-Value" = p_value) %>%
+   dplyr::mutate(across(.cols = c(Defects, 
+                                       `Odds Ratio`), 
+                             ~ round(.x, 1))) %>%
+   dplyr::mutate(`P-Value` = round(`P-Value`, 2)) %>%
+   dplyr::mutate(across(.cols = c("Reports":"P-Value"), 
+                             ~ ifelse(is.na(.x), '-', .x))) %>%
+        rownames_to_column(var = "Regions") %>%
+   select(-Defects) # Removing Defects column
+ 
+#  geo_html <-  htmlTable(txtRound(tmp2), 
+#                                #txt.NA = "-"), 
+#                       rnames = F,
+#                       css.cell = "padding-left: 2em; padding-right: 2em;", tfoot = "Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports  <  6; CI = Confidence
+#                       Interval \n Odds Ratio - An odds ratio (OR) is a measure of association between an exposure and an outcome. The OR represents the odds that an outcome will occur given a particular exposure, compared to the odds of the outcome occurring in the absence of that exposure.") 
+# # gsub('<td','<td nowrap = "nowrap";', geo_html) #removes wrapping
+# 
+# datatable(tmp2, 
+#           container = geo_html, 
+#           options = list(pageLength = nrow(tmp2),
+#                          dom = 't'),
+#                          rownames = F, 
+#                          colnames = names(tmp2))
+# 
+# ######################
+# 
+# geo_html <- htmlTable(txtRound(tmp2), 
+#                      rnames = F,
+#                      css.cell = "padding-left: 2em; padding-right: 2em;",
+#                      css.tfoot = "text-align: left; padding-left: 0;", # Add this line
+#                      tfoot = "Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports < 6; CI = Confidence Interval \n Odds Ratio - An odds ratio (OR) is a measure of association between an exposure and an outcome. The OR represents the odds that an outcome will occur given a particular exposure, compared to the odds of the outcome occurring in the absence of that exposure.")
+# 
+# # Add custom CSS to fix footnote alignment
+# datatable(tmp2, 
+#                 container = geo_html, 
+#                 options = list(pageLength = nrow(tmp2),
+#                               dom = 't',
+#                               initComplete = JS(
+#                                 "function(settings, json) {",
+#                                 "$('.dataTables_wrapper tfoot').css('text-align', 'left');",
+#                                 "$('.dataTables_wrapper tfoot td').css('padding-left', '0');",
+#                                 "}"
+#                               )),
+#                 rownames = F, 
+#                 colnames = names(tmp2))
+
+#########################################################################
+geo_html <- htmlTable(txtRound(tmp2), 
+                     rnames = F,
+                     css.cell = "padding-left: 2em; padding-right: 2em;",
+                     css.tfoot = "text-align: left; padding-left: 0; margin-left: 0;", 
+                     tfoot = "Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports < 6; CI = Confidence Interval\n\nOdds Ratio - An odds ratio (OR) is a measure of association between an exposure and an outcome. The OR represents the odds that an outcome will occur given a particular exposure, compared to the odds of the outcome occurring in the absence of that exposure.")
+
+# Enhanced CSS targeting for complete left alignment
+datatable(tmp2, 
+          container = geo_html, 
+          options = list(pageLength = nrow(tmp2),
+                        dom = 't',
+                        initComplete = JS(
+                          "function(settings, json) {",
+                          "$('.dataTables_wrapper tfoot').css({'text-align': 'left', 'padding-left': '0', 'margin-left': '0'});",
+                          "$('.dataTables_wrapper tfoot td').css({'padding-left': '0', 'margin-left': '0', 'text-align': 'left'});",
+                          "$('.dataTables_wrapper tfoot tr').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('tfoot').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('.dataTables_wrapper thead th').css('text-align', 'left');",
+                          "}"
+                        )),
+          rownames = F, 
+          colnames = names(tmp2))
+ 
+```
+
+### Fetal Alcohol Syndrome (Dysmorphic - Q86.0) by Public Health Region 2016-`r year(Sys.Date()) - 3`
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+# Create regional summary table to display Suppression
+em3 <- fas_em2b %>%
+        dplyr::mutate(across(-Births, ~ifelse(Reports < 6, NA, .x)))
+
+
+# Adding suppression rules to table cell values less than 6
+em3_5 <- {if(sum(is.na(em3$Reports)) == 1)
+        em3 %>% mutate(rank = rank(Reports, 
+                                        ties.method = "random", 
+                                        na.last = TRUE)) %>%
+          dplyr::mutate(across(-Births, 
+                               ~ ifelse(rank == 1, NA, .x))) %>%
+          dplyr::select(-rank) else em3}
+
+# Deleting and rearranging variables
+ tmp2 <- em3_5 %>% dplyr::select(Reports, Defects, Births,
+                      `Prevalence (95% CI)`, odd_ratio, p_value) %>%
+   dplyr::rename("Odds Ratio" = odd_ratio, 
+                      "P-Value" = p_value) %>%
+   dplyr::mutate(across(.cols = c(Defects, 
+                                       `Odds Ratio`), 
+                             ~ round(.x, 1))) %>%
+   dplyr::mutate(`P-Value` = round(`P-Value`, 2)) %>%
+   dplyr::mutate(across(.cols = c("Reports":"P-Value"), 
+                             ~ ifelse(is.na(.x), '-', .x))) %>%
+        rownames_to_column(var = "Regions") %>%
+   select(-Defects) # Removing Defects column
+ 
+#  geo_html <-  htmlTable(txtRound(tmp2), 
+#                                #txt.NA = "-"), 
+#                       rnames = F,
+#                       css.cell = "padding-left: 2em; padding-right: 2em;", tfoot = "Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports  <  6; CI = Confidence
+#                       Interval \n Odds Ratio - An odds ratio (OR) is a measure of association between an exposure and an outcome. The OR represents the odds that an outcome will occur given a particular exposure, compared to the odds of the outcome occurring in the absence of that exposure.") 
+# # gsub('<td','<td nowrap = "nowrap";', geo_html) #removes wrapping
+# 
+# datatable(tmp2, 
+#           container = geo_html, 
+#           options = list(pageLength = nrow(tmp2),
+#                          dom = 't'),
+#                          rownames = F, 
+#                          colnames = names(tmp2))
+
+
+##################################################################################
+geo_html <- htmlTable(txtRound(tmp2), 
+                     rnames = F,
+                     css.cell = "padding-left: 2em; padding-right: 2em;",
+                     css.tfoot = "text-align: left; padding-left: 0; margin-left: 0;", 
+                     tfoot = "Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports < 6; CI = Confidence Interval \n\n  Odds Ratio - An odds ratio (OR) is a measure of association between an exposure and an outcome. The OR represents the odds that an outcome will occur given a particular exposure, compared to the odds of the outcome occurring in the absence of that exposure.")
+
+# Enhanced CSS targeting for complete left alignment
+datatable(tmp2, 
+          container = geo_html, 
+          options = list(pageLength = nrow(tmp2),
+                        dom = 't',
+                        initComplete = JS(
+                          "function(settings, json) {",
+                          "$('.dataTables_wrapper tfoot').css({'text-align': 'left', 'padding-left': '0', 'margin-left': '0'});",
+                          "$('.dataTables_wrapper tfoot td').css({'padding-left': '0', 'margin-left': '0', 'text-align': 'left'});",
+                          "$('.dataTables_wrapper tfoot tr').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('tfoot').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('.dataTables_wrapper thead th').css('text-align', 'left');",
+                          "}"
+                        )),
+          rownames = F, 
+          colnames = names(tmp2))
+
+```
+  
+  
+## Demographics 
+### Health Facilities Data Reporting (HFDR) Alcohol complicating pregnancy (O99.31) diagnoses 2016-`r year(Sys.Date()) - 3` by Race 
+<center>
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+
+alcohol_get_query_b <- alcohol_get_query %>%
+  mutate(race_txt = case_when(race == 1 ~ "White",
+                              race == 2 ~ "Black",
+                              race == 3 ~ "Alaska Native/Am Indian",
+                              race == 4 ~ "Asian", 
+                              race == 5 ~ "Pacific Islander", 
+                              race == 6 ~ "Other", 
+                              race == 9 ~ "Unknown")
+  )
+
+
+birth_race_new <- birth %>% 
+  dplyr::filter(dob_yr > 2015, 
+                dob_yr < 2024) %>%
+  mutate(race_txt = dplyr::case_when(mrace_bridged == "ASIAN INDIAN" ~ "Asian",
+                                     mrace_bridged == "BRIDGED AMERICAN INDIAN/ALASKAN NATIVE" ~ "Alaska Native/Am Indian",
+                                     mrace_bridged == "AMERICAN INDIAN/ALASKAN NATIVE" ~ "Alaska Native/Am Indian",
+                                     mrace_bridged == "BLACK" ~ "Black",
+                                     mrace_bridged == "BRIDGED BLACK" ~ "Black",
+                                     mrace_bridged == "BRIDGED WHITE" ~ "White", 
+                                     mrace_bridged == "CHINESE" ~ "Asian",
+                                     mrace_bridged == "FILIPINO" ~ "Asian",
+                                     mrace_bridged == "GUAMANIAN OR CHAMORRO" ~ "Pacific Islander",
+                                     mrace_bridged == "BRIDGED ASIAN AND PACIFIC ISLANDER" ~ "Pacific Islander",
+                                     mrace_bridged == "JAPANESE" ~ "Asian",
+                                     mrace_bridged == "KOREAN" ~ "Asian",
+                                     mrace_bridged == "NATIVE HAWAIIAN" ~ "Pacific Islander",
+                                     mrace_bridged == "OTHER" ~ "Other",
+                                     mrace_bridged == "OTHER ASIAN" ~ "Asian",
+                                     mrace_bridged == "OTHER PACIFIC ISLANDER" ~ "Pacific Islander",
+                                     mrace_bridged == "SAMOAN" ~ "Pacific Islander",
+                                     mrace_bridged == "UNKNOWN" ~ "Unknown",
+                                     mrace_bridged == "VIETNAMESE" ~ "Asian",
+                                     mrace_bridged == "WHITE" ~ "White")) %>%
+  dplyr::group_by(race_txt) %>%
+  dplyr::summarise(birth_total = n()) %>%
+  arrange(desc(birth_total))
+
+tt <- alcohol_get_query_b %>%
+  dplyr::group_by(race_txt) %>%
+  dplyr::summarise(O99_race = n()) %>%
+  arrange(desc(O99_race)) %>%
+  left_join(birth_race_new, by = "race_txt") %>%
+  mutate(O99diag_rate1000 = (O99_race/birth_total)*1000)
+
+tt2 <- tt %>%
+  mutate(rate = epitools::pois.exact(O99_race, birth_total) 
+         %>% pull(3)*1000,
+         lower = epitools::pois.exact(O99_race, birth_total) 
+         %>% pull(4)*1000, 
+         upper = epitools::pois.exact(O99_race, birth_total) 
+         %>% pull(5)*1000) %>%
+  mutate_at(.vars = vars(rate, lower, upper), .funs = ~ round(., 2)) %>%
+  mutate(prev = paste(rate,paste("(",lower,","," ",upper,")",sep = ""))) %>% 
+  dplyr::rename("Race" = race_txt,
+         "Reports" = O99_race, 
+         "Births" = birth_total,
+         "Prevalence (95% CI)" = prev) %>%
+  select(Race, Reports, Births, `Prevalence (95% CI)`) 
+
+tt3 <- tt2 %>%
+  mutate(Reports = ifelse(Reports < 6, "-", Reports)) %>%
+  remove_rownames()
+
+tt3 %>%
+  htmlTable(rnames = FALSE, 
+            align = "llllll",  # "l" for left align each column
+            css.cell = "padding-left: 2em; padding-right: 2em; text-align: left;")
+```
+</center> 
+<br>
+
+### Newborn Affected by Maternal Use of Alcohol (P04.3) 2016-`r year(Sys.Date()) - 3`
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+#########
+library(plyr)
+library(dplyr)
+library(epitools)
+
+# ABDR_0721YOR_YOB <- ABDR_0721YOR_YOB %>%  
+#   dplyr::filter(ICD10 == "P043", 
+#                 age_y < 3, 
+#                 dob > "2024-12-31") %>%
+#   distinct(BC, ICD10, dob) %>%
+#   dplyr::group_by(year(dob)) %>%
+#   dplyr::summarise(total = n()) %>%
+#   mutate(sum = sum(total))
+# # 932
+# 
+# ABDR_0721YOR_YOB %>%
+#   filter(ICD10 == 'P043') %>%
+#   distinct(BC) %>% nrow()
+
+#Function to Create condition specific dataset from the ABDR and bth files
+#   DAT<-function(DCODE,ABDRdata,VSdata){
+#   cdton<-ddply(subset(ABDRdata,ICD10==DCODE & age_y<3),.(BC),summarise,FYOB=min(YOB))
+#     dta<-join(VSdata,cdton,by='BC',type='left',match='first') 
+#     dta$CD<-with(dta,ifelse(is.na(FYOB),0,1)) 
+#     dta<-dta[which(!is.na(dta$PH_REGION)),] #Resident mothers only
+# }
+# #Specify the National Condition Code to be used
+#   code<-"P043"
+# #Create a label for the condition to be used
+#   condition<-("P04.3")
+# #Specify the condition specific dataset for the condition report
+#   P_CDATA<-as.data.frame(DAT(code,ABDR_0721YOR_YOB,bth07_21)) %>%
+#     filter(dob > "2015-12-31")                                                  #
+# #Specify the years of these data
+#   datYRS<-("2016-2021")                                                         #
+# #Specify the row-names for moving averages
+#  rnames=c(#"2007-2011","2008-2012","2009-2013","2010-2014","2011-2015",
+#           #"2012-2016", "2013-2017", "2014-2018", "2015-2019", 
+#           "2016-2020", "2017-2021")                                             #
+  
+   
+### Condition Specific Report coding ####
+### Create Prevalence estimates by year
+ #  ev<-addmargins(table(P_CDATA[,"CD"]==1,year(P_CDATA[,"dob"]),useNA = "always"))
+ #  ev<-ev[-3,][,-c(length(colnames(ev))-1)] #remove the NA values from the summary table
+ #  row.names(ev)<-c("NoDefect","Defect","Total")
+ #  #cp<-subset(CPROB,rownames=="FAS" ,select=c("NatCond","ReportsSens","Confirmed","PPV","NPV"))
+ #  Rrate<-ev[2,]/ev[3,] #Reported prevalence rate by year
+ # # estimated Prevalence
+ #  temp1<- Rrate #((Rrate)*cp$PPV)+((1-(Rrate))*(1-cp$NPV)) #Bayes adjusted prevalence rate
+ #    ev1<-pois.exact(temp1*ev[3,],ev[3,]) #Obtain CI's
+ #    ev1[,3:5]<-round(ev1[,3:5]*1000,1)
+ #    ev1[,1]<-round(ev1[,1],1)
+ #    ev2<-cbind(ev[2,],ev1[,-6])
+ #    ev2<-format(round(ev2,1),trim=T,justify="centre",drop0trailing=F)
+ #    ev2$`Prevalence (95% CI)`<-paste(ev2[,4],paste("(",ev2[,5],","," ",ev2[,6],")",sep = ""))
+ #    #ev2$`Prevalence (95% CI)`<-sprintf("%1.1f (%1.1f, %1.1f)",ev2[,4],ev2[,5],ev[,6])
+ #    colnames(ev2)<-c("Reports","Defects","Births","Defect Prevalence","LowerCI","UpperCI", "Prevalence (95% CI)")
+ #    rownames(ev2)<-c(min(year(P_CDATA[,"dob"])):max(year(P_CDATA[,"dob"])),"Total")
+ #    ev2$yrs<-c(min(year(P_CDATA[,"dob"])):max(year(P_CDATA[,"dob"])),NA)
+#########
+    
+# #Specify the National Condition Code to be used
+#   code<-"P043"
+# #Specify the condition specific dataset for the condition report
+#   P_CDATA<-as.data.frame(DAT(code,ABDR_0721YOR_YOB,bth07_21)) %>%
+#     filter(dob > "2015-12-31")                                                  #
+# #Specify the years of these data
+#   datYRS<-("2016-2021")                                                         #
+# #Specify the row-names for moving averages
+#  rnames=c(#"2007-2011","2008-2012","2009-2013","2010-2014","2011-2015",
+#           #"2012-2016", "2013-2017", "2014-2018", "2015-2019", 
+#           "2016-2020", "2017-2021")  
+ 
+levels(P_CDATA$BWT_G)<-c("<2500","2500+")
+# P_CDATA$M_EDU <- factor(P_CDATA$M_EDU, levels = c("<12 years", "12 years", "+12 years"), 
+#                         labels = c("<12 years", "12 years", "+12 years"))
+P_CDATA$M_EDU <-(as.factor(P_CDATA$M_EDU))
+P_CDATA$M_EDU <- fct_relevel(P_CDATA$M_EDU, "<12 years", "12 years", "+12 years")
+# levels(P_CDATA$M_EDU)<-c("<12", "12","12+")
+levels(P_CDATA$eligible)<-c("Enrolled","Not enrolled")
+P_CDATA$smoking_status<-relevel(as.factor(P_CDATA$smoking_status),ref="Reported smoking")
+#P_CDATA$substance<-relevel(as.factor(P_CDATA$substance),ref="Yes")
+#levels(P_CDATA$DName) <- c("Not Present", "Present")
+
+COND_FCTR<-function(Code2,Factor,data){
+  ga<-addmargins(table(data[,"CD"]==1,data[,Factor],useNA = "always"))
+  ga<-ga[-3,][,-c(max(length(colnames(ga)))-1,max(length(colnames(ga))))]
+    row.names(ga)<-c("NoDefect","Defect","Total")
+  cp<-subset(CPROB,rownames==Code2,select=c("NatCond","ReportsSens","Confirmed","PPV","NPV"))
+  Rrate<-ga[2,]/ga[3,] #Reported prevalence rate by year
+  temp1<-((Rrate)*1)#+((1-(Rrate))*(1))
+    ga1<-pois.exact(temp1*ga[3,],ga[3,]) #Obtain CI's
+    ga1[,3:5]<-round(ga1[,3:5]*1000,2)
+    #ga1<-ga1[,-6]
+    row.names(ga1)<-colnames(ga) 
+  ga2<-cbind(ga[2,],ga1[,-6])
+    colnames(ga2)<-c("Reports","Defects","Births","Defect Prevalence","LowerCI","UpperCI")
+  #ga2[ga2$Reports<5,]<-NA
+  ga2 %>%
+    mutate(Defects = Reports)
+}
+
+Code2<-"P043"
+d1<-COND_FCTR(Code2,"sex",P_CDATA) %>%
+   select(-Defects) # Removing Defects column
+d2<-COND_FCTR(Code2,"BWT_G",P_CDATA) %>%
+   select(-Defects) # Removing Defects column
+d3<-COND_FCTR(Code2,"M_grp",P_CDATA) %>%
+   select(-Defects) # Removing Defects column
+d4<-COND_FCTR(Code2,"M_rce",P_CDATA) %>%
+   select(-Defects) # Removing Defects column
+d5<-COND_FCTR(Code2,"M_EDU",P_CDATA) %>%
+   select(-Defects) 
+row.names(d5) <- c("<12 years", "12 years", "+12 years")
+d6<-COND_FCTR(Code2,"marital_status",P_CDATA) %>%
+   select(-Defects) # Removing Defects column
+d8<-COND_FCTR(Code2,"smoking_status",P_CDATA) %>%
+   select(-Defects) # Removing Defects column
+d11<-COND_FCTR(Code2,"eligible",P_CDATA) %>%
+   select(-Defects) # Removing Defects column
+d12<-COND_FCTR(Code2,"DName",P_CDATA) %>%
+   select(-Defects) # Removing Defects column
+row.names(d12) <- c("Not Present", "Present")
+
+###Make the combined Demographic table
+
+t1a<-rbind(d1,d2,d3,d4,d5,d6,d8,d11,d12)
+  t2<-as.data.frame(data.matrix(t1a)) %>%
+    mutate_at(vars(`Defect Prevalence`:UpperCI), ~ round(., 1)) %>%
+     mutate_at(vars(`Defect Prevalence`:UpperCI), ~ format(.,drop0trailing = FALSE,trim = T)) %>% 
+    mutate(`Prevalence (95% CI)` = paste(`Defect Prevalence`,paste("(",LowerCI,","," ",UpperCI,")",sep = "")))
+  t3<-t2 %>% 
+    select(-LowerCI, -UpperCI)  
+  t3$grp<-rep(1:9,c(2,2,6,4,3,2,2,2,2))
+  t3$vlu<-c(1:25)
+  t3$num <- ave(t3$Reports, t3$grp, FUN = seq_along)
+#Suppression rules
+  t4<-merge(t3,t3[t3$Reports<6,c("grp","Reports")],by=c("grp"),all.x=T)
+  t5<-t4[!duplicated(t4[,1:7]),]
+   t5<-ddply(t5,.(grp),transform,count = length(grp))
+    t5<-t5[order(t5$vlu),]
+   rownames(t5)<-rownames(t3)
+    t5[is.na(t5$Reports.y),"Reports.y"]<-10
+      t5[t5$Reports.x <6 & t5$Reports.y<6,c(5:8)]<-0
+      t5$sup1<-with(t5,ifelse(`Prevalence (95% CI)` == '0',1,0))
+      t5<-ddply(t5,.(grp),transform,sup2 = sum(sup1))
+      rownames(t5)<-rownames(t3)
+      t5$dif<-t5$count-t5$sup2
+      t5 <- t5 %>% dplyr::group_by(grp) %>%
+        dplyr::mutate(rank = rank(Reports.x, ties.method = "random"))
+      t5$sup<-ifelse(t5$sup1==0 & t5$count==2 & t5$dif < 2,0,
+              ifelse(t5$sup1==0 & t5$count==2 & t5$dif == 2,1,
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 5 &
+                       t5$rank <= 2.5, 0, 
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 4,1,
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 3,1,
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 2,1,      
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 1,1,   
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 6,1,
+                  ifelse(t5$sup1==0 & t5$count==4 & t5$dif == 3 & 
+                           (t5$rank == 1 | t5$rank == 2), 0,
+                  ifelse(t5$sup1==0 & t5$count==4 & t5$dif == 2,1,
+                  ifelse(t5$sup1==0 & t5$count==4 & t5$dif == 1,1,
+                  ifelse(t5$sup1==0 & t5$count==4 & t5$dif == 4,1,
+                    ifelse(t5$sup1==0 & t5$count==3 & t5$dif ==2,0,
+                    ifelse(t5$sup1==0 & t5$count==3 & t5$dif ==1,1,
+                    ifelse(t5$sup1==0 & t5$count==3 & t5$dif ==3,1,9)
+                    ))))))))))))))                                              
+     t5 <- t5 %>% mutate_at(.vars = c(2:4, 6:14), .funs = as.numeric)           
+           t5[t5$Reports.x <6 & t5$Reports.y<6,c(1:2,6:8)]<- 0 
+           t5[(t5$sup==0),c(1,2)]<- 0
+            t5 <- t5 %>% mutate_all(.funs = as.character) %>%
+              ungroup()
+            t5 <- t5 %>% mutate_at(
+                              .vars = 5, 
+                              funs(ifelse(grp == "0" & Reports.x == "0", 
+                                          "0", .)))
+            t5 <- t5 %>% mutate_at( 
+                             .vars = c(2,3,5:14),
+                             funs(ifelse(. == "0", "-", .)))
+   # t5[t5 == "0"] <- '-'                                                       
+    t6<-t5[-c(1,4,6:14)]                                                          
+    rownames(t6)<-rownames(t3)                                                  
+      colnames(t6)[1]<-"Reports"
+      # colnames(t6)[5]<-"Prevalence (95% CI)" 
+      
+   #    t6s <- t6 %>%
+   # select(-Defects) # Removing Defects column
+
+tmp1<-htmlTable(t6,
+                rgroup=c("Sex","Birth weight (grams)","Maternal age","Maternal race",
+                         "Maternal education (years)","Marital status",
+                         "Maternal smoking use",
+                         "Medicaid (mother or child)",
+                         "Father on birth certificate"),
+                n.rgroup=c(2,2,6,4,3,2,2,2,2),
+                css.cell="padding-left: 2em; padding-right: 2em;",
+                tfoot=txtMergeLines("Notes: Prevalence reported per 1,000 live births; Data suppressed for # of reports  < 6; 95% CI = 95% Confidence Interval"))
+gsub('<td','<td nowrap="nowrap";',tmp1) #removes wrapping
+ 
+```
+
+<br>
+
+### Fetal Alcohol Syndrome (Dysmorphic - Q86.0) 2016-`r year(Sys.Date()) - 3`
+```{r} 
+#| warning: false 
+#| message: false 
+#| echo: false
+
+library(dplyr)
+
+library(plyr)
+library(dplyr)
+library(epitools)
+
+#Function to Create condition specific dataset from the ABDR and bth files
+  DAT<-function(DCODE,ABDRdata,VSdata){
+  cdton<-ddply(subset(ABDRdata,ICD10==DCODE & age_y<3),.(BC),summarise,FYOB=min(YOB))
+    dta<-join(VSdata,cdton,by='BC',type='left',match='first') 
+    dta$CD<-with(dta,ifelse(is.na(FYOB),0,1)) 
+    dta<-dta[which(!is.na(dta$PH_REGION)),] #Resident mothers only
+}
+#Specify the National Condition Code to be used
+  code<-"Q860"
+#Create a label for the condition to be used
+  condition<-("Q86.0")
+#Specify the condition specific dataset for the condition report
+  fas_CDATA<-as.data.frame(DAT(code,ABDR_0721YOR_YOB,bth07_21)) %>%
+    filter(dob > "2015-12-31")                                                  #
+#Specify the years of these data
+  datYRS<-(paste0("2016-", year(Sys.Date()) - 3))                               #
+#Specify the row-names for moving averages
+ rnames=c(#"2007-2011","2008-2012","2009-2013","2010-2014","2011-2015",
+          #"2012-2016", "2013-2017", "2014-2018", "2015-2019", 
+          "2016-2020", "2017-2021", "2018-2022")                                #
+  
+   
+### Condition Specific Report coding ####
+### Create Prevalence estimates by year
+  ev<-addmargins(table(fas_CDATA[,"CD"]==1,year(fas_CDATA[,"dob"]),useNA = "always"))
+  ev<-ev[-3,][,-c(length(colnames(ev))-1)] #remove the NA values from the summary table
+  row.names(ev)<-c("NoDefect","Defect","Total")
+  cp<-subset(CPROB,rownames=="FAS" ,select=c("NatCond","ReportsSens","Confirmed","PPV","NPV"))
+  Rrate<-ev[2,]/ev[3,] #Reported prevalence rate by year
+ # estimated Prevalence
+  temp1<- Rrate #((Rrate)*cp$PPV)+((1-(Rrate))*(1-cp$NPV)) #Bayes adjusted prevalence rate
+    ev1<-pois.exact(temp1*ev[3,],ev[3,]) #Obtain CI's
+    ev1[,3:5]<-round(ev1[,3:5]*1000,1)
+    ev1[,1]<-round(ev1[,1],1)
+    ev2<-cbind(ev[2,],ev1[,-6])
+    ev2<-format(round(ev2,1),trim=T,justify="centre",drop0trailing=F)
+    ev2$`Prevalence (95% CI)`<-paste(ev2[,4],paste("(",ev2[,5],","," ",ev2[,6],")",sep = ""))
+    #ev2$`Prevalence (95% CI)`<-sprintf("%1.1f (%1.1f, %1.1f)",ev2[,4],ev2[,5],ev[,6])
+    colnames(ev2)<-c("Reports","Defects","Births","Defect Prevalence","LowerCI","UpperCI", "Prevalence (95% CI)")
+    rownames(ev2)<-c(min(year(fas_CDATA[,"dob"])):max(year(fas_CDATA[,"dob"])),"Total")
+    ev2$yrs<-c(min(year(fas_CDATA[,"dob"])):max(year(fas_CDATA[,"dob"])),NA)
+#########
+    
+#Specify the National Condition Code to be used
+  code<-"Q860"
+#Specify the condition specific dataset for the condition report
+  fas_CDATA<-as.data.frame(DAT(code,ABDR_0721YOR_YOB,bth07_21)) %>%
+    filter(dob > "2015-12-31")                                                  #
+#Specify the years of these data
+  datYRS<-(paste0("2016-", year(Sys.Date()) - 3))                               #
+#Specify the row-names for moving averages
+ rnames=c(#"2007-2011","2008-2012","2009-2013","2010-2014","2011-2015",
+          #"2012-2016", "2013-2017", "2014-2018", "2015-2019", 
+          "2016-2020", "2017-2021", "2018-2022")  
+
+levels(fas_CDATA$BWT_G)<-c("<2500","2500+")
+# fas_CDATA$M_EDU<-(as.factor(fas_CDATA$M_EDU))
+fas_CDATA$M_EDU <-(as.factor(fas_CDATA$M_EDU))
+fas_CDATA$M_EDU <- fct_relevel(fas_CDATA$M_EDU, "<12 years", "12 years", "+12 years")
+levels(fas_CDATA$eligible)<-c("Enrolled","Not enrolled")
+fas_CDATA$smoking_status<-relevel(as.factor(fas_CDATA$smoking_status),ref="Reported smoking")
+#fas_CDATA$substance<-relevel(as.factor(fas_CDATA$substance),ref="Yes")
+
+COND_FCTR<-function(Code2,Factor,data){
+  ga<-addmargins(table(data[,"CD"]==1,data[,Factor],useNA = "always"))
+  ga<-ga[-3,][,-c(max(length(colnames(ga)))-1,max(length(colnames(ga))))]
+    row.names(ga)<-c("NoDefect","Defect","Total")
+  cp<-subset(CPROB,rownames==Code2,select=c("NatCond","ReportsSens","Confirmed","PPV","NPV"))
+  Rrate<-ga[2,]/ga[3,] #Reported prevalence rate by year
+  temp1<- Rrate #((Rrate)*cp$PPV)+((1-(Rrate))*(1-cp$NPV)) #Bayes adjusted prevalence rate           # Removing PPV and NPV 
+    ga1<-pois.exact(temp1*ga[3,],ga[3,]) #Obtain CI's
+    ga1[,3:5]<-round(ga1[,3:5]*1000,2)
+    #ga1<-ga1[,-6]
+    row.names(ga1)<-colnames(ga) 
+  ga2<-cbind(ga[2,],ga1[,-6])
+    colnames(ga2)<-c("Reports","Defects","Births","Defect Prevalence","LowerCI","UpperCI")
+  #ga2[ga2$Reports<5,]<-NA
+  ga2
+}
+Code2<-"FAS"
+d1<-COND_FCTR(Code2,"sex",fas_CDATA) %>%
+   select(-Defects) 
+d2<-COND_FCTR(Code2,"BWT_G",fas_CDATA) %>%
+   select(-Defects) 
+d3<-COND_FCTR(Code2,"M_grp",fas_CDATA)%>%
+   select(-Defects) 
+d4<-COND_FCTR(Code2,"M_rce",fas_CDATA)%>%
+   select(-Defects) 
+d5<-COND_FCTR(Code2,"M_EDU",fas_CDATA) %>%
+   select(-Defects) 
+row.names(d5) <- c("<12 years", "12 years", "+12 years")
+d6<-COND_FCTR(Code2,"marital_status",fas_CDATA) %>%
+   select(-Defects) 
+d8<-COND_FCTR(Code2,"smoking_status",fas_CDATA) %>%
+   select(-Defects) 
+d11<-COND_FCTR(Code2,"eligible",fas_CDATA) %>%
+   select(-Defects) 
+d12<-COND_FCTR(Code2,"DName",fas_CDATA) %>%
+   select(-Defects) 
+row.names(d12) <- c("Not Present", "Present")
+
+###Make the combined Demographic table
+
+t1a<-rbind(d1,d2,d3,d4,d5,d6,d8,d11,d12)
+  t2<-as.data.frame(data.matrix(t1a)) %>%
+    mutate_at(vars(`Defect Prevalence`:UpperCI), ~ round(., 1)) %>%
+     mutate_at(vars(`Defect Prevalence`:UpperCI), ~ format(.,drop0trailing = FALSE,trim = T)) %>% 
+    mutate(`Prevalence (95% CI)` = paste(`Defect Prevalence`,paste("(",LowerCI,","," ",UpperCI,")",sep = "")))
+  t3<-t2 %>% 
+    select(-LowerCI, -UpperCI)  
+  t3$grp<-rep(1:9,c(2,2,6,4,3,2,2,2,2))
+  t3$vlu<-c(1:25)
+  t3$num <- ave(t3$Reports, t3$grp, FUN = seq_along)
+#Suppression rules
+  t4<-merge(t3,t3[t3$Reports<6,c("grp","Reports")],by=c("grp"),all.x=T)
+  t5<-t4[!duplicated(t4[,1:7]),]
+   t5<-ddply(t5,.(grp),transform,count = length(grp))
+    t5<-t5[order(t5$vlu),]
+   rownames(t5)<-rownames(t3)
+    t5[is.na(t5$Reports.y),"Reports.y"]<-10
+      t5[t5$Reports.x <6 & t5$Reports.y<6,c(5:8)]<-0
+      t5$sup1<-with(t5,ifelse(`Prevalence (95% CI)` == '0',1,0))
+      t5<-ddply(t5,.(grp),transform,sup2 = sum(sup1))
+      rownames(t5)<-rownames(t3)
+      t5$dif<-t5$count-t5$sup2
+      t5 <- t5 %>% dplyr::group_by(grp) %>%
+        dplyr::mutate(rank = rank(Reports.x, ties.method = "random"))
+      t5$sup<-ifelse(t5$sup1==0 & t5$count==2 & t5$dif < 2,0,
+              ifelse(t5$sup1==0 & t5$count==2 & t5$dif == 2,1,
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 5 &
+                       t5$rank <= 2.5, 0, 
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 4,1,
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 3,1,
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 2,1,      
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 1,1,   
+                ifelse(t5$sup1==0 & t5$count==6 & t5$dif == 6,1,
+                  ifelse(t5$sup1==0 & t5$count==4 & t5$dif == 3 & 
+                           (t5$rank == 1 | t5$rank == 2), 0,
+                  ifelse(t5$sup1==0 & t5$count==4 & t5$dif == 2,1,
+                  ifelse(t5$sup1==0 & t5$count==4 & t5$dif == 1,1,
+                  ifelse(t5$sup1==0 & t5$count==4 & t5$dif == 4,1,
+                    ifelse(t5$sup1==0 & t5$count==3 & t5$dif ==2,0,
+                    ifelse(t5$sup1==0 & t5$count==3 & t5$dif ==1,1,
+                    ifelse(t5$sup1==0 & t5$count==3 & t5$dif ==3,1,9)
+                    ))))))))))))))                                              
+     t5 <- t5 %>% mutate_at(.vars = c(2:4, 6:14), .funs = as.numeric)           
+           t5[t5$Reports.x <6 & t5$Reports.y<6,c(1:2,6:8)]<- 0 
+           t5[(t5$sup==0),c(1,2)]<- 0
+            t5 <- t5 %>% mutate_all(.funs = as.character) %>%
+              ungroup()
+                t5 <- t5 %>% mutate_at(
+                              .vars = 5, 
+                              funs(ifelse(grp == "0" & Reports.x == "0", 
+                                          "0", .)))
+            t5 <- t5 %>% mutate_at( 
+                             .vars = c(2,3,5:14),
+                             funs(ifelse(. == "0", "-", .)))
+   # t5[t5 == "0"] <- '-'                                                       
+     t6<-t5[-c(1,4,6:14)]                                                          
+    rownames(t6)<-rownames(t3)                                                  
+      colnames(t6)[1]<-"Reports"
+      # colnames(t6)[5]<-"Prevalence (95% CI)" 
+      
+   #    t6s <- t6 %>%
+   # select(-Defects) # Removing Defects column 
+tmp1<-htmlTable(t6,
+                rgroup=c("Sex","Birth weight (grams)","Maternal age","Maternal race",
+                         "Maternal education (years)","Marital status",
+                         "Maternal smoking use",
+                         "Medicaid (mother or child)",
+                         "Father on birth certificate"),
+                n.rgroup=c(2,2,6,4,3,2,2,2,2),
+                css.cell="padding-left: 2em; padding-right: 2em;",
+                tfoot=txtMergeLines("Notes: Prevalence reported per 1,000 live births; Data suppressed for # of reports  < 6; 95% CI = 95% Confidence Interval"))
+gsub('<td','<td nowrap="nowrap";',tmp1) #removes wrapping
+```
+
+### P-value Estimate  
+To evaluate the trend over time and account for under/over-dispersion we constructed a quasi-Poisson regression model. This model assumes the variance is a linear function of the mean and models the estimated number of annual defects by year with a natural log (ln) offset of the annual births. P-values < 0.05 are considered significant, which indicates that the predicted slope is significantly different from a slope of zero.   
+
+
+### Data Suppression
+For region and demographic data tables, values are suppressed based on the number of reports received during the observation period. Counts less than 6 are suppressed (as indicated by '-' in the table). For regions or demographics with only one cell count suppressed a second is suppressed to eliminate the ability to back-calculate the estimate.   
+
+## References
+[[1]](https://www.webmd.com/baby/fetal-alcohol-syndrome) WedbMD - Fetal Alcohol Syndrome: Signs and Symptoms, Available from: https://www.webmd.com/baby/fetal-alcohol-syndrome Retrieved 16 April 2025 
+
+[[2]](https://my.clevelandclinic.org/health/diseases/15677-fetal-alcohol-syndrome) Cleveland Clinic: Fetal Alcohol Syndrome Available from: https://my.clevelandclinic.org/health/diseases/15677-fetal-alcohol-syndrome Retrieved 16 April 2025 
+
+[[3]](https://www.mayoclinic.org/diseases-conditions/fetal-alcohol-syndrome/symptoms-causes/syc-20352901) Mayo Clinic: Fetal alcohol syndrome - Symptoms & causes Available from: https://www.mayoclinic.org/diseases-conditions/fetal-alcohol-syndrome/symptoms-causes/syc-20352901 Retrieved 16 April 2025
+
+[[4]](https://www.aacap.org/AACAP/Families_and_Youth/Facts_for_Families/FFF-Guide/Fetal_Alcohol_Syndrome-134.aspx) The American Academy of Child and Adolescent Psychiatry - Fetal Alcohol Syndrome (FAS) No. 134; October 2023  Available from: https://www.aacap.org/AACAP/Families_and_Youth/Facts_for_Families/FFF-Guide/Fetal_Alcohol_Syndrome-134.aspx Retrieved 16 April 2025
+
+[[5]](https://www.mayoclinic.org/diseases-conditions/fetal-alcohol-syndrome/diagnosis-treatment/drc-20352907) Mayo Clinic: Fetal alcohol syndrome - Diagnosis & Treatment Available from: https://www.mayoclinic.org/diseases-conditions/fetal-alcohol-syndrome/diagnosis-treatment/drc-20352907 Retrieved 16 April 2025
+
+[[6]](https://medlineplus.gov/fetalalcoholspectrumdisorders.html) National Library of Medicine MedlinePlus - Fetal Alcohol Spectrum Disorders Available from: https://medlineplus.gov/fetalalcoholspectrumdisorders.html Retrieved 16 April 2025
+
+[[7]](https://onlinelibrary.wiley.com/doi/10.1002/bdra.23245) Moberg DP, Bowser J, Burd L, Elliott AJ, Punyko J, Wilton G; Fetal Alcohol Syndrome Surveillance Program-FASSLink Team. Fetal alcohol syndrome surveillance: age of syndrome manifestation in case ascertainment. Birth Defects Res A Clin Mol Teratol. 2014 Sep;100(9):663-9. doi: 10.1002/bdra.23245. Epub 2014 Apr 16. PMID: 24737611; PMCID: PMC4169739. Available from: https://onlinelibrary.wiley.com/doi/10.1002/bdra.23245 First published: 16 April 2014
+
+[[8]](https://beta.cdc.gov/mmwr/preview/mmwrhtml/00050021.htm) Centers for Disease Control and Prevention - Surveillance for Fetal Alcohol Syndrome Using Multiple Sources -- Atlanta, Georgia, 1981-1989 MMWR November 28, 1997 / 46(47);1118-1120 Available from: https://beta.cdc.gov/mmwr/preview/mmwrhtml/00050021.htm Retrieved 16 April 2025
+
+[[9]](https://onlinelibrary.wiley.com/doi/10.1002/bdra.23335) O'Leary LA, Ortiz L, Montgomery A, Fox DJ, Cunniff C, Ruttenber M, Breen A, Pettygrove S, Klumb D, Druschel C, Frías JL, Robinson LK, Bertrand J, Ferrara K, Kelly M, Gilboa SM, Meaney FJ; FASSNetII. Methods for surveillance of fetal alcohol syndrome: The Fetal Alcohol Syndrome Surveillance Network II (FASSNetII) - Arizona, Colorado, New York, 2009 - 2014. Birth Defects Res A Clin Mol Teratol. 2015 Mar;103(3):196-202. doi: 10.1002/bdra.23335. Epub 2015 Mar 12. PMID: 25761572; PMCID: PMC4484746. Available from: https://onlinelibrary.wiley.com/doi/10.1002/bdra.23335 First published: 12 March 2015
+
+## Resources 
+[Mayo Clinic](https://www.mayoclinic.org/diseases-conditions/fetal-alcohol-syndrome/symptoms-causes/syc-20352901) 
+
+[The Cleveland Clinic](https://my.clevelandclinic.org/health/diseases/15677-fetal-alcohol-syndrome)
+
+[National Library of Medicine MedlinePlus](https://medlineplus.gov/fetalalcoholspectrumdisorders.html) 
+
+## Authorship
+Maternal and Child Health (MCH) senior epidemiologist Dr. Jared Parrish, PhD conceived of the presented analysis. Alaska Birth Defects Registry program manager and epidemiologist Chris Barnett, MS MPH and Dr. Jared Parrish, PhD developed the theory and performed the computations. Research analyst Brittany Corbin managed data collection and storage. All authors discussed the results and contributed to the final report.
+
+## Suggested Citation
+State of Alaska Department of Health, Division of Public Health, Section of Women's, Children's, and Family Health. Alaska Birth Defects Registry Condition Report: Prenatal Alcohol Exposure Report, Alaska, 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`. Updated `r format(Sys.time(), '%B %d, %Y')`. Available at: http://rpubs.com/AK_ABDR/prenatal_alcohol_report.
+
+## Contact    
+Alaska Birth Defects Registry (ABDR)  
+3601 C Street, Suite 358  
+Anchorage, AK 99503  
+(907) 269-3400 phone  
+(907) 754-3529 fax  
+hssbirthdefreg@alaska.gov
+
+
+*Updated: `r format(Sys.time(), '%B %d, %Y')`*  
+*Code source:* ```R:\ABDR\Website\ABDR_Quarto_Website\prenatal_alcohol_report.qmd```   
+
+&nbsp;
+
+<center>
+![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png){width=200px height=200px}

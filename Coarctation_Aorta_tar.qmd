@@ -312,8 +312,8 @@ hssbirthdefreg@alaska.gov
 
 &nbsp;
 
- <center>
-![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](R:/ABDR/Website/ABDR_Quarto_Website/img/DOH%20Beveled.png) 
+<center>
+![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH%20Beveled.png)
 **State of Alaska, Department of Health, Section of Women's, Children's and Family Health**
 
 </center>  

@@ -14,40 +14,43 @@ title: "Reports"
 * [Common truncus](Truncus_Arteriosus_tar.qmd)
 * [Double outlet right ventricle](DORV_tar.qmd)
 * [Ebstein anomaly](Ebstein_Anomaly_tar.qmd)
-* [Hypoplastic left heart syndrome](https://rpubs.com/AK_ABDR/1045456)
-* [Interrupted aortic arch](https://rpubs.com/AK_ABDR/1043713)
-* [Pulmonary valve atresia and stenosis](https://rpubs.com/AK_ABDR/1045021)
-* [Single ventricle](https://rpubs.com/AK_ABDR/1045023)
-* [Teratology of fallot](https://rpubs.com/AK_ABDR/1045064)
-* [Total anomalous pulmonary venous Return](https://rpubs.com/AK_ABDR/1045027)
-* [Transposition of the great arteries](https://rpubs.com/AK_ABDR/1045028)
-* [Tricuspid valve atresia and stenosis](https://rpubs.com/AK_ABDR/1045068)
+* [Hypoplastic left heart syndrome](HLHS_tar.qmd)
+* [Interrupted aortic arch](IAA_tar.qmd)
+* [Pulmonary valve atresia and stenosis](Pulmonary_Atresia_tar.qmd)
+* [Single ventricle](SingleVentricle_tar.qmd)
+* [Teratology of fallot](TOF_tar.qmd)
+* [Total anomalous pulmonary venous Return](TAPVR_tar.qmd)
+* [Transposition of the great arteries](TGA_tar.qmd)
+* [Tricuspid valve atresia and stenosis](tricuspid_atresia_tar.qmd)
 
 ### Central Nervous System
-* [Anencephaly](https://rpubs.com/AK_ABDR/1043560)
 * [Anencephaly](Anencephaly_tar.qmd)
-* [Spina bifida without anencephalus](https://rpubs.com/AK_ABDR/1045024)
-* [Encephalocele](https://rpubs.com/AK_ABDR/1043684)
+* [Spina bifida without anencephalus](SpinaBifida_tar.qmd)
+* [Encephalocele](Encephalocele_tar.qmd)
 
 ### Chromosomal
-* [Trisomy 13](https://rpubs.com/AK_ABDR/1045072)
-* [Trisomy 18](https://rpubs.com/AK_ABDR/1045076)
-* [Trisomy 21 (Down syndrome)](https://rpubs.com/AK_ABDR/1045078)
+* [Trisomy 13](Trisomy13_tar.qmd)
+* [Trisomy 18](Trisomy18_tar.qmd)
+* [Trisomy 21 (Down syndrome)](Trisomy21_tar.qmd)
 
 ### Eye
-* [Anophthalmia/Microphthalmia](https://rpubs.com/AK_ABDR/anoph)
+* [Anophthalmia/Microphthalmia](anoph_tar.qmd)
 
 ### Genitourinary
-* [Hypospadias](https://rpubs.com/AK_ABDR/1043711)
+* [Hypospadias](Hypospadias_tar.qmd)
 
 ### Musculoskeletal
-* [Clubfoot](https://rpubs.com/AK_ABDR/1043609)
-* [Craniosynostosis](https://rpubs.com/AK_ABDR/CR_2007-2021)
-* [Diaphragmatic hernia](https://rpubs.com/AK_ABDR/1043627)
-* [Gastroschisis](https://rpubs.com/AK_ABDR/1043706)
-* [Limb Deficiencies](https://rpubs.com/AK_ABDR/limb)
-* [Omphalocele](https://rpubs.com/AK_ABDR/1045016)
+* [Clubfoot](club_foot_tar.qmd)
+* [Craniosynostosis](Craniosynostosis_tar.qmd)
+* [Diaphragmatic hernia](DiaphragmaticHernia_tar.qmd)
+* [Gastroschisis](Gastroschisis_tar.qmd)
+* [Limb Deficiencies](limb_tar.qmd)
+* [Omphalocele](Omphalocele_tar.qmd)
 
 ### Orofacial
-* [Cleft Lip](https://rpubs.com/AK_ABDR/1043611)
-* [Cleft Palate](https://rpubs.com/AK_ABDR/1043623)
+* [Cleft Lip](cleft_lip_tar.qmd)
+* [Cleft Palate](cleft_Palate_tar.qmd)
+
+### Other Syndromes
+* [Fetal Alcohol Syndrome (FAS)](prenatal_alcohol_reportv3.qmd)
+* [Neonatal Abstinence Syndrome (NAS)](nas_tar.qmd)

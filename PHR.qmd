@@ -1,0 +1,55 @@
+---
+title: "Public Health Regional Breakdown"
+format:
+  html:
+    toc: true
+    toc-float: true
+    code-fold: false
+---
+
+Alaska Public Health Regions are based upon the Alaska Department of Labor and Workforce Development’s 6 Economic Regions: Anchorage and Mat-Su, Gulf Coast, Interior, Northern, Southeast, and Southwest. For public health purposes, the Matanuska-Susitna Borough is reported separately from the Municipality of Anchorage.
+
+## Alaska Public Health Regions Boroughs/Census Areas
+
+### Anchorage
+* Muncipality of Anchorage (02020)
+
+### Gulf Coast Region
+* Kenai Peninsula Borough (02122)
+* Kodiak Island Borough (02150)
+* Valdez-Cordova Census Area (02261)
+
+### Interior Region
+* Denali Borough (02068)
+* Fairbanks North Star Borough (02090)
+* Southeast Fairbanks Census Area (02240)
+* Yukon-Koyukuk Census Area (02290)
+
+### Mat-Su
+* Matanuska-Susitna Borough (02170)
+
+### Northern Region
+* Nome Census Area (02180)
+* North Slope Borough (02185)
+* Northwest Arctic Borough (02188)
+
+### Southeast Region
+* Haines Borough (02100)
+* Hoonah-Angoon Census Area (02105)
+* Juneau City and Borough (02110)
+* Ketchikan Gateway Borough (02130)
+* Petersburg Borough (02195)
+* Prince of Wales-Hyder Census Area (02198)
+* Sitka City and Borough (02220)
+* Skagway Municipality (02230)
+* Wrangell City and Borough (02275)
+* Yakutat City and Borough (02282)
+
+### Southwest Region
+* Aleutians East Borough (02013)
+* Aleutians West Census Area (02016)
+* Bethel Census Area (02050)
+* Bristol Bay Borough (02060)
+* Dillingham Census Area (02070)
+* Kusilvak Census Area (02158)
+* Lake and Peninsula Borough (02164)
