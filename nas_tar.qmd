@@ -1,6 +1,5 @@
 ---
 title: "Neonatal Abstinence Syndrome (NAS) 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
-author: "Alaska Birth Defect Registy"
 title-block-banner: ~img/ABDR_csr2.png
 format:
   html:
@@ -116,9 +115,9 @@ Prevalence per 10,000 births of `r condition[1]` during `r datYRS[1]` by three-y
 library(ggplot2)
 library(plotly)
 
- trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_NAS.rds")
+ trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_nma_NAS.rds")
 
- trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_NAS.rds")
+ trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_nma_NAS.rds")
 
  # trend[["data"]] <- trend[["data"]][9:11, ]
 
@@ -287,7 +286,7 @@ $$p(defect) \approx [p(report)\cdot PPV]+[p(\overline{report})\cdot (1-NPV)]$$
 
 Defect prevalence estimates are a more accurate estimation of the actual diagnosed prevalence of birth defects compared to the reported prevalence estimates in Alaska. ABDR obtains reports from medical providers using International Classification of Disease (ICD) codes that are extracted from individual systems which when aggregated may not reflect true diagnostics. Caution should be used when interpreting and comparing the reported prevalence estimates with national estimates.  
 
-See [Data analysis methods](https://alaskabirthdefectsregistry.github.io/ABDR_Quarto_Website/Data_Methods.html) for more information.
+See [Data analysis methods](Data Analysis Methods.qmd) for more information.
 
 ### P-value Estimate  
 To evaluate the trend over time and account for under/over-dispersion we constructed a quasi-Poisson regression model. This model assumes the variance is a linear function of the mean and models the estimated number of annual defects by year with a natural log (ln) offset of the annual births. P-values < 0.05 are considered significant, which indicates that the predicted slope is significantly different from a slope of zero.   

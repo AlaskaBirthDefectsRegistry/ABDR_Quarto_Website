@@ -1,6 +1,5 @@
 ---
 title: "Transportation of the Great Arteries 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
-author: "Alaska Birth Defect Registy"
 title-block-banner: ~img/ABDR_csr2.png
 format:
   html:
@@ -8,6 +7,7 @@ format:
     toc-float: true
     code-fold: true
 ---
+
 
 
 <style type="text/css">
@@ -121,9 +121,9 @@ Prevalence per 10,000 births of `r condition[1]` during `r datYRS[1]` by five-ye
 library(ggplot2)
 library(plotly)
 
- trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_TGA.rds")
+ trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_nma_TGA.rds")
   
- trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_TGA.rds")
+ trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_nma_TGA.rds")
   
  ggplotly(trend, tooltip = c("text")) %>%
   layout(legend = list(orientation = "h", x = 0.4, y = -0.2))
@@ -164,7 +164,7 @@ p_val
    
 </center>   
 ### Regional Distribution
-Distribution of `r condition[1]` in Alaska by Public Health Region of maternal residence at the time of birth. [A description of regional breakdowns can be found here](http://dhss.alaska.gov/dph/InfoCenter/Pages/ia/brfss/geography.aspx). Data suppressed for # of reports  < 6.   
+Distribution of `r condition[1]` in Alaska by Public Health Region of maternal residence at the time of birth. [A description of regional breakdowns can be found here](PHR.qmd). Data suppressed for # of reports  < 6.   
 <center>
 ```{r} 
 #| warning: false 
@@ -327,7 +327,7 @@ hssbirthdefreg@alaska.gov
 &nbsp;
 
 <center>
-![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH%20Beveled.png)
+![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png){width=200px height=200px}
 </center>  
 
   

@@ -117,9 +117,9 @@ Prevalence per 10,000 births of `r condition[1]` during `r datYRS[1]` by five-ye
 library(ggplot2)
 library(plotly)
 
- trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_IAA.rds")
+ trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_nma_IAA.rds")
   
- trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_IAA.rds")
+ trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_nma_IAA.rds")
   
  ggplotly(trend, tooltip = c("text")) %>%
   layout(legend = list(orientation = "h", x = 0.4, y = -0.2))
@@ -160,7 +160,7 @@ p_val
    
 </center>   
 ### Regional Distribution
-Distribution of `r condition[1]` in Alaska by Public Health Region of maternal residence at the time of birth. [A description of regional breakdowns can be found here](http://dhss.alaska.gov/dph/InfoCenter/Pages/ia/brfss/geography.aspx). Data suppressed for # of reports  < 6.   
+Distribution of `r condition[1]` in Alaska by Public Health Region of maternal residence at the time of birth. [A description of regional breakdowns can be found here](PHR.qmd). Data suppressed for # of reports  < 6.   
 <center>
 ```{r} 
 #| warning: false 
@@ -270,7 +270,7 @@ $$p(defect) \approx [p(report)\cdot PPV]+[p(\overline{report})\cdot (1-NPV)]$$
 
 Defect prevalence estimates are a more accurate estimation of the actual diagnosed prevalance of birth defects compared to the reported prevalance estimates in Alaska. ABDR obtains reports from medical providers using International Classification of Disease (ICD) codes that are extracted from individual systems which when aggregated may not reflect true diagnostics. Caution should be used when interpreting and comparing the reported prevalence estimates with national estimates.  
 
-See [Data analysis methods](http://dhss.alaska.gov/dph/wcfh/Documents/mchepi/abdr/Data%20Analysis%20Methods_v2.1.pdf) for more information.
+See [Data analysis methods](Data Analysis Methods.qmd) for more information.
 
 ### P-value estimate  
 To evaluate the trend over time and account for under/over-dispersion we constructed a quasi-Poisson regression model. This model assumes the variance is a linear function of the mean and models the estimated number of annual defects by year with a natural log (ln) offset of the annual births. P-values < 0.05 are considered significant, which indicates that the predicted slope is significantly different from a slope of zero.   
@@ -313,7 +313,7 @@ hssbirthdefreg@alaska.gov
 &nbsp;
 
 <center>
-![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH%20Beveled.png) 
+![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png){width=200px height=200px}
 </center>  
 
   

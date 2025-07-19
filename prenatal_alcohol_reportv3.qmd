@@ -1,6 +1,5 @@
 ---
 title: "Prenatal Alcohol Exposure 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
-author: "Alaska Birth Defect Registy"
 title-block-banner: ~img/ABDR_csr2.png
 format:
   html:
@@ -109,6 +108,7 @@ library(sf)
 #| warning: false 
 #| message: false 
 #| echo: false
+#| output: false
 
 # Creating duckdb database connection 
 con <- DBI::dbConnect(duckdb())
@@ -186,7 +186,7 @@ alcohol_get_query <- dbGetQuery(con, alcohol_query)
 ## ABDR Data 
 # Obtaining ABDR data 2016-2024
 #load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_BTH_0721RSRCH_L3.Rda")
-load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_0721YOR_YOB.Rda")
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2022\\ABDR_0722YOR_YOB.Rda")
 
 ### Microsoft Access connection ####
 # library(RODBC)
@@ -215,14 +215,14 @@ load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_0721YOR_YOB.
 ## Prenatal Alcohol Exposure Diagnosis Codes
 * **ICD-10-CM Diagnosis Code O99.31** - The ICD-10 code "*O99.31*" refers to a medical event where alcohol use results in a complication during pregnancy, childbirth, or puerperium (the period of about six weeks after childbirth during which the mother's reproductive organs return to their original nonpregnant condition)
 * **ICD-10-CM Diagnosis Code P04.3** - The ICD-10 code "*P04.3*" refers to a newborn affected by maternal use of alcohol, meaning a baby showing signs of complications due to the mother's alcohol consumption during pregnancy; essentially indicating "Fetal Alcohol Syndrome" related issues in the newborn. 
-* **ICD-10-CM Diagnosis Code Q86.0** - The ICD-10 code "*Q86.0*" refers to "Fetal alcohol syndrome (dysmorphic).
+* **ICD-10-CM Diagnosis Code Q86.0** - The ICD-10 code "*Q86.0*" refers to "Fetal alcohol syndrome (dysmorphic). 
 ```{r} 
 #| warning: false 
 #| message: false 
 #| echo: false
 
 # 
-p_code <- ABDR_0721YOR_YOB %>%
+p_code <- ABDR_0722YOR_YOB %>%
   mutate(year = year(DOS)) %>%
   select(BC, ICD10, year) %>%
   #bind_rows(icd_table) %>%
@@ -247,7 +247,7 @@ p_code <- ABDR_0721YOR_YOB %>%
 #| message: false 
 #| echo: false
 
-q_code <- ABDR_0721YOR_YOB %>%
+q_code <- ABDR_0722YOR_YOB %>%
   mutate(year = year(DOS)) %>%
   select(BC, ICD10, year) %>%
   # bind_rows(icd_table) %>%
@@ -328,7 +328,7 @@ bvs <- birth %>%
   dplyr::group_by(dob_yr) %>%
   dplyr::summarise(annual = n()) %>%
   dplyr::filter(dob_yr > 2015 &
-           dob_yr < 2022) %>% #year(Sys.Date())) %>%                            # 
+           dob_yr < 2023) %>% #year(Sys.Date())) %>%                            # 
   dplyr::rename("year" = dob_yr)
 ```
 
@@ -380,7 +380,7 @@ alcohol_rate_1000_outpat <- alcohol_rate_1000 %>%
 
 # Calculating P04.3 Rate of diagnosis
 p_code_rate_1000 <- p_code %>%
-  dplyr::filter(year < 2022) %>%                                                #
+  dplyr::filter(year < 2023) %>%                                                #
   dplyr::group_by(year) %>%
   dplyr::summarise(count = n()) %>%
  # dplyr::rename("year" = YOB) %>%
@@ -406,7 +406,7 @@ p_code_rate_1000 <- p_code %>%
 
 # Calculating and trending the rate of ICD-10 code Q86.0 Fetal alcohol syndrome (dysmorphic)
 q_code_rate_1000 <- q_code %>%
-  dplyr::filter(year < 2022) %>%                                                #
+  dplyr::filter(year < 2023) %>%                                                #
   dplyr::group_by(year) %>%
   dplyr::summarise(count = dplyr::n()) %>%
 #  dplyr::rename("year" = YOB) %>%
@@ -499,13 +499,13 @@ library(epitools)
 #CPROB<-subset(sqlQuery(channel.c,"SELECT * FROM CaseConfProb1")) 
 
 #load current ABDR,BVS, & Conf files: update these files each year
-load("R:/ABDR/Research_Data_tables/ResearchTables2007_2021/ABDR_BTH_0721RSRCH_L3.Rda") #
+load("R:/ABDR/Research_Data_tables/ResearchTables2007_2022/ABDR_BTH_0722RSRCH_L3.Rda") #
 
 # Loading Birth Certificate data
-load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\bth07_21.Rda")   #
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2022\\bth07_22.Rda")   #
 
 # Loading ABDR data with NatCond variable
-load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_0721YOR_YOB.Rda") #
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2022\\ABDR_0722YOR_YOB.Rda") #
 
 # Conf files
 load("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\CPROB.Rda") 
@@ -522,10 +522,10 @@ load("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\CPROB.Rda")
 #Create a label for the condition to be used
   condition<-("FAS")
 #Specify the condition specific dataset for the condition report
-  fas_CDATA<-as.data.frame(DAT(code,ABDR_0721YOR_YOB,bth07_21)) %>%
-    filter(dob > "2015-12-31")                                                  #
+  fas_CDATA<-as.data.frame(DAT(code,ABDR_0722YOR_YOB,bth07_22)) %>%             #
+    filter(dob > "2015-12-31")                                                  
 #Specify the years of these data
-  datYRS<-(paste0("2016-", year(Sys.Date()) - 3))                               #
+  datYRS<-(paste0("2016-", year(Sys.Date()) - 3))                               
 #Specify the row-names for moving averages
  rnames=c(#"2007-2011","2008-2012","2009-2013","2010-2014","2011-2015",
           #"2012-2016", "2013-2017", "2014-2018", "2015-2019", 
@@ -738,10 +738,10 @@ Q86_map_ly <- ggplotly(Q86_map,
 #Specify the National Condition Code to be used
   code<-"P043"
 #Specify the condition specific dataset for the condition report
-  P_CDATA<-as.data.frame(DAT(code,ABDR_0721YOR_YOB,bth07_21)) %>%
-    filter(dob > "2015-12-31")                                                  #
+  P_CDATA<-as.data.frame(DAT(code,ABDR_0722YOR_YOB,bth07_22)) %>%               # #
+    filter(dob > "2015-12-31")                                                  
 #Specify the years of these data
-  datYRS<-(paste0("2016-", year(Sys.Date()) - 3))                               #
+  datYRS<-(paste0("2016-", year(Sys.Date()) - 3))                               
 #Specify the row-names for moving averages
  rnames=c(#"2007-2011","2008-2012","2009-2013","2010-2014","2011-2015",
           #"2012-2016", "2013-2017", "2014-2018", "2015-2019", 
@@ -939,10 +939,10 @@ P043_map_ly <- ggplotly(P043_map,
 #| message: false 
 #| echo: false
 
-# Creating a vector of birth totals 2016-2021                                   #
+# Creating a vector of birth totals 2016-2022                                   #
 bvs_n <- birth %>%
   filter(dob > '2015-12-31' & 
-            dob < '2022-01-01') %>% 
+            dob < '2023-01-01') %>%                                             #
   group_by(res_phregn) %>%
   dplyr::summarise(Total = n()) %>%
   filter(!(res_phregn %in% c("OUT OF STATE", "UNKNOWN"))) %>%
@@ -1802,10 +1802,10 @@ library(epitools)
 #Create a label for the condition to be used
   condition<-("Q86.0")
 #Specify the condition specific dataset for the condition report
-  fas_CDATA<-as.data.frame(DAT(code,ABDR_0721YOR_YOB,bth07_21)) %>%
-    filter(dob > "2015-12-31")                                                  #
+  fas_CDATA<-as.data.frame(DAT(code,ABDR_0722YOR_YOB,bth07_22)) %>%             # #
+    filter(dob > "2015-12-31")                                                  
 #Specify the years of these data
-  datYRS<-(paste0("2016-", year(Sys.Date()) - 3))                               #
+  datYRS<-(paste0("2016-", year(Sys.Date()) - 3))                               
 #Specify the row-names for moving averages
  rnames=c(#"2007-2011","2008-2012","2009-2013","2010-2014","2011-2015",
           #"2012-2016", "2013-2017", "2014-2018", "2015-2019", 
@@ -1836,10 +1836,10 @@ library(epitools)
 #Specify the National Condition Code to be used
   code<-"Q860"
 #Specify the condition specific dataset for the condition report
-  fas_CDATA<-as.data.frame(DAT(code,ABDR_0721YOR_YOB,bth07_21)) %>%
-    filter(dob > "2015-12-31")                                                  #
+  fas_CDATA<-as.data.frame(DAT(code,ABDR_0722YOR_YOB,bth07_22)) %>%             # #
+    filter(dob > "2015-12-31")                                                  
 #Specify the years of these data
-  datYRS<-(paste0("2016-", year(Sys.Date()) - 3))                               #
+  datYRS<-(paste0("2016-", year(Sys.Date()) - 3))                               
 #Specify the row-names for moving averages
  rnames=c(#"2007-2011","2008-2012","2009-2013","2010-2014","2011-2015",
           #"2012-2016", "2013-2017", "2014-2018", "2015-2019", 
