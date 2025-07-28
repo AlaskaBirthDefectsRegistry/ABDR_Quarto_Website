@@ -57,7 +57,7 @@ years of age are added to the master encounter data set.
 ** Subsequent reports received for an existing name and diagnostic code combination in the master
 encounter data set are added to the agency reports data set.
 
-![Figure 1 Incoming Data](img/data_collections_fig1.png)
+![Figure 1 Incoming Data](img/data_collections_fig1.png "Figure 1. Incoming Data")
 
 
 All encounters are compared to birth certificate data to determine if reported children were born in the State of

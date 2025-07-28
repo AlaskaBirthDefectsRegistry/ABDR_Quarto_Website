@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./img/alaska-logo.png" alt="" class="navbar-logo">
+    <img src="./img/alaska-logo.png" alt="Great State of Alaska Logo" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -158,6 +158,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#calculation-of-report-and-prevalence-estimates" id="toc-calculation-of-report-and-prevalence-estimates" class="nav-link" data-scroll-target="#calculation-of-report-and-prevalence-estimates">Calculation of Report and Prevalence Estimates</a></li>
   <li><a href="#report-prevalence" id="toc-report-prevalence" class="nav-link" data-scroll-target="#report-prevalence">Report Prevalence</a></li>
   <li><a href="#defect-prevalence" id="toc-defect-prevalence" class="nav-link" data-scroll-target="#defect-prevalence">Defect Prevalence</a></li>
+  <li><a href="#interpreting-prevalence-estimates" id="toc-interpreting-prevalence-estimates" class="nav-link" data-scroll-target="#interpreting-prevalence-estimates">Interpreting Prevalence Estimates</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -192,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The report prevalence is the prevalence at birth of a specific defect based on the count of unique children identified through a reported ICD code representing a specified condition regardless of case confirmation status.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="img/rep_prev.PNG" class="img-fluid figure-img"></p>
+<p><img src="img/rep_prev.PNG" title="Report Prevalence Equation" class="img-fluid figure-img"></p>
 <figcaption>Report Prevalence</figcaption>
 </figure>
 </div>
@@ -203,14 +204,14 @@ ul.task-list li input[type="checkbox"] {
 <p>The defect prevalence is the estimated prevalence at birth of a specific defect. This estimate uses a Bayesian approach to incorporate the historical sampled confirmation probability and the estimated missed cases probability by restricting the analysis to children diagnosed and seen by a medical provider before age 3 years.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="img/Bayes.png" class="img-fluid figure-img"></p>
+<p><img src="img/Bayes.png" title="Bayes' Theorem Equation" class="img-fluid figure-img"></p>
 <figcaption>Bayes’s Theorem</figcaption>
 </figure>
 </div>
 <p>We use the informative known prior obtained through sampled case confirmation of reported cases (Positive Predictive Value) and (1-Negative Predictive Value) to calculate the estimated probability of defect. Thus:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="img/ppv_npv.PNG" class="img-fluid figure-img"></p>
+<p><img src="img/ppv_npv.PNG" title="Positive and Negative Predictive Value" class="img-fluid figure-img"></p>
 <figcaption>Positive and Negitive Predicitive Value</figcaption>
 </figure>
 </div>
@@ -218,12 +219,21 @@ ul.task-list li input[type="checkbox"] {
 <p>The Confidence interval for both the estimate based on reports without confirmation and defect estimate are based on the Poisson distribution. The exact method for estimation:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="img/CI.PNG" class="img-fluid figure-img"></p>
+<p><img src="img/CI.PNG" title="Confidence Interval Equation" class="img-fluid figure-img"></p>
 <figcaption>Confidence Interval</figcaption>
 </figure>
 </div>
-<p>Note: Confidence Intervals are calculated using an ‘exact’ method. This method is based on the exact distribution opposed to an approximation. Exact methods are a conservative approach and useful with small cell counts. Interpreting Prevalence Estimates The Registry’s focus is to:  Improve the consistency of reporting among core agencies.  Stabilize and improve the confidence in calculated prevalence estimates. The Registry has attempted to produce prevalence estimates with improved accuracy by incorporating informative prior information and by utilizing specific condition defect estimates (DE) from medical record reviews. Differences in defect and reported prevalence estimates over time or between regions may reflect variance in reporting, leading to differential detection bias, true differences influenced by genetic, environmental or other causes, or even chance differences. These estimates are limited to live births occurring in Alaska, as such estimates for certain defects that result in spontaneous abortion, high fetal mortality, or frequently delivered out-of-state are likely underrepresented. Defect classification in the Alaska Birth Defect Registry is made by collecting and aggregating ICD codes representing birth defects from multiple agencies across the state. As such, variation in clinical and diagnosis practices, expertise, electronic health records, and miscoding by coders/providers all may influence case detection and classification. ICD codes used in passive surveillance system can potentially misrepresent the actual prevalence, and caution should be used when interpreting the reported prevalence in the absence of estimated defect prevalence. The estimates provided are believed to be the most accurate, but are subject to large variation resulting from surveillance methodology. Updated April 2019 Version 2 3</p>
-<p>As additional samples are drawn and medical records abstraction and confirmation occurs, the defect estimates will be updated and expanded. Updated April 2019 Version 2 4</p>
+<p>Note: Confidence Intervals are calculated using an ‘exact’ method. This method is based on the exact distribution opposed to an approximation. Exact methods are a conservative approach and useful with small cell counts.</p>
+</section>
+<section id="interpreting-prevalence-estimates" class="level3">
+<h3 class="anchored" data-anchor-id="interpreting-prevalence-estimates">Interpreting Prevalence Estimates</h3>
+<p>The Registry’s focus is to: <br> 1. Improve the consistency of reporting among core agencies. <br> 2. Stabilize and improve the confidence in calculated prevalence estimates.</p>
+<p>The Registry has attempted to produce prevalence estimates with improved accuracy by incorporating informative prior information and by utilizing specific condition defect estimates (DE) from medical record reviews.</p>
+<p>Differences in defect and reported prevalence estimates over time or between regions may reflect variance in reporting, leading to differential detection bias, true differences influenced by genetic, environmental or other causes, or even chance differences.</p>
+<p>These estimates are limited to live births occurring in Alaska, as such estimates for certain defects that result in spontaneous abortion, high fetal mortality, or frequently delivered out-of-state are likely underrepresented.</p>
+<p>Defect classification in the Alaska Birth Defect Registry is made by collecting and aggregating ICD codes representing birth defects from multiple agencies across the state. As such, variation in clinical and diagnosis practices, expertise, electronic health records, and miscoding by coders/providers all may influence case detection and classification. ICD codes used in passive surveillance system can potentially misrepresent the actual prevalence, and caution should be used when interpreting the reported prevalence in the absence of estimated defect prevalence.</p>
+<p>The estimates provided are believed to be the most accurate, but are subject to large variation resulting from surveillance methodology.</p>
+<p>As additional samples are drawn and medical records abstraction and confirmation occurs, the defect estimates will be updated and expanded.</p>
 
 
 </section>

@@ -1,0 +1,96 @@
+---
+title: "Alaska Birth Defect Registry - Reporting Guide"
+title-block-banner: ~img/ABDR_csr2.png
+format:
+  html:
+    toc: true
+    toc-float: true
+    code-fold: true
+---
+
+## Introduction
+The Alaska Birth Defects Registry (ABDR) was established in 1996 under Alaska Regulation 7 AAC 27.012. Healthcare providers, hospitals, other healthcare facilities, regional health exchanges, and third-party payers report to ABDR when they have cared for, collect or maintain a record of service to a child under the age of three, with any of the congenital conditions listed below.
+
+ABDR provides information on the occurrence and distribution of congenital birth defects within the State of Alaska.
+
+
+## Authority
+Please refer to the enabling regulation above and the references cited in the included Commissioners Letter which, addresses data collection for public health use.
+
+## Reporting
+* **Who:**  Any organization that provides service to or collects, and maintains records of service to children under the age of three with any of the conditions listed below.
+* **When:**	Organizations are expected to report all indicated conditions semiannually (every six months).
+* **What:**	Please include data for:
+** All of the divisions and / or business segments of your organization.
+-	In-patient, outpatient, admits, discharges, radiology, laboratory, specialty clinics, etc.
+** All individuals seen by your organization up until their 3rd birthday. (Date of Service – Date of Birth) <3
+** All of the ICD-10 CM codes listed in the following tables.
+
+## Data Format and Layout
+![Child Information](img/reporting_guide_1.png "Data format layout image")
+
+* Each encounter is a unique combination of: Individual Last + First + DOB + Sex + ICD Code. Send a single row for each unique combination.
+* Repeat the individual data for each individual and condition combination reported.
+* If your data is not quite what the registry is requesting please send it as is. 
+* Our preference is to receive .xls, .xlsx, or comma delimited .csv / .txt files.
+* Data arrives in many layouts and formats. The registry can accommodate wide variations in incoming data sets. Contact the registry with any questions.
+* The registry de-duplicates multiple reports for the same individual, condition, and agency.
+
+
+## How to Report
+* All Protected Health Information (PHI) delivered to the Registry must be encrypted at all times.
+* Microsoft email encryption is a simple method to send your reports securely. Keep an eye out for a reminder email from the Alaska Birth Defect Registry. A second encrypted email will directly follow this email. Perform the steps outlined in the attachment “Report Submission With Microsoft Office 365 Message Encryption” PDF and directly reply to the second email with your report.
+* If your organization has its own secure mail system that can be accessed through the internet, please have an account created for the Registry to use to receive reports. The account should use a generic name (akbirthregistry) or something similar. You can then email me the report from within your system The Registry uses this approach with a number of organizations. 
+* If none of the above works for your situation please contact the registry at hssbirthdefreg@alaska.gov and we can work on a solution.
+
+We will do our best to make reporting a simple and straightforward process. Thanks again for your help and support of the Registry.
+If you have any questions or need help with the reporting process please don’t hesitate to contact the registry at:
+
+Alaska Birth Defects Registry
+Alaska Dept. of Health and Social Services
+MCH-Epidemiology
+Email: hssbirthdefreg@alaska.gov 
+Web: https://alaskabirthdefectsregistry.github.io/ABDR_Quarto_Website/
+Tel: 907.269.3400 
+
+## Reporting Code Ranges 
+Data coding is based on the latest: International Classification of Diseases, Clinical Modification. For report development use the following code ranges. 
+
+### ICD Codes	Description
+* C96.5, C96.6 	Langerhans-cell histiocytosis
+* D55.0 - D61.09	Anemias
+* D80.0 - D89.9 	Immunodeficiencies
+* E00.0-E00.9 	Congenital iodine-deficiency syndrome
+* E03.0-E03.9 	Congenital hypothyroidism
+* E25.0 - E25.9 	Adrenogenital disorders
+* E70.0 - E88.9 	Metabolic disorders
+* G11.0 - G94.9 	Nervous system disorders
+* H35.52, H49.819 	Pigmentary retinal dystrophy, Kearns-Sayre
+* H90.0 - H91.93 	Hearing loss
+* M21.021 - M21.129	Acquired deformities of limbs
+* P00.0 - P04.9 	Certain conditions originating in the perinatal period
+* P96.0 - P96.9 	Other conditions originating in the perinatal period
+* Q00.0 - Q99.99 	Congenital malformations
+ 
+Note: ABDR collects only the specific valid codes listed below. The registry parses all submitted data for this specific collection of codes. All other data is ignored.
+
+Attention: Addition of new P-codes P04.11, P04.12, P04.13, P04.14, P04.15, P04.16, P04.17, P04.18, P04.19, P04.40, P04.42, P04.81, P04.89 are now included in the list below.
+
+## Specific code List  
+```{r}
+#| warning: false 
+#| message: false 
+#| echo: false
+
+library(tidyverse)
+library(janitor)
+library(htmlTable)
+library(DT)
+read_csv("data/report_icd_codes.csv") %>%
+  #janitor::clean_names() %>% 
+  datatable()
+```
+
+ [Download the ICD-10 Code List](data/report_icd_codes.csv){download="data/report_icd_codes.csv"}.
+
+

@@ -379,4 +379,6 @@ hssbirthdefreg@alaska.gov
 
 
 *Updated: `r format(Sys.time(), '%B %d, %Y')`*                                                      
-*Code source:* ```R:\ABDR\Analysis_New\Published Data\trend07_20.Rmd```         
+*Code source:* ``R:\ABDR\Website\ABDR_Quarto_Website\trend_currnet.qmd``` 
+
+![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png "State of Alaska, Department of Health, Section of Women's, Children's and Family Health"){width=200px height=200px}

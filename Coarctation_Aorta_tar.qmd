@@ -308,12 +308,12 @@ hssbirthdefreg@alaska.gov
 
 
 *Updated: `r format(Sys.time(), '%B %d, %Y')`*  
-*Code source:* ```R:\ABDR\Analysis_New\ABDR_CASECONF\cond_reports\Published_reports\Targets_publications\Coarctation_Aorta_tar.qmd```   
+*Code source:* ```R:\ABDR\Website\ABDR_Quarto_Website\Coarctation_Aorta_tar.qmd```   
 
 &nbsp;
 
 <center>
-![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH%20Beveled.png)
+![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png "State of Alaska, Department of Health, Section of Women's, Children's and Family Health"){width=200px height=200px}
 **State of Alaska, Department of Health, Section of Women's, Children's and Family Health**
 
 </center>  

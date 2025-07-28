@@ -6,6 +6,7 @@ website:
   title: "" 
   navbar:
     logo: "img/alaska-logo.png"
+    logo-alt: "Great State of Alaska Logo" # alt text
     left:
       - href: index.qmd
         text: Home
@@ -26,7 +27,7 @@ website:
         href: https://www.youtube.com/alaskadhss
       - icon: github
         href: https://github.com/AlaskaBirthDefectsRegistry/
-        logo: "img/DOH_20Beveled.png"
+        search: false
   page-footer:
     right: "Built with [Quarto](https://quarto.org/)"
     left: "&copy; Copyright 2025, State of Alaska Dept. of Health"
@@ -35,6 +36,7 @@ website:
 format:
   html:
     theme: Flatly
+    linkcolor: "#0013d5"
     toc: false
 
 editor: source

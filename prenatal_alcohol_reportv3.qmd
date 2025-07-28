@@ -487,6 +487,7 @@ rate_trend %>%
 
 ## Regional Distribution
 Distribution of prenatal alcohol exposure in Alaska by Public Health Region of maternal residence at the time of birth. [A description of regional breakdowns can be found here](https://health.alaska.gov/en/resources/brfss-map-regions/). Data suppressed for # of reports  < 6. 
+
 ```{r} 
 #| warning: false 
 #| message: false 
@@ -2021,4 +2022,4 @@ hssbirthdefreg@alaska.gov
 &nbsp;
 
 <center>
-![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png){width=200px height=200px}
+![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png "State of Alaska, Department of Health, Section of Women's, Children's and Family Health"){width=200px height=200px}

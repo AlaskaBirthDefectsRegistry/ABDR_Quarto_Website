@@ -457,5 +457,7 @@ hssbirthdefreg@alaska.gov
 &nbsp;
 
 <center>
+![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png "State of Alaska, Department of Health, Section of Women's, Children's and Family Health"){width=200px height=200px}
+
 **State of Alaska, Department of Health, Section of Women's, Children's and Family Health**
 </center>  

@@ -157,7 +157,7 @@ p_val
 </center>
 
 ### Regional Distribution
-Distribution of `r condition[1]` in Alaska by Public Health Region of maternal residence at the time of birth. [A description of regional breakdowns can be found here](http://dhss.alaska.gov/dph/InfoCenter/Pages/ia/brfss/geography.aspx). Data suppressed for # of reports  < 6.   
+Distribution of `r condition[1]` in Alaska by Public Health Region of maternal residence at the time of birth. [A description of regional breakdowns can be found here](PHR.qmd). Data suppressed for # of reports  < 6.   
 
 <center>
 ```{r} 
@@ -313,7 +313,7 @@ hssbirthdefreg@alaska.gov
 &nbsp;
 
 <center>
-![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png){width=200px height=200px}
+![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png "State of Alaska, Department of Health, Section of Women's, Children's and Family Health"){width=200px height=200px}
 </center>  
 
   
