@@ -1,5 +1,5 @@
 ---
-title: "Alaska Birth Defect Registry - Data Methods"
+title: "Alaska Birth Defect Registry - Data Collection Methods"
 title-block-banner: ~img/ABDR_csr2.png
 format:
   html:
