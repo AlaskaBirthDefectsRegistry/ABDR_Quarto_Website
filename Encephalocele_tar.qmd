@@ -116,9 +116,9 @@ Prevalence per 10,000 births of `r condition[1]` during `r datYRS[1]` by three-y
 library(ggplot2)
 library(plotly)
 
- trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_ENC.rds")
+ trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_nma_ENC.rds")
   
- trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_ENC.rds")
+ trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_nma_ENC.rds")
   
  ggplotly(trend, tooltip = c("text")) %>%
   layout(legend = list(orientation = "h", x = 0.4, y = -0.2))

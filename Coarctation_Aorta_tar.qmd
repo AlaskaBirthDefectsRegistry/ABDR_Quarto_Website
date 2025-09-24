@@ -111,9 +111,9 @@ Prevalence per 10,000 births of `r condition[1]` during `r datYRS[1]` by five-ye
 #| echo: falselibrary(ggplot2)
 library(plotly)
 
- trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_COARC.rds")
+ trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_nma_COARC.rds")
   
- trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_COARC.rds")
+ trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_nma_COARC.rds")
   
  ggplotly(trend, tooltip = c("text")) %>%
   layout(legend = list(orientation = "h", x = 0.4, y = -0.2))

@@ -1,0 +1,50 @@
+  /*-- scss:defaults --*/
+ /* $toc-active-border: "#0013d5"--*/
+  /*$navbar-bg "#2c3e50"*/
+ /* $sidebar-hl: "#0092DE"
+
+/* Only change TOC link colors (sidebar on the right) 
+#TOC a {
+  color: ##0013d5;   /* normal link */
+ /*text-decoration: none;
+}
+
+#TOC a:hover {
+  color: ##0259f0;   /* hover */
+}
+
+ /*#TOC a.active {
+  color: ##0259f0;   /* currently active section */
+ /*  font-weight: bold;
+}*/
+
+/* Change entire banner/nav background */
+/*.navbar,
+.quarto-title-block {
+  background-color: #05071f !important;  /* dark blue, change as needed */
+/*  color: white;  /* make sure text stays visible */
+/*}
+
+/*.quarto-title-banner {
+  background-color: #05071f !important;
+}
+
+/* Make sure links inside are readable */
+/*.navbar a,
+.quarto-title-block a {
+  color: white !important;
+}
+
+.navbar a:hover,
+.quarto-title-block a:hover {
+  color: #bdbec7 !important;  /* hover color */
+  
+  
+  /*-- scss:defaults --*/
+$navbar-bg: #05071f;
+$primary: #05071f;
+
+/*-- scss:rules --*/
+.navbar {
+  background-color: $navbar-bg !important;
+}

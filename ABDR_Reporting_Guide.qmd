@@ -88,7 +88,7 @@ library(htmlTable)
 library(DT)
 read_csv("data/report_icd_codes.csv") %>%
   #janitor::clean_names() %>% 
-  datatable()
+  datatable(rownames = FALSE)
 ```
 
  [Download the ICD-10 Code List](data/report_icd_codes.csv){download="data/report_icd_codes.csv"}.

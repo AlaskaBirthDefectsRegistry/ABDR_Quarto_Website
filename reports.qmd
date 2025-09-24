@@ -25,8 +25,9 @@ title: "Reports"
 
 ### Central Nervous System
 * [Anencephaly](Anencephaly_tar.qmd)
-* [Spina bifida without anencephalus](SpinaBifida_tar.qmd)
 * [Encephalocele](Encephalocele_tar.qmd)
+* [Holoprosencephaly](Holoprosencephaly_tar.qmd)
+* [Spina bifida without anencephalus](SpinaBifida_tar.qmd)
 
 ### Chromosomal
 * [Trisomy 13](Trisomy13_tar.qmd)

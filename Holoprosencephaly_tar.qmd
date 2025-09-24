@@ -1,0 +1,350 @@
+---
+title: "Holoprosencephaly 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
+title-block-banner: ~img/ABDR_csr2.png
+format:
+  html:
+    toc: true
+    toc-float: true
+    code-fold: true
+---
+
+<style type="text/css">
+
+h4.author { /* Header 4 - and the author and date headers use this too  */
+  font-size: 36px;
+  font-style: normal;
+  font-family: "Times New Roman";
+  color: Black;
+  text-align: center;
+}
+h4.date { /* Header 4 - and the author and date headers use this too  */
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  color: Black;
+  text-align: center;
+}
+</style>
+
+---
+## Background 
+Holoprosencephaly (HPE) is a rare congenital brain defect where the fetal forebrain fails to properly divide into two hemispheres during early pregnancy, typically within the first 2–3 weeks of gestation.[1,3,7](#references) This condition ranges in severity:alobar HPE(most severe, with no brain separation), semi-lobar (partial separation), lobar (minimal fusion), and middle interhemispheric variant (middle brain fusion).[1,5,7](#references) Associated facial abnormalities may include cleft lip/palate, a single central incisor, or closely spaced eyes14. Common symptoms involve seizures, developmental delays, intellectual disabilities, pituitary dysfunction, and motor impairments145. HPE affects approximately 1 in 16,000 live births, though severe cases often result in miscarriage or stillbirth.[2,3](#references)
+The causes of HPE are primarily genetic, with chromosomal abnormalities (e.g., trisomy 13) accounting for 30–75% of cases.[1,3,6](#references) Maternal diabetes may increase risk, but most cases have no identifiable cause.[3,6](#references) Diagnosis often occurs prenatally via ultrasound or fetal MRI, though milder cases may only be detected postnatally through brain imaging (MRI/CT) and genetic testing.[1,3,5](#references) Facial features and developmental delays frequently prompt further evaluation.[1,4](#references)
+While there is no cure for HPE, treatment focuses on managing symptoms. A multidisciplinary team may provide antiseizure medications, hormone replacement therapy, surgeries for facial anomalies, and physical/occupational therapies.[1,3,4,5](#references) Prevention is limited, as most cases arise from spontaneous genetic mutations, though genetic counseling is recommended for families with a history of HPE.[1,6](#references) Lifelong outcomes depend on severity: children with alobar HPE rarely survive infancy, while those with milder forms may live into adulthood but require lifelong medical support for developmental, endocrine, and neurological complications.[1,2,5](#references) Early intervention improves quality of life, but significant disabilities typically persist.[1,5](#references)
+
+## Epidemiology 
+Alaska Birth Defects Registry (ABDR) records birth defects reported by healthcare providers using International Classification of Disease (ICD) billing codes. However, relying on these ICD codes alone can result in misclassifying diagnosed conditions.  
+
+The estimates in this report are derived by conducting a medical record review and case confirmation of a random sample of cases of the condition reported to ABDR. The confirmation probability from the sample was then used to estimate the prevalence of the diagnosed defect among Alaskan residents. [See Defect prevalence calculation](#defect-prevalence-calculation).      
+
+For explanations of table columns [see Column descriptions](#column-descriptions).  
+
+### Prevalence   
+Holoprosencephaly is the most common malformation of the forebrain and occurs in 1 in 250 fetuses and 1 in 16,000 live births.[9](#references)
+
+
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+options(width=150)
+
+library(shiny)
+library(knitr)
+library(pander)
+library(htmlTable)
+library(htmltools)
+library(tidyverse)
+library(haven)
+library(dplyr)
+library(janitor)
+library(DT)
+library(plotly)
+library(lubridate)
+library(epitools)
+
+
+# Removing scientific notation
+options(scipen=999)
+
+# Specify the National Condition Code to be used
+  code <- "HOLOP"                                                                  #
+# Create a label for the condition to be used
+  condition <- ("Holoprosencephaly")                                             #
+  
+# Setting last updated date
+  up_date <-  today() 
+  
+  #Specify the years of these data
+load("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\datYRS.Rda")
+datYRS <- datYRS %>%
+  filter(row == max(row)) %>%
+  dplyr::select(years)
+#Specify the row-names for moving averages
+load("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\rnames.Rda")
+
+# Loading the HOLOP
+ev2 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/ev2_num_HOLOP.rds") #
+
+```
+
+  
+   
+In Alaska, during `r datYRS[1]`, the prevalence of `r condition[1]` was **`r ev2[max(row.names(ev2)),4]` per 10,000 live births**. 
+<center>
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+tmp <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\tmp_HOLOP.rds")
+tmp[[1]]
+```  
+</center>
+
+### Trend 
+Prevalence per 10,000 births of `r condition[1]` during `r datYRS[1]` by three-year moving averages, with 95% confidence interval band and Poisson estimated fitted line.
+<center>
+
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+library(ggplot2)
+library(plotly)
+
+ trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_nma_HOLOP.rds")
+
+ trend_table <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_table_nma_HOLOP.rds")
+
+ # trend[["data"]] <- trend[["data"]][9:11, ]
+
+ ggplotly(trend, tooltip = c("text")) %>%
+  layout(legend = list(orientation = "h", x = 0.4, y = -0.2))
+
+trend_1 <- htmlTable(trend_table,
+                    # txt.NA = "-",
+                  css.cell="padding-left: 2em; padding-right: 2em;",
+                  # header=c("Reports","Defects","Births","Prevalence (95% CI)","Predicted Prevalence&dagger;"),
+                  rnames = F,
+                  tfoot=txtMergeLines("Notes: Each row is based on three-year moving averages; Prevalence reported per 10,000 live births; 95% CI=95%
+                                      Confidence Interval", "&dagger; Estimated rate based on Poisson model"))
+
+
+datatable(trend_table,
+          container = trend_1,
+          options = list(pageLength = nrow(trend_table),
+                         columnDefs = list(list(className = 'dt-center', targets = 0:5)), 
+                         dom = 't'),
+                         rownames = F,
+                         colnames = names(trend_1))
+
+
+ 
+ 
+``` 
+
+
+</center>
+Trend tests with a p-value of 0.05 or lower detect a statistically significant increase or decrease in the number of live births with `r condition[1]` during `r datYRS[1]`. See [p-value estimate](#p-value-estimate).
+<center>
+
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+p_val <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_p_table_HOLOP.rds")
+
+p_val
+```  
+
+</center>
+
+### Regional Distribution
+Distribution of `r condition[1]` in Alaska  2007 -`r as.numeric(format(Sys.time(), '%Y')) - 3` by Public Health Region of maternal residence at the time of birth. [A description of regional breakdowns can be found here](PHR.qmd). Data suppressed for number of reports  < 6.   
+
+<center>
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+ 
+geo_plot <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\sf_plot_map_HOLOP.rds")
+ ggplotly(geo_plot) %>%
+  layout(xaxis = list(autorange = TRUE),
+         yaxis = list(autorange = TRUE))
+
+geo_tbl <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\geo_tbl_HOLOP.rds")
+
+geo_html <- htmlTable(htmlTable::txtRound(x = geo_tbl), 
+                      rnames = F,
+                      css.cell = "padding-left: 2em; padding-right: 2em;", 
+                      tfoot = "Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports  <  6; 95% CI = 95% Confidence Interval") 
+#geo_html <- gsub('<td','<td nowrap = "nowrap";', geo_html) #removes wrapping
+geo_tbl <- geo_tbl %>%
+  mutate(`P-Value`= as.character(`P-Value`))
+
+datatable(geo_tbl, 
+          container = geo_html, 
+          options = list(
+             columnDefs = list(list(className = 'dt-center', targets = 1:6)), 
+             pageLength = nrow(geo_tbl),
+             dom = 't'),
+          rownames = F, 
+          colnames = names(geo_tbl)
+          ) 
+
+
+
+```
+</center>
+
+### Demographics
+ `r condition[1]` may occur in some subgroups more often than others. This section provides the descriptive epidemiology of specified maternal, birth, and child characteristics identified from the birth certificate.  
+  
+<center> 
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+
+t6 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/t6_HOLOP.Rds")
+t7 <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/t7_HOLOP.Rds")
+
+tmp1<-htmlTable(t6,
+                rowlabel = "Groups",
+                rgroup=c("Sex","Birth weight (grams)","Maternal age",
+                         "Maternal race",
+                         "Maternal education (years)","Marital status",
+                         "Maternal smoking use",
+                         "Medicaid (mother or child)",
+                         "Father on birth certificate"),
+                n.rgroup=c(2,2,6,4,3,2,2,2,2),
+                css.cell="padding-left: 2em; padding-right: 2em;",
+                tfoot=txtMergeLines("Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports  < 6; 95% CI = 95% Confidence Interval"))
+
+demo_tbl <- datatable(t7,
+          extensions = c("RowGroup", "Responsive"),
+          options = list(rowGroup = list(dataSrc = 5), 
+                         pageLength = 30, 
+                         dom = 't'),
+          container = tmp1,
+          rownames = T, 
+          class = 'cell-border stripe')
+
+#Make table   
+demo_tbl
+
+``` 
+</center>
+
+### Accompanying Diagnoses
+The ten diagnoses most commonly associated with `r condition[1]` in Alaska,  2007 -`r as.numeric(format(Sys.time(), '%Y')) - 3`. 
+
+<center>
+```{r} 
+#| warning: false 
+#| message: FALSE 
+#| echo: false
+ 
+
+plot <- readRDS("R:/ABDR/Analysis_New/ABDR_CASECONF/cond_reports/Published_reports/abdr_website/images/accomp_diag_HOLOP.Rds")
+
+ggplotly(plot, tooltip = c("text"))
+
+```
+
+## Technical Notes  
+### Column Descriptions  
+- **Reports:** Unless otherwise noted, the number of unique reports of the defect received by ABDR during the specified birth year(s). Each report represents a unique child with the specified defect.  
+
+- **Defects:** The estimated number of reports diagnosed defects based on medical record review and case confirmation.  
+
+- **Births:** The number of live births among Alaskan residents in Alaska during the specified birth year(s).  
+
+- **Prevalence (95% CI):** The estimated diagnosed prevalence of the condition and corresponding 95% Confidence Interval. (For information on how the defect prevalence was estimated, see below).   
+
+- **Odds Ratio:** The odds ratio is a measure of association. Here, we used the odds ratio to measure the association of a condition and its prevalence within the seven public health regions of the state. All odds ratios are calculated by comparing each public health region to the rest of the state. The higher the odds ratio, the higher the association. 
+
+- **P-value:** The P-value is a statistical test that aims to calculate the probability a result occurs at random (due to chance). Here, we calculate p-values to help understand the association between the condition and the seven public health regions of the state. The lower the p-value, the less likely the differences in public health regions are due to chance.
+
+- **Predicted prevalence:** The predicted prevalence is a metric calculated by a quasi-poisson regression model fit to the individual yearly prevalence estimates. Here, we use the quasi-poisson regression model to test the statistical significance of a trend in overdispersed count data for our condition of interest.
+
+
+### Defect Prevalence Calculation
+The estimated defect prevalence was calculated using a Bayesian approach based on the reported prevalence, PPV and 1-NPV (see formula below). Defect prevalence estimates are more accurate estimates of the actual diagnosed prevalence of birth defects compared to the reported prevalence estimates in Alaska. The registry obtains reports from medical providers using International Classification of Disease (ICD) codes extracted from individual systems, which, when aggregated, may not reflect true diagnostics. Readers should use caution when interpreting and comparing the reported prevalence estimates with national estimates.
+
+Through medical records review and case confirmation of a random sample of reported cases, the defect prevalence is calculated as: 
+
+$$PPV (Positive Predictive Value) = p(defect|report)$$
+$$NPV (Negative Predictive Value) = p(\overline{defect}|\overline{report})$$
+
+$$p(defect) \approx [p(report)\cdot PPV]+[p(\overline{report})\cdot (1-NPV)]$$   
+
+Defect prevalence estimates are a more accurate estimation of the actual diagnosed prevalence of birth defects compared to the reported prevalence estimates in Alaska. ABDR obtains reports from medical providers using International Classification of Disease (ICD) codes that are extracted from individual systems which when aggregated may not reflect true diagnostics. Caution should be used when interpreting and comparing the reported prevalence estimates with national estimates.  
+
+See [Data analysis methods](Data Analysis Methods.qmd) for more information.
+
+### P-value Estimate  
+To evaluate the trend over time and account for under/over-dispersion we constructed a quasi-Poisson regression model. This model assumes the variance is a linear function of the mean and models the estimated number of annual defects by year with a natural log (ln) offset of the annual births. P-values < 0.05 are considered significant, which indicates that the predicted slope is significantly different from a slope of zero.   
+
+### Data Suppression
+For region and demographic data tables, values are suppressed based on the number of reports received during the observation period. Counts less than 6 are suppressed (as indicated by '-' in the table). For regions or demographics with only one cell count suppressed a second is suppressed to eliminate the ability to back-calculate the estimate.   
+
+## References
+[[1]](https://my.clevelandclinic.org/health/diseases/22919-holoprosencephaly-hpe) Cleveland Clinic Holoprosencephaly (HPE) Available from: https://my.clevelandclinic.org/health/diseases/22919-holoprosencephaly-hpe Retrieved 17 April 2025 
+
+[[2]](https://www.childneurologyfoundation.org/disorder/holoprosencephaly/) Child Neurology Foundation - Holoprosencephaly Available from: https://www.childneurologyfoundation.org/disorder/holoprosencephaly/ Retrieved 17 April 2025 
+
+[[3]](https://rarediseases.org/rare-diseases/holoprosencephaly/) National Organization for Rare Disorders - Holoprosencephaly Available from: https://rarediseases.org/rare-diseases/holoprosencephaly/ Retrieved 17 April 2025
+
+[[4]](https://ojrd.biomedcentral.com/articles/10.1186/1750-1172-2-8#citeas) Dubourg, C., Bendavid, C., Pasquier, L. et al. Holoprosencephaly. Orphanet J Rare Dis 2, 8 (2007). https://doi.org/10.1186/1750-1172-2-8 Available from: https://ojrd.biomedcentral.com/articles/10.1186/1750-1172-2-8#citeas Retrieved 17 April 2025
+
+[[5]](https://www.childrenscolorado.org/conditions-and-advice/conditions-and-symptoms/conditions/holoprosencephaly/) Children's Hospital Colorado - Colorado Fetal Care Center Holoprosencephaly Available from: https://www.childrenscolorado.org/conditions-and-advice/conditions-and-symptoms/conditions/holoprosencephaly/ Retrieved 17 April 2025
+
+[[6]](www.cincinnatichildrens.org/health/h/holoprosencephaly) Cincinnati Children's Health Library - Holoprosencephaly Available from: www.cincinnatichildrens.org/health/h/holoprosencephaly Retrieved 17 April 2025
+
+[[7]](https://www.health.state.mn.us/diseases/cy/holoprosencephaly.html) Minnesota Department of Health - Diseases and Conditions Identified in Children - Holoprosencephaly Available from: https://www.health.state.mn.us/diseases/cy/holoprosencephaly.html Retrieved 17 April 2025
+
+[[8]](https://www.ncbi.nlm.nih.gov/books/NBK560861/) Ramakrishnan S, Das JM. Holoprosencephaly. [Updated 2024 Jun 7]. In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2025 Jan-. Available from: https://www.ncbi.nlm.nih.gov/books/NBK560861/ Available from: https://www.ncbi.nlm.nih.gov/books/NBK560861/ Retrieved 17 April 2025
+
+[[9]](https://pmc.ncbi.nlm.nih.gov/articles/PMC2689134/) Geng X, Oliver G. Pathogenesis of holoprosencephaly. J Clin Invest. 2009 Jun;119(6):1403-13. doi: 10.1172/JCI38937. Epub 2009 Jun 1. PMID: 19487816; PMCID: PMC2689134. Available from: https://pmc.ncbi.nlm.nih.gov/articles/PMC2689134/ Retrieved 17 April 2025
+
+
+## Resources 
+[National Library of Medicine](https://medlineplus.gov/genetics/condition/nonsyndromic-holoprosencephaly/) 
+
+[ National Institutes of Health (NIH)](https://www.ncbi.nlm.nih.gov/books/NBK560861/)
+
+[Minnesota Department of Health](https://www.health.state.mn.us/diseases/cy/holoprosencephaly.html) 
+
+
+## Authorship
+Maternal and Child Health (MCH) senior epidemiologist Dr. Jared Parrish, PhD conceived of the presented analysis. Alaska Birth Defects Registry program manager and epidemiologist Chris Barnett, MS MPH and Dr. Jared Parrish, PhD developed the theory and performed the computations. Research analyst Brittany Corbin managed data collection and storage. All authors discussed the results and contributed to the final report.
+
+## Suggested Citation
+State of Alaska Department of Health, Division of Public Health, Section of Women's, Children's, and Family Health. Alaska Birth Defects Registry Condition Report: `r condition[1]`, Alaska, 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`. Updated `r format(Sys.time(), '%B %d, %Y')`. Available at: http://rpubs.com/AK_ABDR/`r condition[1]`.
+
+## Contact    
+Alaska Birth Defects Registry (ABDR)  
+3601 C Street, Suite 358  
+Anchorage, AK 99503  
+(907) 269-3400 phone  
+(907) 754-3529 fax  
+hssbirthdefreg@alaska.gov
+
+
+*Updated: `r format(Sys.time(), '%B %d, %Y')`*  
+*Code source:* ```R:\ABDR\Website\ABDR_Quarto_Website\Holoprosencephaly_tar.Rmd```   
+
+&nbsp;
+
+<center>
+![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png "State of Alaska, Department of Health, Section of Women's, Children's and Family Health"){width=200px height=200px}
+</center>  
+
+  
+
+
