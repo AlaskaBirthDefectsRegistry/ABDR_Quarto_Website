@@ -35,8 +35,11 @@ website:
 
 format:
   html:
-    theme: Flatly, 
-    css: custom.scss
+    theme: default 
+    css: |
+      .navbar {
+        background-color: var(--bs-primary) !important;
+      }
     toc: false
     
 

@@ -1,6 +1,5 @@
 ---
 title: "Alaska Birth Defect Registry - Reporting Guide"
-title-block-banner: ~img/ABDR_csr2.png
 format:
   html:
     toc: true
@@ -9,13 +8,13 @@ format:
 ---
 
 ## Introduction
-The Alaska Birth Defects Registry (ABDR) was established in 1996 under Alaska Regulation 7 AAC 27.012. Healthcare providers, hospitals, other healthcare facilities, regional health exchanges, and third-party payers report to ABDR when they have cared for, collect or maintain a record of service to a child under the age of three, with any of the congenital conditions listed below.
+The Alaska Birth Defects Registry (ABDR) was established in 1996 under [Alaska Regulation 7 AAC 27.012](https://www.akleg.gov/basis/aac.asp#7.27.012). Healthcare providers, hospitals, other healthcare facilities, regional health exchanges, and third-party payers report to ABDR when they have cared for, collect or maintain a record of service to a child under the age of three, with any of the congenital conditions listed below.
 
 ABDR provides information on the occurrence and distribution of congenital birth defects within the State of Alaska.
 
 
 ## Authority
-Please refer to the enabling regulation above and the references cited in the included Commissioners Letter which, addresses data collection for public health use.
+Please refer to the enabling regulation above that addresses data collection for public health use.
 
 ## Reporting
 * **Who:**  Any organization that provides service to or collects, and maintains records of service to children under the age of three with any of the conditions listed below.
