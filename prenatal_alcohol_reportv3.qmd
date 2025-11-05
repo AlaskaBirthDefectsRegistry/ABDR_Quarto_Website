@@ -215,7 +215,8 @@ load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2022\\ABDR_0722YOR_YOB.
 ## Prenatal Alcohol Exposure Diagnosis Codes
 * **ICD-10-CM Diagnosis Code O99.31** - The ICD-10 code "*O99.31*" refers to a medical event where alcohol use results in a complication during pregnancy, childbirth, or puerperium (the period of about six weeks after childbirth during which the mother's reproductive organs return to their original nonpregnant condition)
 * **ICD-10-CM Diagnosis Code P04.3** - The ICD-10 code "*P04.3*" refers to a newborn affected by maternal use of alcohol, meaning a baby showing signs of complications due to the mother's alcohol consumption during pregnancy; essentially indicating "Fetal Alcohol Syndrome" related issues in the newborn. 
-* **ICD-10-CM Diagnosis Code Q86.0** - The ICD-10 code "*Q86.0*" refers to "Fetal alcohol syndrome (dysmorphic). 
+* **ICD-10-CM Diagnosis Code Q86.0** - The ICD-10 code "*Q86.0*" refers to "Fetal alcohol syndrome (dysmorphic).
+
 ```{r} 
 #| warning: false 
 #| message: false 
