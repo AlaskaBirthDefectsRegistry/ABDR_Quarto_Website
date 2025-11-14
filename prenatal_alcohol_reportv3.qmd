@@ -1,5 +1,5 @@
 ---
-title: "Prenatal Alcohol Exposure 2007-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
+title: "Prenatal Alcohol Exposure 2016-`r as.numeric(format(Sys.time(), '%Y')) - 3`"
 title-block-banner: ~img/ABDR_csr2.png
 format:
   html:
@@ -47,15 +47,15 @@ Surveillance of fetal alcohol syndrome (FAS) has many inherent challenges due to
 
 Another major obstacle is integrating data from multiple sources, including medical, educational, and social service records, to capture FAS cases fully. Surveillance systems often lack access to non-medical records (e.g., school evaluations), limiting their ability to identify neurodevelopmental issues that emerge outside clinical settings.[9](#references) Variability in diagnostic practices among healthcare providers and the absence of standardized biomarkers for FAS also contribute to underreporting or misclassification.[7,8](#references) Furthermore, tracking cases across different healthcare systems or geographic regions poses logistical challenges, particularly when children move or change providers before establishing a definitive diagnosis.[9](#references) These complexities result in underestimated prevalence rates and hinder efforts to monitor FAS's true public health impact.
 
-The many challenges of FAS surveillance have led the Alaska Birth Defect Registry to take a multi-prong approach that leverages multiple data sources to obtain an estimate of other (upstream) outcomes of prenatal alcohol exposure. To achieve this, the registry performs parallel surveillance on three medical diagnosis codes that capture different adverse health outcomes caused by maternal alcohol use during pregnancy. The ABDR utilizes data from the state's Health Facilities Data Reporting (HFDR) Program, the state's Health Analytics and Vital Records - Birth Certificate, and ABDR's own data collection to create this report.
+The many challenges of FAS surveillance have led the Alaska Birth Defect Registry to take a multi-prong approach that leverages multiple data sources to obtain an estimate of other outcomes of prenatal alcohol exposure. To achieve this, the registry performs parallel surveillance on three medical diagnosis codes that capture different adverse health outcomes caused by maternal alcohol use during pregnancy. The ABDR utilizes data from the state's Health Facilities Data Reporting (HFDR) Program, the state's Health Analytics and Vital Records - Birth Certificate, and ABDR's own data collection to create this report.
 
 Prenatal Alcohol Exposure Diagnosis Codes
 ICD-10-CM Diagnosis Code O99.31 - The ICD-10 code "O99.31" refers to a medical event where alcohol use results in a complication during pregnancy, childbirth, or puerperium (about six weeks after childbirth, during which the mother's reproductive organs return to their original nonpregnant condition)
-ICD-10-CM Diagnosis Code P04.3 - The ICD-10 code "P04.3" refers to a newborn affected by maternal use of alcohol, meaning a baby showing signs of complications due to the mother's alcohol consumption during pregnancy, essentially indicating "Fetal Alcohol Syndrome" related issues in the newborn.
+ICD-10-CM Diagnosis Code P04.3 - The ICD-10 code "P04.3" refers to a newborn affected by maternal use of alcohol, meaning a baby showing signs of complications due to the mother's alcohol consumption during pregnancy.
 ICD-10-CM Diagnosis Code Q86.0 - The ICD-10 code "Q86.0" refers to "Fetal alcohol syndrome (dysmorphic)
 Surveillance of ICD-10 codes "O99.31" and "P04.3" are likely more sensitive than the threshold for FAS. Additionally, for ICD-10 codes "O99.31" and "P04.3," the diagnostic complexity is much lower, requiring less clinical expertise and assessment for an accurate diagnosis. Lastly, "O99.31" and "P04.3" do not require follow-up to assess symptoms that develop later.
 
-Surveying primary prevention targets of FAS is like checking for lead paint in homes versus diagnosing lead poisoning in children: it is more straightforward to test homes built before a certain year for the presence of lead-based paint than diagnosing lead poisoning in children, which requires blood tests, developmental assessments, and can manifest with a wide range of non-specific symptoms.
+Tracking more immediate outcomes of prenatal alcohol exposure is like checking for lead paint in homes versus diagnosing lead poisoning in children: it is more straightforward to test homes built before a certain year for the presence of lead-based paint than diagnosing lead poisoning in children, which requires blood tests, developmental assessments, and can manifest with a wide range of non-specific symptoms.
 
 ## Limitations
 Tracking more immediate targets of alcohol consumption during pregnancy, like "O99.31" and "P04.3," can be done more accurately than FAS for the reasons outlined previously. The surveillance of these targets offers valuable insights into the public health needs for primary prevention efforts. However, there are inherent limitations compared to tracking actual Fetal Alcohol Syndrome (FAS) diagnoses. Tracking "O99.31" and "P04.3" does not help quantify the true burden of FAS and the broader Fetal Alcohol Spectrum Disorders (FASD) in Alaska and does not necessarily assist in planning and delivery of intervention services for patients with FAS. Consequently, relying solely on primary prevention surveillance paints an incomplete picture of the overall public health challenge posed by FAS, limiting the ability to understand the full scope of needs and effectively allocate resources for those living with the condition.
@@ -186,7 +186,7 @@ alcohol_get_query <- dbGetQuery(con, alcohol_query)
 ## ABDR Data 
 # Obtaining ABDR data 2016-2024
 #load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_BTH_0721RSRCH_L3.Rda")
-load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2022\\ABDR_0722YOR_YOB.Rda")
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2022\\ABDR_0722YOR_YOB.Rda") # #
 
 ### Microsoft Access connection ####
 # library(RODBC)
@@ -340,18 +340,18 @@ bvs <- birth %>%
 #| message: false 
 #| echo: false
 
-alcohol_rate_1000 <- alcohol_get_query %>%
+alcohol_rate_10000 <- alcohol_get_query %>%
   dplyr::group_by(pat_type, year) %>%
   dplyr::summarise(count = dplyr::n())  %>%
   dplyr::mutate(year = as.character(year)) %>%
   dplyr::left_join(bvs, by = "year") %>%
-  dplyr::mutate(rate = (count/annual)*1000)
+  dplyr::mutate(rate = (count/annual)*10000)
 
-alcohol_rate_1000_inpat <- alcohol_rate_1000 %>%
+alcohol_rate_10000_inpat <- alcohol_rate_10000 %>%
   filter(pat_type == "inpatient") %>%
   dplyr::rename("O99_inp_Rate" = rate)
 
-alcohol_rate_1000_outpat <- alcohol_rate_1000 %>%
+alcohol_rate_10000_outpat <- alcohol_rate_10000 %>%
   filter(pat_type == "outpatient") %>%
   dplyr::rename("O99_out_Rate" = rate)
 ```
@@ -362,7 +362,7 @@ alcohol_rate_1000_outpat <- alcohol_rate_1000 %>%
 #| message: false 
 #| echo: false
 
-# alcohol_rate_1000 %>%
+# alcohol_rate_10000 %>%
 # ggplot(aes(x = year, 
 #            y = rate, 
 #            group = pat_type, 
@@ -380,17 +380,17 @@ alcohol_rate_1000_outpat <- alcohol_rate_1000 %>%
 #| echo: false
 
 # Calculating P04.3 Rate of diagnosis
-p_code_rate_1000 <- p_code %>%
+p_code_rate_10000 <- p_code %>%
   dplyr::filter(year < 2023) %>%                                                #
   dplyr::group_by(year) %>%
   dplyr::summarise(count = n()) %>%
  # dplyr::rename("year" = YOB) %>%
   dplyr::mutate(year = as.character(year)) %>%
   dplyr::left_join(bvs, by = "year") %>%
-  dplyr::mutate(rate = (count/annual)*1000) %>%
+  dplyr::mutate(rate = (count/annual)*10000) %>%
   dplyr::rename("P04.3_Rate" = rate)
 # 
-# p_code_rate_1000 %>%
+# p_code_rate_10000 %>%
 # mutate(year = as.numeric(year)) %>%
 # ggplot(aes(x = year, 
 #            y = rate)) +
@@ -406,17 +406,17 @@ p_code_rate_1000 <- p_code %>%
 #| echo: false
 
 # Calculating and trending the rate of ICD-10 code Q86.0 Fetal alcohol syndrome (dysmorphic)
-q_code_rate_1000 <- q_code %>%
+q_code_rate_10000 <- q_code %>%
   dplyr::filter(year < 2023) %>%                                                #
   dplyr::group_by(year) %>%
   dplyr::summarise(count = dplyr::n()) %>%
 #  dplyr::rename("year" = YOB) %>%
   dplyr::mutate(year = as.character(year)) %>%
   dplyr::left_join(bvs, by = "year") %>%
-  dplyr::mutate(rate = (count/annual)*1000) %>%
+  dplyr::mutate(rate = (count/annual)*10000) %>%
   dplyr::rename("Q86_Rate" = rate)
 # 
-# q_code_rate_1000 %>%
+# q_code_rate_10000 %>%
 # mutate(year = as.numeric(year)) %>%
 # ggplot(aes(x = year, 
 #            y = rate)) +
@@ -431,10 +431,10 @@ q_code_rate_1000 <- q_code %>%
 #| message: false 
 #| echo: false
 
-rate_trend <- q_code_rate_1000 %>%
-  left_join(p_code_rate_1000, by = "year") %>%
-  left_join(alcohol_rate_1000_inpat, by = "year") %>%
-  left_join(alcohol_rate_1000_outpat, by = "year") %>%
+rate_trend <- q_code_rate_10000 %>%
+  left_join(p_code_rate_10000, by = "year") %>%
+  left_join(alcohol_rate_10000_inpat, by = "year") %>%
+  left_join(alcohol_rate_10000_outpat, by = "year") %>%
   select(year, P04.3_Rate, Q86_Rate, O99_inp_Rate, O99_out_Rate) %>%
   pivot_longer(-year)
 
@@ -475,7 +475,7 @@ rate_trend %>%
       ) + # Using viridis palette
   labs(title = paste0("Prenatal Alcohol Exposure Reported Rates 2016-", year(Sys.Date()) - 3), 
        x = "Year",
-       y = "Reported Prevalence per 1,000 Births",
+       y = "Reported Prevalence per 10,000 Births",
        colour = "Category", 
        caption = "Alcohol complicating pregnancy (O99.31) \n Affected by maternal use of alcohol (P04.3)\nFetal Alcohol Syndrome (Q86.0)") +
   theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"), # Centering and styling the title
@@ -544,7 +544,7 @@ load("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\CPROB.Rda")
  # estimated Prevalence
   temp1<- Rrate #((Rrate)*cp$PPV)+((1-(Rrate))*(1-cp$NPV)) #Bayes adjusted prevalence rate
     ev1<-pois.exact(temp1*ev[3,],ev[3,]) #Obtain CI's
-    ev1[,3:5]<-round(ev1[,3:5]*1000,1)
+    ev1[,3:5]<-round(ev1[,3:5]*10000,1)
     ev1[,1]<-round(ev1[,1],1)
     ev2<-cbind(ev[2,],ev1[,-6])
     ev2<-format(round(ev2,1),trim=T,justify="centre",drop0trailing=F)
@@ -718,9 +718,10 @@ Q86_map <- ggplot(data = ak_sf_em,
         theme(axis.text.x = element_blank(),
               axis.text.y = element_blank(),
               axis.ticks = element_blank(),
+              legend.title = element_blank(),
               panel.background = element_rect(fill = "white", 
                                               color = "white"), 
-              legend.position = "none") +
+              legend.position = "right") +
         ggtitle("Q86.0")
 
 Q86_map_ly <- ggplotly(Q86_map, 
@@ -760,7 +761,7 @@ Q86_map_ly <- ggplotly(Q86_map,
  # estimated Prevalence
   temp1<- Rrate #((Rrate)*cp$PPV)+((1-(Rrate))*(1-cp$NPV)) #Bayes adjusted prevalence rate
     ev1<-pois.exact(temp1*ev[3,],ev[3,]) #Obtain CI's
-    ev1[,3:5]<-round(ev1[,3:5]*1000,1)
+    ev1[,3:5]<-round(ev1[,3:5]*10000,1)
     ev1[,1]<-round(ev1[,1],1)
     ev2<-cbind(ev[2,],ev1[,-6])
     ev2<-format(round(ev2,1),trim=T,justify="centre",drop0trailing=F)
@@ -922,9 +923,10 @@ P043_map <- ggplot(data = ak_sf_em,
         theme(axis.text.x = element_blank(),
               axis.text.y = element_blank(),
               axis.ticks = element_blank(),
+              legend.title = element_blank(),
               panel.background = element_rect(fill = "white", 
                                               color = "white"),
-              legend.position = "none") +
+              legend.position = "right") +
         ggtitle("P04.3")
 
 P043_map_ly <- ggplotly(P043_map, 
@@ -1143,7 +1145,7 @@ O9931_map <- ggplot(data = ak_sf_em_p, #combined_data,
               panel.background = element_rect(fill = "white", 
                                               color = "white"),
               legend.position = "right") +
-        ggtitle(paste0("Prevalence Rate per 1,000 Births by Public Health Region 2016-", year(Sys.Date()) - 3, "\n \n O99.31")) +
+        ggtitle(paste0("Prevalence Rate per 10,000 Births by Public Health Region 2016-", year(Sys.Date()) - 3, "\n \n O99.31")) +
   ggrepel::geom_label_repel(
     data = ak_sf_em_p,
     aes(label = PH_REGION, geometry = geometry),
@@ -1161,7 +1163,7 @@ O9931_map <- ggplot(data = ak_sf_em_p, #combined_data,
   ) + 
   xlab("") +
   ylab("") + 
-  labs(fill = "Report Prevalence per 1,000 Births")
+  labs(fill = "Report Prevalence per 10,000 Births")
 
 #ggsave(plot = O9931_map, filename = "R:/ABDR/chris_analysis/Ad_hoc_queries/img/O9931_map.png")
 
@@ -1540,15 +1542,15 @@ tt <- alcohol_get_query_b %>%
   dplyr::summarise(O99_race = n()) %>%
   arrange(desc(O99_race)) %>%
   left_join(birth_race_new, by = "race_txt") %>%
-  mutate(O99diag_rate1000 = (O99_race/birth_total)*1000)
+  mutate(O99diag_rate10000 = (O99_race/birth_total)*10000)
 
 tt2 <- tt %>%
   mutate(rate = epitools::pois.exact(O99_race, birth_total) 
-         %>% pull(3)*1000,
+         %>% pull(3)*10000,
          lower = epitools::pois.exact(O99_race, birth_total) 
-         %>% pull(4)*1000, 
+         %>% pull(4)*10000, 
          upper = epitools::pois.exact(O99_race, birth_total) 
-         %>% pull(5)*1000) %>%
+         %>% pull(5)*10000) %>%
   mutate_at(.vars = vars(rate, lower, upper), .funs = ~ round(., 2)) %>%
   mutate(prev = paste(rate,paste("(",lower,","," ",upper,")",sep = ""))) %>% 
   dplyr::rename("Race" = race_txt,
@@ -1626,7 +1628,7 @@ library(epitools)
  # # estimated Prevalence
  #  temp1<- Rrate #((Rrate)*cp$PPV)+((1-(Rrate))*(1-cp$NPV)) #Bayes adjusted prevalence rate
  #    ev1<-pois.exact(temp1*ev[3,],ev[3,]) #Obtain CI's
- #    ev1[,3:5]<-round(ev1[,3:5]*1000,1)
+ #    ev1[,3:5]<-round(ev1[,3:5]*10000,1)
  #    ev1[,1]<-round(ev1[,1],1)
  #    ev2<-cbind(ev[2,],ev1[,-6])
  #    ev2<-format(round(ev2,1),trim=T,justify="centre",drop0trailing=F)
@@ -1668,7 +1670,7 @@ COND_FCTR<-function(Code2,Factor,data){
   Rrate<-ga[2,]/ga[3,] #Reported prevalence rate by year
   temp1<-((Rrate)*1)#+((1-(Rrate))*(1))
     ga1<-pois.exact(temp1*ga[3,],ga[3,]) #Obtain CI's
-    ga1[,3:5]<-round(ga1[,3:5]*1000,2)
+    ga1[,3:5]<-round(ga1[,3:5]*10000,2)
     #ga1<-ga1[,-6]
     row.names(ga1)<-colnames(ga) 
   ga2<-cbind(ga[2,],ga1[,-6])
@@ -1773,7 +1775,7 @@ tmp1<-htmlTable(t6,
                          "Father on birth certificate"),
                 n.rgroup=c(2,2,6,4,3,2,2,2,2),
                 css.cell="padding-left: 2em; padding-right: 2em;",
-                tfoot=txtMergeLines("Notes: Prevalence reported per 1,000 live births; Data suppressed for # of reports  < 6; 95% CI = 95% Confidence Interval"))
+                tfoot=txtMergeLines("Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports  < 6; 95% CI = 95% Confidence Interval"))
 gsub('<td','<td nowrap="nowrap";',tmp1) #removes wrapping
  
 ```
@@ -1824,7 +1826,7 @@ library(epitools)
  # estimated Prevalence
   temp1<- Rrate #((Rrate)*cp$PPV)+((1-(Rrate))*(1-cp$NPV)) #Bayes adjusted prevalence rate
     ev1<-pois.exact(temp1*ev[3,],ev[3,]) #Obtain CI's
-    ev1[,3:5]<-round(ev1[,3:5]*1000,1)
+    ev1[,3:5]<-round(ev1[,3:5]*10000,1)
     ev1[,1]<-round(ev1[,1],1)
     ev2<-cbind(ev[2,],ev1[,-6])
     ev2<-format(round(ev2,1),trim=T,justify="centre",drop0trailing=F)
@@ -1863,7 +1865,7 @@ COND_FCTR<-function(Code2,Factor,data){
   Rrate<-ga[2,]/ga[3,] #Reported prevalence rate by year
   temp1<- Rrate #((Rrate)*cp$PPV)+((1-(Rrate))*(1-cp$NPV)) #Bayes adjusted prevalence rate           # Removing PPV and NPV 
     ga1<-pois.exact(temp1*ga[3,],ga[3,]) #Obtain CI's
-    ga1[,3:5]<-round(ga1[,3:5]*1000,2)
+    ga1[,3:5]<-round(ga1[,3:5]*10000,2)
     #ga1<-ga1[,-6]
     row.names(ga1)<-colnames(ga) 
   ga2<-cbind(ga[2,],ga1[,-6])
@@ -1965,7 +1967,7 @@ tmp1<-htmlTable(t6,
                          "Father on birth certificate"),
                 n.rgroup=c(2,2,6,4,3,2,2,2,2),
                 css.cell="padding-left: 2em; padding-right: 2em;",
-                tfoot=txtMergeLines("Notes: Prevalence reported per 1,000 live births; Data suppressed for # of reports  < 6; 95% CI = 95% Confidence Interval"))
+                tfoot=txtMergeLines("Notes: Prevalence reported per 10,000 live births; Data suppressed for # of reports  < 6; 95% CI = 95% Confidence Interval"))
 gsub('<td','<td nowrap="nowrap";',tmp1) #removes wrapping
 ```
 
