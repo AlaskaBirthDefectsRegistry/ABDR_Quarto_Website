@@ -2,5 +2,5 @@
 title: "Reporting Guide"
 ---
 
-* [ABDR Reporting Guide](ABDR_Reporting_Guide.qmd)
+* [ABDR Reporting Guide](https://health.alaska.gov/en/resources/reporting-guide-alaska-birth-defects-registry-abdr/)
 
