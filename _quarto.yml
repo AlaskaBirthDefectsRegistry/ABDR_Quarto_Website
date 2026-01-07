@@ -20,6 +20,8 @@ website:
         text: Methods
       - href: about.qmd
         text: About
+      - href: abdr_advisory_committee.qmd
+        text: Advisory Committee
     tools:
       - icon: facebook
         href: https://www.facebook.com/doh.alaska
