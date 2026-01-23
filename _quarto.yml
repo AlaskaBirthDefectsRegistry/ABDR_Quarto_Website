@@ -20,16 +20,19 @@ website:
         text: Methods
       - href: about.qmd
         text: About
-      - href: abdr_advisory_committee.qmd
-        text: Advisory Committee
     tools:
       - icon: facebook
         href: https://www.facebook.com/doh.alaska
+        aria-label: "Visit Alaska Department of Health on Facebook"
       - icon: youtube
         href: https://www.youtube.com/alaskadhss
+        aria-label: "Visit Alaska DHSS on YouTube"
       - icon: github
         href: https://github.com/AlaskaBirthDefectsRegistry/
-        search: TRUE
+        aria-label: "Visit Alaska Birth Defects Registry on GitHub"
+  search: 
+    location: navbar
+    type: overlay
   page-footer:
     right: "Built with [Quarto](https://quarto.org/)"
     left: "&copy; Copyright 2025, State of Alaska Dept. of Health"
@@ -43,7 +46,7 @@ format:
         background-color: var(--bs-primary) !important;
       }
     toc: false
-    
+    include-after-body: accessibility-fixes.html
 
 editor: source
 

@@ -51,7 +51,6 @@ ul.task-list li input[type="checkbox"] {
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -140,16 +139,12 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./abdr_advisory_committee.html"> 
-<span class="menu-text">Advisory Committee</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
-    <a href="https://www.facebook.com/doh.alaska" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-facebook"></i></a>
-    <a href="https://www.youtube.com/alaskadhss" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-youtube"></i></a>
-    <a href="https://github.com/AlaskaBirthDefectsRegistry/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <a href="https://www.facebook.com/doh.alaska" title="" class="quarto-navigation-tool px-1" aria-label="Visit Alaska Department of Health on Facebook"><i class="bi bi-facebook"></i></a>
+    <a href="https://www.youtube.com/alaskadhss" title="" class="quarto-navigation-tool px-1" aria-label="Visit Alaska DHSS on YouTube"><i class="bi bi-youtube"></i></a>
+    <a href="https://github.com/AlaskaBirthDefectsRegistry/" title="" class="quarto-navigation-tool px-1" aria-label="Visit Alaska Birth Defects Registry on GitHub"><i class="bi bi-github"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -829,7 +824,7 @@ h2 {/* Header 2 */
 </section>
 <section id="suggested-citation" class="level2">
 <h2 class="anchored" data-anchor-id="suggested-citation">Suggested Citation</h2>
-<p>State of Alaska Department of Health, Division of Public Health, Section of Women’s, Children’s, and Family Health. Alaska Birth Defects Registry Condition Report: Prenatal Alcohol Exposure Report, Alaska, 2007-2023. Updated January 06, 2026. Available at: http://rpubs.com/AK_ABDR/prenatal_alcohol_report.</p>
+<p>State of Alaska Department of Health, Division of Public Health, Section of Women’s, Children’s, and Family Health. Alaska Birth Defects Registry Condition Report: Prenatal Alcohol Exposure Report, Alaska, 2007-2023. Updated January 16, 2026. Available at: http://rpubs.com/AK_ABDR/prenatal_alcohol_report.</p>
 </section>
 <section id="contact" class="level2">
 <h2 class="anchored" data-anchor-id="contact">Contact</h2>
@@ -839,7 +834,7 @@ Anchorage, AK 99503<br>
 (907) 269-3400 phone<br>
 (907) 754-3529 fax<br>
 hssbirthdefreg@alaska.gov</p>
-<p><em>Updated: January 06, 2026</em><br>
+<p><em>Updated: January 16, 2026</em><br>
 <em>Code source:</em> <code>R:\ABDR\Website\ABDR_Quarto_Website\prenatal_alcohol_report.qmd</code></p>
 <p>&nbsp;</p>
 <center>
@@ -854,6 +849,59 @@ hssbirthdefreg@alaska.gov</p>
 </center></section>
 
 </main> <!-- /main -->
+<script>
+
+// Fix accessibility issues after page load
+
+window.addEventListener('load', function() {
+
+  // Small delay to ensure all Quarto elements are fully rendered
+
+  setTimeout(function() {
+
+    
+
+    // Fix 1: Add aria-label to search button
+
+    const searchButton = document.querySelector('.aa-DetachedSearchButton');
+
+    if (searchButton && !searchButton.getAttribute('aria-label')) {
+
+      searchButton.setAttribute('aria-label', 'Search this site');
+
+    }
+
+    
+
+    // Fix 2: Add aria-label to autocomplete container
+
+    const autocomplete = document.querySelector('.aa-Autocomplete');
+
+    if (autocomplete && !autocomplete.getAttribute('aria-label')) {
+
+      autocomplete.setAttribute('aria-label', 'Search');
+
+    }
+
+    
+
+    // Fix 3: Remove tabindex from aria-hidden elements (tabster dummies)
+
+    const hiddenFocusable = document.querySelectorAll('i[aria-hidden="true"][data-tabster-dummy][tabindex="0"]');
+
+    hiddenFocusable.forEach(function(element) {
+
+      element.setAttribute('tabindex', '-1');
+
+    });
+
+    
+
+  }, 100);
+
+});
+
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

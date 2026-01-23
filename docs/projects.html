@@ -51,7 +51,6 @@ ul.task-list li input[type="checkbox"] {
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -114,16 +113,12 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./abdr_advisory_committee.html"> 
-<span class="menu-text">Advisory Committee</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
-    <a href="https://www.facebook.com/doh.alaska" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-facebook"></i></a>
-    <a href="https://www.youtube.com/alaskadhss" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-youtube"></i></a>
-    <a href="https://github.com/AlaskaBirthDefectsRegistry/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <a href="https://www.facebook.com/doh.alaska" title="" class="quarto-navigation-tool px-1" aria-label="Visit Alaska Department of Health on Facebook"><i class="bi bi-facebook"></i></a>
+    <a href="https://www.youtube.com/alaskadhss" title="" class="quarto-navigation-tool px-1" aria-label="Visit Alaska DHSS on YouTube"><i class="bi bi-youtube"></i></a>
+    <a href="https://github.com/AlaskaBirthDefectsRegistry/" title="" class="quarto-navigation-tool px-1" aria-label="Visit Alaska Birth Defects Registry on GitHub"><i class="bi bi-github"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -168,6 +163,59 @@ ul.task-list li input[type="checkbox"] {
 </section>
 
 </main> <!-- /main -->
+<script>
+
+// Fix accessibility issues after page load
+
+window.addEventListener('load', function() {
+
+  // Small delay to ensure all Quarto elements are fully rendered
+
+  setTimeout(function() {
+
+    
+
+    // Fix 1: Add aria-label to search button
+
+    const searchButton = document.querySelector('.aa-DetachedSearchButton');
+
+    if (searchButton && !searchButton.getAttribute('aria-label')) {
+
+      searchButton.setAttribute('aria-label', 'Search this site');
+
+    }
+
+    
+
+    // Fix 2: Add aria-label to autocomplete container
+
+    const autocomplete = document.querySelector('.aa-Autocomplete');
+
+    if (autocomplete && !autocomplete.getAttribute('aria-label')) {
+
+      autocomplete.setAttribute('aria-label', 'Search');
+
+    }
+
+    
+
+    // Fix 3: Remove tabindex from aria-hidden elements (tabster dummies)
+
+    const hiddenFocusable = document.querySelectorAll('i[aria-hidden="true"][data-tabster-dummy][tabindex="0"]');
+
+    hiddenFocusable.forEach(function(element) {
+
+      element.setAttribute('tabindex', '-1');
+
+    });
+
+    
+
+  }, 100);
+
+});
+
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
