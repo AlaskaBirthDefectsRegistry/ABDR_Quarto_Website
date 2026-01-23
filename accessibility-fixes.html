@@ -1,0 +1,27 @@
+<script>
+// Fix accessibility issues after page load
+window.addEventListener('load', function() {
+  // Small delay to ensure all Quarto elements are fully rendered
+  setTimeout(function() {
+    
+    // Fix 1: Add aria-label to search button
+    const searchButton = document.querySelector('.aa-DetachedSearchButton');
+    if (searchButton && !searchButton.getAttribute('aria-label')) {
+      searchButton.setAttribute('aria-label', 'Search this site');
+    }
+    
+    // Fix 2: Add aria-label to autocomplete container
+    const autocomplete = document.querySelector('.aa-Autocomplete');
+    if (autocomplete && !autocomplete.getAttribute('aria-label')) {
+      autocomplete.setAttribute('aria-label', 'Search');
+    }
+    
+    // Fix 3: Remove tabindex from aria-hidden elements (tabster dummies)
+    const hiddenFocusable = document.querySelectorAll('i[aria-hidden="true"][data-tabster-dummy][tabindex="0"]');
+    hiddenFocusable.forEach(function(element) {
+      element.setAttribute('tabindex', '-1');
+    });
+    
+  }, 100);
+});
+</script>
