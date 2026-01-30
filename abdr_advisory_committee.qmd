@@ -4,56 +4,35 @@ title: "ABDR Advisory Committee"
 
 # Call for Alaska Birth Defects Registry Advisory Committee Members
 
-## The Alaska Birth Defects Registry
+## About the Registry
 
-The Alaska Birth Defects Registry (ABDR) is a population-based public health surveillance system that monitors the incidence of birth defects among children under age three throughout Alaska. ABDR plays a critical role in identifying, analyzing, and responding to patterns of birth defects across Alaska’s diverse communities. Approximately 50 birth defects are reportable to ABDR, including the 47 recommended by the National Birth Defects Prevention Network. The registry was established in 1996 and is operated by the Alaska Division of Public Health.
+The Alaska Birth Defects Registry (ABDR) is a population-based public health surveillance system that monitors the incidence of birth defects among children under age three throughout Alaska. ABDR plays a critical role in identifying, analyzing, and responding to patterns of birth defects across Alaska’s diverse communities. Approximately 50 birth defects are reportable to ABDR, including the 47 recommended by the [National Birth Defects Prevention Network](https://nbdpn.org/). The registry was established in 1996 and is operated by the [Alaska Division of Public Health](https://health.alaska.gov/en/division-of-public-health/).
 
 ## Advisory Committee
 
 The Registry is seeking a group of key stakeholders, senior leaders, and subject-matter experts to provide high-level oversight, guidance, and strategic direction. The aim is for the committee to be a multi-disciplinary body composed of a mix of governmental leaders, technical experts, and community stakeholders.
 
-Committee membership will be broadly categorized by five core areas:
+Examples of membership can be categorized into five core areas:
 
 ### 1. Public Health & Governmental Leadership
 
-These individuals provide the authority and policy direction for the program.
-
-* State Epidemiologist: Usually the ranking scientific official who oversees disease tracking and response.
-* Program Directors: Leaders from specific divisions, such as Infectious Disease, Chronic Disease, or Environmental Health.
-* Local Health Department Representatives: Officials from county or city health departments to ensure the state system works for local jurisdictions.
-* Tribal Health Liaisons: Representatives from Tribal Nations to ensure surveillance respect's sovereign data rights.
+These individuals will be members of the State of Alaska, Division of Public Health, who help ensure that birth defect surveillance operates within the government's capacity and will have the greatest authority and liability for the registry.
 
 ### 2. Technical & Data Governance Experts
 
-With the shift toward "Data Modernization," these roles are critical for the infrastructure of the surveillance system.
-
-* Chief Data Officer (CDO) / Chief Information Officer (CIO): Focus on the technical architecture, data standards (like HL7), and interoperability.
-* Informatics Specialists: Experts who understand how data flows from electronic health records (EHRs) to public health databases.
-* Statistical Officials: High-level biostatisticians who ensure the data being collected is scientifically valid and capable of being analyzed for trends.
+With the shift toward "Data Modernization," these roles are critical for the infrastructure of the surveillance system. Individuals may have a background in healthcare data interoperability, be members of the Alaska HIE Healtheconnect, or be data modernization experts or informatics specialists.
 
 ### 3. Clinical & Laboratory Partners
 
-Since most surveillance data originates in the healthcare system, these individuals represent the "data providers."
-
-* State Public Health Laboratory Director: Represents the diagnostic side of surveillance (e.g., genomic sequencing of virus variants).
-* Hospital Association Representatives: Liaisons from private hospital systems who manage the burden of reporting.
-* Clinical Leads: Physicians or nurses who can speak to the feasibility of data collection in a busy clinical setting.
+Since most of ABDR’s surveillance data originates in healthcare entities, it is important to include clinical representation, such as physicians or nurses who can provide medical expertise, or liaisons from hospital systems who manage the reporting burden and can speak to the feasibility of data collection.
 
 ### 4. Legal, Privacy, and Regulatory Experts
 
-Public health surveillance often involves sensitive patient data, making these roles essential for compliance.
-
-* Privacy Officer / HIPAA Compliance Officer: Ensures all data sharing follows federal (HIPAA) and state privacy laws.
-* General Counsel: Provides legal advice on mandates, such as "reportable disease" laws that require doctors to share information with the state.
-* Ethics Officers: Address the "why" and "how" of data collection, ensuring that surveillance doesn't unfairly target or marginalize specific populations.
+Public health surveillance often involves sensitive patient data, making legal expertise helpful for a committee.
 
 ### 5. Community & Policy Stakeholders
 
-These members ensure the surveillance program remains transparent and serves the public interest.
-
-* Patient Advocates: Individuals who represent the interests of those whose data is being collected.
-* Legislative Liaisons: Staff from the Governor’s office or state legislature who help secure funding and political support.
-* Community Advisory Board (CAB) Members: Leaders from non-profits or community organizations who ensure the data collected is used to address health inequities.
+Patient advocates, members of applicable local non-profits, and individuals with lived expertise can help ensure the surveillance program remains transparent and serves the public interest.
 
 ## Member Time Commitment
 
