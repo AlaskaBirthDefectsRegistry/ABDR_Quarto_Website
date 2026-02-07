@@ -54,9 +54,9 @@ channel.c<-odbcDriverConnect("Driver={Microsoft Access Driver (*.mdb, *.accdb)};
 tnd<-sqlQuery(channel.c,"SELECT * FROM Trend")
 
 # Loading research dataset
-load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_BTH_0721RSRCH_L3.Rda") # #
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2022\\ABDR_BTH_0722RSRCH_L3.Rda") # #
 
-gg <- ABDR_BTH_0721RSRCH_L3 %>%                                                 #
+gg <- ABDR_BTH_0722RSRCH_L3 %>%                                                 #
   mutate(YOB = ifelse(is.na(dob), 
                       substr(BC, start = 0, stop = 4), 
                       year(ymd(dob))))
@@ -64,15 +64,15 @@ ABDR_L3 <- gg %>%
   select(HYP:YOB) %>%
   group_by(YOB) %>%
   summarise_all(.funs = sum) %>%
-  filter(YOB %in% 2007:2021)                                                    #
+  filter(YOB %in% 2007:2022)                                                    #
                            
 # Loading Birth Certificate data
-load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\bth07_21.Rda")   # #
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2022\\bth07_22.Rda")   # #
                            
 # Loading ABDR data with NatCond variable
-load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2021\\ABDR_0721YOR_YOB.Rda") # #
+load("R:\\ABDR\\Research_Data_tables\\ResearchTables2007_2022\\ABDR_0722YOR_YOB.Rda") # #
 
-ABDR_YOB <- ABDR_0721YOR_YOB %>%                                                #
+ABDR_YOB <- ABDR_0722YOR_YOB %>%                                                #
   distinct(BC, NatCond, YOB) %>%
   group_by(NatCond, YOB) %>%
   dplyr::summarise(cases = n())
@@ -108,7 +108,7 @@ birth3 <- birth2 %>% mutate(YOB = ifelse(is.na(dob),
 
 # Creating dataframe of birth per year (birth_totals)
 birth_totals <- birth %>% 
-  filter(dob_yr %in% 2007:2021) %>%                                             #
+  filter(dob_yr %in% 2007:2022) %>%                                             #
   dplyr::group_by(dob_yr) %>% 
   dplyr::summarise(total_population = n()) %>%
   mutate_all(.funs = as.integer) %>%
@@ -117,7 +117,7 @@ birth_totals <- birth %>%
 # Creating dataframe of female birth per year (f_birth_totals)
 f_birth_totals <- birth %>%
   filter(sex == "F") %>% 
-  filter(dob_yr %in% 2007:2021) %>%                                             #
+  filter(dob_yr %in% 2007:2022) %>%                                             #
   dplyr::group_by(dob_yr) %>% 
   dplyr::summarise(female_population = n()) %>%
   mutate_all(.funs = as.integer) %>%
@@ -126,7 +126,7 @@ f_birth_totals <- birth %>%
 # Creating dataframe of male birth per year (m_birth_totals)
 m_birth_totals <- birth %>%
   filter(sex == "M") %>% 
-  filter(dob_yr %in% 2007:2021) %>%                                             #
+  filter(dob_yr %in% 2007:2022) %>%                                             #
   dplyr::group_by(dob_yr) %>% 
   dplyr::summarise(male_population = n()) %>%
   mutate_all(.funs = as.integer) %>%
@@ -189,7 +189,7 @@ rts1<-reshape(rts,timevar="YOB",idvar="NatCond",direction="wide")
 rts1 <- rts1[c("NatCond", "Rate.2007", "Rate.2008", "Rate.2009", "Rate.2010", 
        "Rate.2011", "Rate.2012", "Rate.2013", "Rate.2014", "Rate.2015",
        "Rate.2016", "Rate.2017", "Rate.2018", "Rate.2019", "Rate.2020", 
-       "Rate.2021")]                                                            #
+       "Rate.2021", "Rate.2022")]                                               #
 
 # Merging rts1 and pval2 into one dataframe: trend
 trend<-merge(rts1,pval,by="NatCond",all.x=T)    
@@ -209,12 +209,12 @@ trend1 <- merge(trend, cond_b, by = "NatCond") %>%
 
 colnames(trend1) <-c("Defect", "2007", "2008", "2009", "2010", "2011", "2012", 
                       "2013", "2014", "2015", "2016", "2017", "2018", "2019",
-                     "2020", "2021", "p-value")                                 #
+                     "2020", "2021", "2022", "p-value")                         #
 
-trend1[,2:16]<-round(trend1[,2:16],1)                                           # # add one to all last column numbers
-trend1[,17]<-round(trend1[,17],4)                                               # #
-trend1[,2:17]<-format(trend1[,2:17],drop0trailing = FALSE,trim = T)             # #
-trend1[,2:17][trend1[,2:17]=="NA"|trend1[,2:17]=="NaN"]<- 0 # used to be "-" not zero   # # #
+trend1[,2:17]<-round(trend1[,2:17],1)                                           # # add one to all last column numbers
+trend1[,18]<-round(trend1[,18],4)                                               # #
+trend1[,2:18]<-format(trend1[,2:18],drop0trailing = FALSE,trim = T)             # #
+trend1[,2:18][trend1[,2:18]=="NA"|trend1[,2:18]=="NaN"]<- 0 # used to be "-" not zero   # # #
 
 row.names(trend1)<-trend1[,1]
 
@@ -264,7 +264,7 @@ trend2 <- trend2 %>% select(-Defect)
 tidytrend <- trend2 %>%
   rownames_to_column() %>%
   select(-`p-value`) %>%
-  pivot_longer( names_to = "year", values_to = "reports", `2007`:`2021`) %>%    #
+  pivot_longer( names_to = "year", values_to = "reports", `2007`:`2022`) %>%    #
   mutate(reports = ifelse(reports == "-", 0, reports)) %>%
   mutate(reports = as.numeric(reports), 
          year = as.numeric(year)) %>%
@@ -326,7 +326,7 @@ tmp1<-htmlTable(trend4_no_groups,
 demo_tbl <- datatable(trend4,
                       escape = FALSE,
                       extensions = c("RowGroup"), #, "Responsive"),
-          options = list(rowGroup = list(dataSrc = 18),                         # Add one to dataSrc to keep the right grouping number
+          options = list(rowGroup = list(dataSrc = 19),                         # Add one to dataSrc to keep the right grouping number
                          pageLength = 47, 
                          dom = 't',
                          paging = FALSE, fnDrawCallback = htmlwidgets::JS(
