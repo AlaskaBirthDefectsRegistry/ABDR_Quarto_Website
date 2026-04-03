@@ -33,7 +33,18 @@ Truncus arteriosus is a birth defect of the heart that occurs when the aorta and
 
 <br>
 
-<iframe width="812" height="456.75" src="https://www.youtube.com/embed/193JQ6LQRwI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-external = "1"></iframe>
+<iframe width="812" height="456.75" 
+src="https://www.youtube.com/embed/193JQ6LQRwI" 
+  title="Explainer video: What is Truncus arteriosus. From Cincinnati Children's Hospital"
+  frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+  allowfullscreen 
+  data-external="1">
+</iframe>
+
+<p><a href="https://www.youtube.com/embed/193JQ6LQRwI">
+  Watch this video on YouTube: Truncus arteriosus explained
+</a> (opens in YouTube, where captions are available)</p>
 
 
 ## Epidemiology 
@@ -182,7 +193,16 @@ geo_html <- htmlTable(txtRound(geo_tbl),
 datatable(geo_tbl, 
           container = geo_html, 
           options = list(pageLength = nrow(geo_tbl),
-                         dom = 't'),
+                          dom = 't',
+                        initComplete = JS(
+                          "function(settings, json) {",
+                          "$('.dataTables_wrapper tfoot').css({'text-align': 'left', 'padding-left': '0', 'margin-left':                            '0'});",
+                          "$('.dataTables_wrapper tfoot td').css({'padding-left': '0', 'margin-left': '0', 'text-align':                             'left'});",
+                          "$('.dataTables_wrapper tfoot tr').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('tfoot').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('.dataTables_wrapper thead th').css('text-align', 'left');",
+                          "}"
+                        )),
                          rownames = F, 
                          colnames = names(geo_tbl)) 
 
@@ -219,7 +239,16 @@ demo_tbl <- datatable(t7,
           extensions = c("RowGroup", "Responsive"),
           options = list(rowGroup = list(dataSrc = 5), 
                          pageLength = 30, 
-                         dom = 't'),
+                          dom = 't',
+                        initComplete = JS(
+                          "function(settings, json) {",
+                          "$('.dataTables_wrapper tfoot').css({'text-align': 'left', 'padding-left': '0', 'margin-left':                            '0'});",
+                          "$('.dataTables_wrapper tfoot td').css({'padding-left': '0', 'margin-left': '0', 'text-align':                             'left'});",
+                          "$('.dataTables_wrapper tfoot tr').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('tfoot').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('.dataTables_wrapper thead th').css('text-align', 'left');",
+                          "}"
+                        )),
           container = tmp1,
           rownames = T, 
           class = 'cell-border stripe')
@@ -317,7 +346,6 @@ hssbirthdefreg@alaska.gov
 
  <center>
 ![State of Alaska, Department of Health, Section of Women's, Children's and Family Health](img/DOH_20Beveled.png "State of Alaska, Department of Health, Section of Women's, Children's and Family Health"){width=200px height=200px}
-**State of Alaska, Department of Health, Section of Women's, Children's and Family Health**
 </center>  
 
   

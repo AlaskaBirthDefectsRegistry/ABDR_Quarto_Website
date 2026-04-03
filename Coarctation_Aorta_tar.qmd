@@ -33,7 +33,17 @@ Coarctation of the aorta is a birth defect in which part of the aorta, the main 
 
 <br>
 
-<iframe width="812" height="456.75" src="https://www.youtube.com/embed/HbUrfLgE2FE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-external = "1"></iframe>
+<iframe width="812" height="456.75" 
+  src="https://www.youtube.com/embed/HbUrfLgE2FE" 
+  title="Explainer video: What is Coarctation of the Aorta. From Cincinnati Children's Hospital"
+  frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+  allowfullscreen 
+  data-external="1">
+</iframe>
+<p><a href="https://www.youtube.com/watch?v=HbUrfLgE2FE">
+  Watch this video on YouTube: Coarctation of the Aorta explained
+</a> (opens in YouTube, where captions are available)</p>
 
 ## Epidemiology 
 Alaska Birth Defects Registry (ABDR) registers birth defects as reported from health care providers using International Classification of Disease (ICD) billing codes. The use of these ICD codes can lead to misclassification of diagnosed conditions. Prior to this report, all prevalence estimates were based on the number of unique children reported to ABDR with an ICD code representing a specified condition regardless of case confirmation status.  
@@ -108,7 +118,9 @@ Prevalence per 10,000 births of `r condition[1]` during `r datYRS[1]` by five-ye
 #| label: chunk-label-3 
 #| warning: false 
 #| message: FALSE 
-#| echo: falselibrary(ggplot2)
+#| echo: false
+
+library(ggplot2)
 library(plotly)
 
  trend <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\trend_nma_COARC.rds")
@@ -129,7 +141,16 @@ trend_1 <- htmlTable(trend_table,
 datatable(trend_table, 
           container = trend_1, 
           options = list(pageLength = nrow(trend_table),
-                         dom = 't'),
+                        dom = 't',
+                        initComplete = JS(
+                          "function(settings, json) {",
+                          "$('.dataTables_wrapper tfoot').css({'text-align': 'left', 'padding-left': '0', 'margin-left':                            '0'});",
+                          "$('.dataTables_wrapper tfoot td').css({'padding-left': '0', 'margin-left': '0', 'text-align':                             'left'});",
+                          "$('.dataTables_wrapper tfoot tr').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('tfoot').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('.dataTables_wrapper thead th').css('text-align', 'left');",
+                          "}"
+                        )),
                          rownames = F, 
                          colnames = names(trend_1))      
  
@@ -178,7 +199,16 @@ geo_html <- htmlTable(txtRound(geo_tbl),
 datatable(geo_tbl, 
           container = geo_html, 
           options = list(pageLength = nrow(geo_tbl),
-                         dom = 't'),
+                          dom = 't',
+                        initComplete = JS(
+                          "function(settings, json) {",
+                          "$('.dataTables_wrapper tfoot').css({'text-align': 'left', 'padding-left': '0', 'margin-left':                            '0'});",
+                          "$('.dataTables_wrapper tfoot td').css({'padding-left': '0', 'margin-left': '0', 'text-align':                             'left'});",
+                          "$('.dataTables_wrapper tfoot tr').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('tfoot').css({'padding-left': '0', 'margin-left': '0'});",
+                          "$('.dataTables_wrapper thead th').css('text-align', 'left');",
+                          "}"
+                        )),
                          rownames = F, 
                          colnames = names(geo_tbl)) 
 

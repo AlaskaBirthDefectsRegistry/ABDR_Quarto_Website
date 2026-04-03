@@ -205,7 +205,7 @@ load("R:\\ABDR\\chris_analysis\\cleft\\ev2_cp.Rda")
 load("R:\\ABDR\\chris_analysis\\cleft\\ev2_clp.Rda")                           
 
 #### CL ####
-cl15 <- ev2_cl %>% filter(yrs %in% 2017:2021) %>%                               # #
+cl15 <- ev2_cl %>% filter(yrs %in% 2018:2022) %>%                               # #
   select(-c('Prevalence (95% CI)', yrs)) %>%
   mutate_all(.funs = as.numeric) %>%
   summarise_all(.funs = sum)
@@ -257,7 +257,7 @@ cl15_rptc <- cl15_rptb %>%
 
 
 #### CP
-cp15 <- ev2_cp %>% filter(yrs %in% 2017:2021) %>%                               # #
+cp15 <- ev2_cp %>% filter(yrs %in% 2018:2022) %>%                               # #
   select(-c('Prevalence (95% CI)', yrs)) %>%
   mutate_all(.funs = as.numeric) %>%
   summarise_all(.funs = sum)
@@ -309,7 +309,7 @@ cp15_rptc <- cp15_rptb %>%
 
 
 #### CLP ####
-clp15 <- ev2_clp %>% filter(yrs %in% 2017:2021) %>%                             # #
+clp15 <- ev2_clp %>% filter(yrs %in% 2018:2022) %>%                             # #
   select(-c('Prevalence (95% CI)', yrs)) %>%
   mutate_all(.funs = as.numeric) %>%
   summarise_all(.funs = sum)
@@ -374,7 +374,7 @@ clft_prevs <- data.frame(Report_Prevalence, Defect_Prevalence,
 
 clft_prevs <- clft_prevs %>% mutate_all(.funs = as.character)
 
-save(clft_prevs, file = "R:/ABDR/Analysis_New/Published Data/clft_prevs.Rda")
+#save(clft_prevs, file = "R:/ABDR/Analysis_New/Published Data/clft_prevs.Rda")
 
 # Replacing auto-calculated cleft conditions with more complex adjustment
 PrevTab4 <- PrevTab3
