@@ -342,6 +342,7 @@ bvs <- birth %>%
 
 alcohol_rate_10000 <- alcohol_get_query %>%
   dplyr::group_by(pat_type, year) %>%
+    dplyr::distinct(dkey, pat_type, year) %>%
   dplyr::summarise(count = dplyr::n())  %>%
   dplyr::mutate(year = as.character(year)) %>%
   dplyr::left_join(bvs, by = "year") %>%
@@ -957,6 +958,7 @@ bvs_n <- birth %>%
 
 # Creating temp O99 defects datatable
 ii <- alcohol_get_query %>%
+  dplyr::distinct(dkey, patientregion) %>%
   group_by(patientregion) %>%
   dplyr::summarise(Total = n()) %>%
   filter(!(patientregion %in% c("Out of State", "Unknown"))) %>%
@@ -1538,6 +1540,7 @@ birth_race_new <- birth %>%
   arrange(desc(birth_total))
 
 tt <- alcohol_get_query_b %>%
+  dplyr::distinct(dkey, race_txt) %>%
   dplyr::group_by(race_txt) %>%
   dplyr::summarise(O99_race = n()) %>%
   arrange(desc(O99_race)) %>%

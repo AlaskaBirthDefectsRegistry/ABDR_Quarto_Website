@@ -1,0 +1,161 @@
+---
+title: "ABDR Reports App"
+format: html
+filters: 
+  - shinylive
+  - quarto-ext/shinylive
+---
+
+
+```{shinylive-r}
+#| standalone: true
+#| components: [editor, viewer]
+
+
+library(shiny)
+library(httr)
+library(rvest)
+
+# Base URL for the reports
+base_url <- "https://alaskabirthdefectsregistry.github.io/ABDR_Quarto_Website/"
+
+# Define the report links and their display names, grouped by category
+# This structure mirrors the organization on the original website, but flattened
+# for compatibility with Shiny's selectInput grouping.
+report_categories <- list(
+  "Rates and Trends" = list(
+    "Prevalence Rates" = "Prevalence_current.html",
+    "Prevalence Trends" = "trend_current.qmd"
+  ),
+  "Cardiovascular" = list(
+    "Coarctation of the aorta" = "Coarctation_Aorta_tar.html",
+    "Common truncus" = "Truncus_Arteriosus_tar.html",
+    "Double outlet right ventricle" = "DORV_tar.html",
+    "Ebstein anomaly" = "Ebstein_Anomaly_tar.html",
+    "Hypoplastic left heart syndrome" = "HLHS_tar.html",
+    "Interrupted aortic arch" = "IAA_tar.html",
+    "Pulmonary valve atresia and stenosis" = "Pulmonary_Atresia_tar.html",
+    "Single ventricle" = "SingleVentricle_tar.html",
+    "Teratology of fallot" = "TOF_tar.html",
+    "Total anomalous pulmonary venous Return" = "TAPVR_tar.html",
+    "Transposition of the great arteries" = "TGA_tar.html",
+    "Tricuspid valve atresia and stenosis" = "tricuspid_atresia_tar.html"
+  ),
+  "Central Nervous System" = list(
+    "Anencephaly" = "Anencephaly_tar.html",
+    "Spina bifida without anencephalus" = "SpinaBifida_tar.html",
+    "Encephalocele" = "Encephalocele_tar.html"
+  ),
+  "Chromosomal" = list(
+    "Trisomy 13" = "Trisomy13_tar.html",
+    "Trisomy 18" = "Trisomy18_tar.html",
+    "Trisomy 21 (Down syndrome)" = "Trisomy21_tar.html"
+  ),
+  "Eye" = list(
+    "Anophthalmia/Microphthalmia" = "anoph_tar.html"
+  ),
+  "Genitourinary" = list(
+    "Hypospadias" = "Hypospadias_tar.html"
+  ),
+  "Musculoskeletal" = list(
+    "Clubfoot" = "club_foot_tar.html",
+    "Craniosynostosis" = "Craniosynostosis_tar.html",
+    "Diaphragmatic hernia" = "DiaphragmaticHernia_tar.html",
+    "Gastroschisis" = "Gastroschisis_tar.html",
+    "Limb Deficiencies" = "limb_tar.html",
+    "Omphalocele" = "Omphalocele_tar.html"
+  ),
+  "Orofacial" = list(
+    "Cleft Lip" = "cleft_lip_tar.html",
+    "Cleft Palate" = "cleft_Palate_tar.html"
+  ),
+  "Other Syndromes" = list(
+    "Fetal Alcohol Syndrome (FAS)" = "prenatal_alcohol_reportv3.html",
+    "Neonatal Abstinence Syndrome (NAS)" = "nas_tar.html"
+  )
+)
+
+# Transform the nested list into the format required by selectInput
+# Each top-level list element will now be a group in the dropdown.
+report_choices_grouped <- lapply(report_categories, function(category_list) {
+  setNames(
+    paste0(base_url, unlist(category_list)),
+    names(category_list)
+  )
+})
+
+ui <- fluidPage(
+  # Add custom CSS to reduce text size in the sidebar
+  tags$head(
+    tags$style(HTML("
+      /* Reduce font size for the dropdown label */
+      .shiny-input-container label {
+        font-size: 13px; /* Adjust as needed */
+      }
+      /* Reduce font size for dropdown options */
+      .selectize-dropdown-content {
+        font-size: 12px; /* Adjust as needed */
+      }
+      /* Reduce font size for the selected item in the dropdown */
+      .selectize-input {
+        font-size: 12px; /* Adjust as needed */
+      }
+      /* Reduce font size for h4 and p tags in the sidebar */
+      .sidebar-panel h4 {
+        font-size: 14px; /* Adjust as needed */
+      }
+      .sidebar-panel p {
+        font-size: 11px; /* Adjust as needed */
+      }
+    "))
+  ),
+  # Application title
+  titlePanel("Alaska Birth Defects Registry Reports"),
+  
+  # Sidebar with a dropdown selector
+  sidebarLayout(
+    sidebarPanel(
+      width = 2, # Changed width to 2 (out of 12 columns) for a thinner sidebar
+      selectInput(
+        inputId = "reportSelector",
+        label = "Choose a Report:",
+        choices = report_choices_grouped, # Use the grouped choices
+        selected = report_choices_grouped[[1]][1] # Select the first report in the first group by default
+      ),
+      h4("About This App:"),
+      p("This Shiny application allows you to browse various reports from the Alaska Birth Defects Registry website. Select a report from the dropdown menu to view its content in the main panel."),
+      p("Note: The content is embedded directly from the original website, so styling and functionality are maintained.")
+    ),
+    
+    # Main panel for displaying the selected report
+    mainPanel(
+      width = 10, # The main panel will automatically take the remaining width (12 - sidebar_width)
+      # Use an iframe to embed the external webpage
+      # The height is set to fill most of the available space, adjust as needed
+      htmlOutput("reportViewer")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  
+  output$reportViewer <- renderUI({
+    # Get the selected URL from the dropdown
+    selected_url <- input$reportSelector
+    
+    # Create an iframe to embed the selected URL
+    # Set width to 100% and height to a large value or dynamically adjust if possible
+    tags$iframe(
+      src = selected_url,
+      width = "100%",
+      height = "800px", # Adjust height as necessary for content
+      style = "border: none;" # Remove iframe border
+    )
+  })
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+
+```
+

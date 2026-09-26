@@ -1,10 +1,109 @@
 ---
-title: "New Quarto Report"
-author: "Author Name"
-date: "2025-05-08" # Standardized date format often preferred
-format:
-  html:
-    toc: true
-    toc-float: true
-    code-fold: true
+title: "Alaska Department of Health Header"
+format: html
 ---
+
+<style>
+/* Define CSS variables for colors */
+:root {
+  --header-bg-color: #1a345a; /* A dark blue similar to the website */
+  --text-color: #ffffff;
+  --light-gray-text: #c0c0c0; /* For the top "The Great State of Alaska" */
+}
+
+/* Overall header container */
+.website-header {
+  background-color: var(--header-bg-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif; /* Common sans-serif font */
+}
+
+/* Top banner: "The Great State of Alaska" */
+.top-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator */
+}
+
+.top-banner .logo-text {
+  font-size: 0.8em;
+  color: var(--light-gray-text);
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between logo and text */
+}
+
+.top-banner .logo-text img {
+  height: 1.5em; /* Adjust size of eagle logo */
+  vertical-align: middle;
+}
+
+.top-banner .dropdown-arrow {
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+/* Main header: "State of Alaska Department of Health" */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.main-header .department-info {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between department logo and text */
+}
+
+.main-header .department-info .department-logo img {
+  height: 50px; /* Adjust size of department logo */
+  width: auto;
+}
+
+.main-header .department-info .department-text h1 {
+  font-size: 1.8em;
+  margin: 0;
+  font-weight: normal;
+  color: var(--text-color);
+}
+
+.main-header .menu-icon {
+  font-size: 2em; /* Size for hamburger icon */
+  cursor: pointer;
+}
+
+/* Basic responsiveness for smaller screens (optional, but good practice) */
+@media (max-width: 768px) {
+  .main-header .department-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .main-header .department-info .department-text h1 {
+    font-size: 1.5em;
+  }
+}
+</style>
+
+<div class="website-header">
+  <div class="top-banner">
+    <div class="logo-text">
+      <img src="https://health.alaska.gov/PublishingImages/Alaska_State_Seal.png" alt="Alaska Eagle Logo"> The Great State of Alaska
+    </div>
+    <div class="dropdown-arrow">&#9660;</div> </div>
+
+  <div class="main-header">
+    <div class="department-info">
+      <div class="department-logo">
+        <img src="https://health.alaska.gov/PublishingImages/Alaska_State_Seal.png" alt="State of Alaska Seal Logo">
+      </div>
+      <div class="department-text">
+        <h1>State of Alaska</h1>
+        <h1>Department of Health</h1>
+      </div>
+    </div>
+    <div class="menu-icon">&#9776;</div> </div>
+</div>

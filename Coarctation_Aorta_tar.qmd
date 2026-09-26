@@ -183,9 +183,28 @@ Distribution of `r condition[1]` in Alaska by Public Health Region of maternal r
 #| message: FALSE 
 #| echo: false
 geo_plot <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\sf_plot_map_COARC.rds")
- ggplotly(geo_plot) %>%
-  layout(xaxis = list(autorange = TRUE),
-         yaxis = list(autorange = TRUE))
+geo_data <- sf::st_as_sf(geo_plot$data)
+plot_ly(geo_data) %>%
+  add_sf(
+   color      = ~`Defect Prevalence`,
+    colors     = "Blues",            # single-hue, light -> dark
+    split      = ~PH_REGION,             # one polygon per region
+    stroke     = I("black"),          # border color
+    text       = ~hover,                 # your prebuilt hover string
+    hoverinfo  = "text",
+    hoveron    = "fills",                # hover anywhere inside the polygon
+    span       = I(0.5),                 # border line width
+    showlegend = FALSE
+  ) %>%
+  colorbar(title = "Defect Prevalence") %>%
+  layout(
+    xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+    yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE)
+  ) %>%
+  config(displayModeBar = FALSE)
+ # ggplotly(geo_plot) %>%
+ #  layout(xaxis = list(autorange = TRUE),
+ #         yaxis = list(autorange = TRUE))
 
 geo_tbl <- readRDS("R:\\ABDR\\Analysis_New\\ABDR_CASECONF\\cond_reports\\Published_reports\\abdr_website\\images\\geo_tbl_COARC.rds")
 
